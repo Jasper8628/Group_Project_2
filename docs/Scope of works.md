@@ -22,7 +22,7 @@ ___
 - Make sure files and locations of files make sense and there is commenting and good structure
 - Do code review to ensure we use ES6 like arrow functions, const, promises etc
 
-## User management
+## User management *we probably can cut this out*
 
 - Create home page, login page, registration page and password recovery page. Persist login details (eg bcrypt for passwords) using something like passport. Probably use sequelize to save the user details.
 - Have a list on the server that people can access to find other users to play chess with 
@@ -40,7 +40,7 @@ ___
 ## Chat window on client
 
 - When logged in and connected to another user, use socket.io or similar to send messages to the server which then get sent to the other person. This will need to be in real time using events/messaging rather than just polling.
-- Show the history of the chat.
+- See the chat minimum viable product document in /docs. 
 
 ## Chess window on client 
 
