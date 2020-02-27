@@ -1,22 +1,8 @@
 {
   "name": "group_project_2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Chess Game made by Jasper, Rita, Gerald and Stewart",
   "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Jasper8628/Group_Project_2.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Jasper8628/Group_Project_2/issues"
-  },
-  "homepage": "https://github.com/Jasper8628/Group_Project_2#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "express": "^4.17.1",
@@ -28,5 +14,36 @@
     "passport-local": "^1.0.0",
     "sequelize": "^5.21.5",
     "socket.io": "^2.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jasper8628/Group_Project_2.git"
+  },
+  "author": "Sydney Bootcamp Feb 2020",
+  "license": "ISC",
+  "homepage": "https://github.com/Jasper8628/Group_Project_2#readme",
+  "keywords": [
+    "chess",
+    "javascript",
+    "client",
+    "mvc",
+    "multiplayer"
+  ],
+  "contributors": [
+    "Jasper",
+    "Rita",
+    "Gerald",
+    "Stewart"
+  ],
+  "bugs": {
+    "url": "https://github.com/Jasper8628/Group_Project_2/issues"
   }
 }
