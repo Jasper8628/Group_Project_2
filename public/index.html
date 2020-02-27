@@ -1,23 +1,26 @@
-<!doctype HTML>
+<!doctype html>
 <html class="no-js" lang="en">
 
 <head>
-	<meta charset="utf-8">
+	<meta charset="utf-8" />
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>Jack Plays Chess</title>
 	<!-- CSS -->
-	<link rel="stylesheet" href="css/styles.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC|Special+Elite&display=swap">
+	<link rel="stylesheet" href="./css/styles.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css"
+		crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Special+Elite&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
 	<section class="content">
-		<img src="/public/images/Chess-3D-Animation-Wallpaper.jpg" class="chessImage" alt="chess">
+		<img src="./images/Chess-3D-Animation-Wallpaper.jpg" class="chessImage" alt="chess">
 		<div class="welcomeHeader">
-			<h1> Jack Plays Chess</h1>
-		</div>
+			<!-- TODO: Might want to fix the h1 tag and closing tag? -->
+			</h1>Jack Plays Chess</div>
+
 		<form data-abide novalidate class="login">
 			<div data-abide-error class="alert callout" style="display: none;">
 				<p><i class="fi-alert"></i> There are some errors in your form.</p>
@@ -25,21 +28,28 @@
 			<div class="grid-container">
 				<div class="grid-x grid-margin-x">
 					<div class="cell small-12">
-						<label> Username:
-							<input class="form" type="text" placeholder="Jack" aria-describedby="example1Hint1"
+						<label id="usernameLabel"> Username:
+							<input id="userForm" type="text" placeholder="Jack" aria-describedby="example1Hint1"
 								aria-errormessage="example1Error1" required>
+							<span class="form-error">
+								This field is required.
+							</span>
 						</label>
 					</div>
-					<br>
 					<div class="cell small-12">
-						<label> Password:
-							<input class="form" type="password" id="password" placeholder="password"
+						<label id="passwordLabel"> Password:
+							<input id="passwordForm" type="password" id="password" placeholder="password"
 								aria-describedby="example1Hint2" aria-errormessage="example1Error2" required>
+							<span class="form-error">
+								This field is required.
+							</span>
 						</label>
 					</div>
 					<br>
-					<button class="button" type="submit" value="Submit">Login</button>
-					<br>
+					<button class="alert button" id="loginButton" type="submit" value="Submit">Login</button>
+					<hr>
+				</div>
+				<div>
 					<p class="goToRegister">No account yet? Click <a href="./register.html">here</a> to create an
 						account.</p>
 				</div>
@@ -48,7 +58,7 @@
 	</section>
 
 	<section class="scripts">
-		<!-- Might not want the section element? -stew-->
+		<!-- TODO: Might not want the section element? -stew-->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.2.6/what-input.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js"
