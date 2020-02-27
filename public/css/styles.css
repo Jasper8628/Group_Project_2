@@ -63,3 +63,83 @@
 .Piece {
 	position: absolute;
 }
+
+
+.content {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.welcomeHeader {
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    font-size: 100px;
+    font-family: 'Amatic SC', sans-serif;
+    color:white;
+
+}
+
+.chessImage{
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 500px 500px;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.login{
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    font-size: 18px;
+    font-family: 'Special Elite', sans-serif;
+    color:white;
+}
+
+.form{
+    border-radius: 5px;
+    height: 20px;
+}
+
+.button {
+    background-color: white;
+    color: darkslateblue;
+    font-family: 'Special Elite', sans-serif;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.goToRegister {
+    font-size: 14px;
+    font-family: 'Special Elite', sans-serif;
+    color:white;
+}
+
+a:link {
+    color: rgb(253, 208, 82); 
+    background-color: transparent; 
+    text-decoration: none;
+  }
+  
+a:visited {
+    color: pink;
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+a:hover {
+    color: rgb(245, 168, 24);
+    background-color: transparent;
+    text-decoration: none;
+  }
+  
+a:active {
+    color: rgb(218, 75, 32);
+    background-color: transparent;
+    text-decoration: none;
+  }
