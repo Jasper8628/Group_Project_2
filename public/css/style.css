@@ -1,0 +1,122 @@
+.zoom {
+  padding: 50px;
+  transition: transform 0.2s; /* Animation */
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  transform: scale(
+    1.5
+  ); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+#map {
+  width: 800px;
+  height: 400px;
+  border: 0px;
+  position: relative;
+  align-content: center;
+  width: 100% !important;
+  height: 400px !important;
+  margin-bottom: 0px;
+}
+
+.banner {
+  /* note that we are in assets/css so we need to reference ../ */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
+    url("../images/desktop-top-banner-improved.png");
+  background-size: cover;
+  background-position: center left;
+  background-attachment: fixed;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+}
+
+.largefooter {
+  position: relative;
+  margin-top: 0px;
+}
+
+.subscribe {
+  margin-top: 10px;
+}
+
+.smallfooter {
+  padding: 10px;
+  background-color: rgb(94, 206, 179);
+  color: white;
+}
+
+.sdj {
+  color: white;
+}
+
+.has-ratio {
+  object-fit: contain;
+}
+
+.logo {
+  object-fit: cover;
+}
+
+.todayprice {
+  color: red;
+}
+
+.icon {
+  position: relative;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.pageNumber {
+  padding-left: auto;
+  padding-right: auto;
+}
+
+.pagination-list {
+  padding-left: auto;
+}
+
+#page1 {
+  background-color: rgb(94, 206, 179);
+  color: aliceblue;
+}
+
+.add-to-cart {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.itemImgContainer {
+  margin-left: 50px;
+  margin-top: 20px;
+}
+
+
+/* figure > img {   Trying to correct the fact that the images are tiny 
+  padding: 0px 0px;
+} */
+
+.sms-padding {
+  display: inline;
+}
+
+.sms-button {
+  margin: 8px 8px;
+}
+
+.mobile-number {
+  /* These are the total 4 properties required
+  transition-property: height;
+  transition-duration: 500ms;
+  transition-delay: 100ms;
+  transition-timing-function: ease-in;
+  Which can be put in a single line transition: <property> <duration> <timing-function> <delay>; */
+  transition: hidden 500ms ease-in 100ms;
+  /*  Note that you can also use the more powerful animate.js for this stuff */
+}
