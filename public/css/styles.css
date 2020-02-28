@@ -78,7 +78,6 @@
     font-size: 100px;
     font-family: 'Amatic SC', sans-serif;
     color:white;
-
 }
 
 .chessImage{
@@ -100,24 +99,62 @@
     color:white;
 }
 
-.form{
+#userForm {
     border-radius: 5px;
-    height: 20px;
+    height: 40px;
+    width: 300px;
 }
 
-.button {
+#passwordForm {
+    border-radius: 5px;
+    height: 40px;
+    width: 300px;
+}
+
+#rePasswordForm {
+    border-radius: 5px;
+    height: 40px;
+    width: 300px;
+}
+
+#loginButton {
     background-color: white;
     color: darkslateblue;
     font-family: 'Special Elite', sans-serif;
     border-radius: 5px;
     padding: 10px;
     font-size: 16px;
+    margin: 15px;
+}
+
+#usernameLabel {
+    font-size: 18px;
+    font-family: 'Special Elite', sans-serif;
+    color:white;
+    background-color: none;
+    border-radius: 5px;
+}
+
+#passwordLabel {
+    font-size: 18px;
+    font-family: 'Special Elite', sans-serif;
+    color:white;
+    background-color: none;
+    border-radius: 5px; 
+}
+
+#rePasswordLabel {
+    font-size: 18px;
+    font-family: 'Special Elite', sans-serif;
+    color:white;
+    background-color: none;
+    border-radius: 5px; 
 }
 
 .goToRegister {
     font-size: 14px;
     font-family: 'Special Elite', sans-serif;
-    color:white;
+    color: white;
 }
 
 a:link {
