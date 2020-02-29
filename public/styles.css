@@ -64,6 +64,25 @@
 	position: absolute;
 }
 
+#Board{
+	pointer-events: none;
+	display: none;
+}
+body{
+	color:white;
+	background-color: grey;
+}
+#EngineOutput{
+	display:none;
+}
+#FenInDiv{
+	display:none;
+}
+#scene{
+	width: 60%;
+	height:100%;
+}
+
 
 
 

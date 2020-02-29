@@ -1,32 +1,48 @@
-$(function() {
-	init();
-	console.log("Main Init Called");	
-	NewGame(START_FEN);
+
+let startingFen;
+let newGame = true;
+socketCast.on("all", function (data) {
+	console.log("listening on cast")
+	UserMove.to = data.to;
+	UserMove.from = data.from;
+	pieceName = data.pieceName;
+	capName = data.capName;
+
+	MakeUserMove();
 });
+$(function () {
+	init();
+	socketCast.on("all", function (data) {
+		if (newGame) {
+			startingFen = data.fen;
+			console.log(startingFen);
+			if (startingFen != null) {
+				NewGame(startingFen);
+			} else {
+				NewGame(START_FEN);
+			}
+			newGame=false;
+		}
+	});
 
-var socket = io.connect("https://tranquil-woodland-06094.herokuapp.com");
-
-socket.on("fen", function (data) {
-	var fenStr = data.message;
-	console.log(fenStr);
-	NewGame(fenStr);
+	console.log("Main Init Called");
 });
 
 function InitFilesRanksBrd() {
-	
+
 	var index = 0;
 	var file = FILES.FILE_A;
 	var rank = RANKS.RANK_1;
 	var sq = SQUARES.A1;
-	
-	for(index = 0; index < BRD_SQ_NUM; ++index) {
+
+	for (index = 0; index < BRD_SQ_NUM; ++index) {
 		FilesBrd[index] = SQUARES.OFFBOARD;
 		RanksBrd[index] = SQUARES.OFFBOARD;
 	}
-	
-	for(rank = RANKS.RANK_1; rank <= RANKS.RANK_8; ++rank) {
-		for(file = FILES.FILE_A; file <= FILES.FILE_H; ++file) {
-			sq = FR2SQ(file,rank);
+
+	for (rank = RANKS.RANK_1; rank <= RANKS.RANK_8; ++rank) {
+		for (file = FILES.FILE_A; file <= FILES.FILE_H; ++file) {
+			sq = FR2SQ(file, rank);
 			FilesBrd[sq] = file;
 			RanksBrd[sq] = rank;
 		}
@@ -34,15 +50,15 @@ function InitFilesRanksBrd() {
 }
 
 function InitHashKeys() {
-    var index = 0;
-	
-	for(index = 0; index < 14 * 120; ++index) {				
+	var index = 0;
+
+	for (index = 0; index < 14 * 120; ++index) {
 		PieceKeys[index] = RAND_32();
 	}
-	
+
 	SideKey = RAND_32();
-	
-	for(index = 0; index < 16; ++index) {
+
+	for (index = 0; index < 16; ++index) {
 		CastleKeys[index] = RAND_32();
 	}
 }
@@ -55,17 +71,17 @@ function InitSq120To64() {
 	var sq = SQUARES.A1;
 	var sq64 = 0;
 
-	for(index = 0; index < BRD_SQ_NUM; ++index) {
+	for (index = 0; index < BRD_SQ_NUM; ++index) {
 		Sq120ToSq64[index] = 65;
 	}
-	
-	for(index = 0; index < 64; ++index) {
+
+	for (index = 0; index < 64; ++index) {
 		Sq64ToSq120[index] = 120;
 	}
-	
-	for(rank = RANKS.RANK_1; rank <= RANKS.RANK_8; ++rank) {
-		for(file = FILES.FILE_A; file <= FILES.FILE_H; ++file) {
-			sq = FR2SQ(file,rank);
+
+	for (rank = RANKS.RANK_1; rank <= RANKS.RANK_8; ++rank) {
+		for (file = FILES.FILE_A; file <= FILES.FILE_H; ++file) {
+			sq = FR2SQ(file, rank);
 			Sq64ToSq120[sq64] = sq;
 			Sq120ToSq64[sq] = sq64;
 			sq64++;
@@ -77,20 +93,20 @@ function InitSq120To64() {
 function InitBoardVars() {
 
 	var index = 0;
-	for(index = 0; index < MAXGAMEMOVES; ++index) {
-		GameBoard.history.push( {
-			move : NOMOVE,
-			castlePerm : 0,
-			enPas : 0,
-			fiftyMove : 0,
-			posKey : 0
+	for (index = 0; index < MAXGAMEMOVES; ++index) {
+		GameBoard.history.push({
+			move: NOMOVE,
+			castlePerm: 0,
+			enPas: 0,
+			fiftyMove: 0,
+			posKey: 0
 		});
-	}	
-	
-	for(index = 0; index < PVENTRIES; ++index) {
+	}
+
+	for (index = 0; index < PVENTRIES; ++index) {
 		GameBoard.PvTable.push({
-			move : NOMOVE,
-			posKey : 0
+			move: NOMOVE,
+			posKey: 0
 		});
 	}
 }
@@ -104,21 +120,21 @@ function InitBoardSquares() {
 	var rankIter = 0;
 	var fileIter = 0;
 	var lightString;
-	
-	for(rankIter = RANKS.RANK_8; rankIter >= RANKS.RANK_1; rankIter--) {
+
+	for (rankIter = RANKS.RANK_8; rankIter >= RANKS.RANK_1; rankIter--) {
 		light = lastLight ^ 1;
 		lastLight ^= 1;
-		rankName = "rank" + (rankIter+1);
-		for(fileIter = FILES.FILE_A; fileIter <= FILES.FILE_H; fileIter++) {
-			fileName = "file" + (fileIter+1);
-			
-			if(light==0) lightString="Light";
+		rankName = "rank" + (rankIter + 1);
+		for (fileIter = FILES.FILE_A; fileIter <= FILES.FILE_H; fileIter++) {
+			fileName = "file" + (fileIter + 1);
+
+			if (light == 0) lightString = "Light";
 			else lightString = "Dark";
 			divString = "<div class=\"Square " + rankName + " " + fileName + " " + lightString + "\"/>";
-			light^=1;
+			light ^= 1;
 			$("#Board").append(divString);
- 		}
- 	}
+		}
+	}
 }
 
 function InitBoardSquares() {
@@ -129,20 +145,20 @@ function InitBoardSquares() {
 	var rankIter;
 	var fileIter;
 	var lightString;
-	
-	for(rankIter = RANKS.RANK_8; rankIter >= RANKS.RANK_1; rankIter--) {
+
+	for (rankIter = RANKS.RANK_8; rankIter >= RANKS.RANK_1; rankIter--) {
 		light ^= 1;
 		rankName = "rank" + (rankIter + 1);
-		for(fileIter = FILES.FILE_A; fileIter <= FILES.FILE_H; fileIter++) {
+		for (fileIter = FILES.FILE_A; fileIter <= FILES.FILE_H; fileIter++) {
 			fileName = "file" + (fileIter + 1);
-			if(light == 0) lightString="Light";
+			if (light == 0) lightString = "Light";
 			else lightString = "Dark";
-			light^=1;
+			light ^= 1;
 			divString = "<div class=\"Square " + rankName + " " + fileName + " " + lightString + "\"/>";
 			$("#Board").append(divString);
 		}
 	}
-	
+
 }
 
 function init() {
