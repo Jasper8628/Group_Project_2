@@ -90,10 +90,10 @@
     padding: 0;
 }
 
-.login{
+#loginForm{
     position: absolute;
-    top: 20%;
-    left: 10%;
+    top: 110%;
+    left: 0;
     font-size: 18px;
     font-family: 'Special Elite', sans-serif;
     color:white;
@@ -152,6 +152,12 @@
 }
 
 .goToRegister {
+    font-size: 14px;
+    font-family: 'Special Elite', sans-serif;
+    color: white;
+}
+
+.goToLogin{
     font-size: 14px;
     font-family: 'Special Elite', sans-serif;
     color: white;
