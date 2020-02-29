@@ -1,32 +1,31 @@
-/**
- *   TODO This file is copied from cats and needs to be updated - stew
- *   This is for authentication and login
- */
-var orm = require("../config/orm.js");
-
-var user = {
-  all: function(cb) {
-    orm.all("users", function(res) {
-      cb(res);
-    });
-  },
-  // The variables cols and vals are arrays.
-  create: function(cols, vals, cb) {
-    orm.create("users", cols, vals, function(res) {
-      cb(res);
-    });
-  },
-  update: function(objColVals, condition, cb) {
-    orm.update("users", objColVals, condition, function(res) {
-      cb(res);
-    });
-  },
-  delete: function(condition, cb) {
-    orm.delete("users", condition, function(res) {
-      cb(res);
-    });
-  }
+// Requiring bcrypt for password hashing. Using the bcryptjs version as the regular bcrypt module sometimes causes errors on Windows machines
+var bcrypt = require("bcryptjs");
+// Creating our User model
+module.exports = function(sequelize, DataTypes) {
+  var User = sequelize.define("User", {
+    // The username cannot be null
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      // validate: {
+      //   isEmail: true
+      // }
+    },
+    // The password cannot be null
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  });
+  // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
+  User.prototype.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+  };
+  // Hooks are automatic methods that run during various phases of the User Model lifecycle
+  // In this case, before a User is created, we will automatically hash their password
+  User.addHook("beforeCreate", function(user) {
+    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+  });
+  return User;
 };
-
-// Export the database functions for the controller (catsController.js).
-module.exports = user;
