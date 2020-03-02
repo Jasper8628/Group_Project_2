@@ -12,7 +12,7 @@ const passport = require('./orm/passport')
 const db = require('./models')
 const app = express()
 
-const PORTSOCKET = process.env.PORTSOCKET || 4000 // This is for socket.io server
+const PORTSOCKET = process.env.PORTSOCKET || 3000 // This is for socket.io server
 const PORTSEQ = process.env.PORTSEQ || 8080 // This is for the html server
 
 // >>>>> Middleware >>>>>
@@ -33,19 +33,35 @@ require('./routes/html-routes.js')(app)
 require('./routes/api-routes.js')(app)
 
 // >>>>> Chat and chess socket events >>>>>
-const ioserver = app.listen(PORTSOCKET, () => console.log('listening for socket.io messages on port 4000'))
-const io = socket(ioserver)
+const ioserver = app.listen(PORTSOCKET, () => console.log(`listening for socket.io messages on port ${PORTSOCKET}`))
+const ioCast = socket(ioserver)
 const chatUsers = {}
 const fenArray = []
+const fenCode = ''
+const whitePicked = false
+const moveArray = []
+const room1 = {
+  name: 'room1',
+  whiteTaken: false,
+  blackTaken: false
+}
 
-io.on('connection', socket => {
+ioCast.on('connection', socket => {
   console.log(`Connection made by socketid: [${socket.id}]`)
+  const fenStr = fenArray[fenArray.length - 1]
+  ioCast.sockets.emit('all', { fen: fenStr })
 
-  socket.on('fen', data => {
-    const fen = data.message
-    io.sockets.emit('fen', data)
-    console.log(fen)
-    fenArray.push(fen)
+  socket.on('game', function (data) {
+    console.log(data)
+    fenArray.push(data.fen)
+    const gameMove = {}
+    gameMove.pieceName = data.pieceName
+    gameMove.capName = data.capName
+    gameMove.to = data.to
+    gameMove.from = data.from
+    moveArray.push(gameMove)
+
+    ioCast.sockets.emit('all', data)
   })
 
   socket.on('new-user', name => {
