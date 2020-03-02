@@ -1,9 +1,9 @@
 {
   "development": {
     "username": "root",
-    "password": "Root11!!",
-    "database": "users_db",
-    "host": "127.0.0.1",
+    "password": "Antares28",
+    "database": "chess",
+    "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
