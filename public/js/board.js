@@ -132,14 +132,15 @@ function PrintBoard() {
 	if (GameBoard.castlePerm & CASTLEBIT.BQCA) line += 'q';
 	//console.log("castle:" + line);
 	//console.log("key:" + GameBoard.posKey.toString(16));
-	
+
 	var fenCode = array.slice(0, array.length - 1);
-	 newFen = fenCode.join("") + " " + side +
+	newFen = fenCode.join("") + " " + side +
 		" " + line + " " + GameBoard.enPas;
-		//console.log(newFen);
+	gameSide = side;
+	//console.log(newFen);
 }
 
-
+let gameSide;
 function GeneratePosKey() {
 
 	var sq = 0;

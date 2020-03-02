@@ -2,6 +2,7 @@ $("#SetFen").click(function () {
 	var fenStr = $("#fenIn").val();
 	NewGame(fenStr);
 });
+//$("#ready").on("click",function(){$.get("/api/ready")});
 
 
 
@@ -158,18 +159,16 @@ let pieceName = "";
 let capName = "";
 let selected3D = false;
 let group3D = new THREE.Group();
-let array = [];
-for (i = 0; i < 32; i++) {
-	array.push(i);
-}
+
 
 function AddGUIPiece(sq, pce) {
-	let colors = [0, 0xDAF7A6, 0xFFC300, 0xFF5733, 0xC70039, 0x900C3F, 0x581845, 0xDAF7A6, 0xFFC300, 0xFF5733, 0xC70039, 0x900C3F, 0x581845];
 	let GUIgeo = new THREE.BoxGeometry(0.8, 0.8, 1.6);
+	let pieceArray = [0, "pawn", "knight", "bishop", "rook", "queen", "king", "bpawn", "bknight", "bbishop", "brook", "bqueen", "bking"]
+	let thisPce = pieceArray[pce];
+	let addressStr = "/images/" + thisPce + "/scene.gltf";
 
 	var file = FilesBrd[sq];
 	var rank = RanksBrd[sq];
-	console.log(rank);
 	var rankName = "rank" + (rank + 1);
 	var fileName = "file" + (file + 1);
 	var pieceFileName = "images/" + SideChar[PieceCol[pce]] + PceChar[pce].toUpperCase() + ".png";
@@ -177,9 +176,63 @@ function AddGUIPiece(sq, pce) {
 	//console.log(imageString);
 	$("#Board").append(imageString);
 
+	var loader = new THREE.GLTFLoader();
+	loader.load(addressStr, function (gltf) {
+		if (thisPce == "knight" || thisPce == "bknight") {
+			gltf.scene.position.z = 0;
+			gltf.scene.position.x = file - 4;
+			gltf.scene.position.y = rank - 4;
+			gltf.scene.scale.z = 0.007;
+			gltf.scene.scale.y = 0.007;
+			gltf.scene.scale.x = 0.007;
+			gltf.scene.rotation.x = 1.5;
+			if (thisPce == "knight") {
+				gltf.scene.rotation.y = 3;
+			}
+		} else {
+			gltf.scene.position.z = 0;
+			gltf.scene.position.x = file - 4;
+			gltf.scene.position.y = rank - 4;
+			gltf.scene.scale.z = 0.009;
+			gltf.scene.scale.y = 0.009;
+			gltf.scene.scale.x = 0.009;
+			gltf.scene.rotation.x = 1.5;
+		}
+		gltf.scene.name = PceChar[pce] + sq;
+		domEvents.addEventListener(gltf.scene, "click", event => {
+			cubePos.x = gltf.scene.position.x;
+			cubePos.y = gltf.scene.position.y;
+			console.log("current piecename: " + pieceName);
+			console.log(" clicked: " + gltf.scene.name);
 
+			if (selected3D == false) {
+				pieceName = gltf.scene.name;
+				UserMove.from = ClickedSquare3D(cubePos.x + 4, cubePos.y + 4);
+				selected3D = true;
+			} else {
+				UserMove.to = ClickedSquare3D(cubePos.x + 4, cubePos.y + 4);
+				capName = gltf.scene.name;
+				//console.log("capName:" + capName);
+				selected3D = false;
+				let gameData = {
+					pieceName: pieceName,
+					capName: capName,
+					to: UserMove.to,
+					from: UserMove.from,
+					fen: "",
+					side: gameSide
+				};
+				if (playerColor == playerSide) {
+					MakeUserMove();
+					gameData.fen = newFen;
+					socketCast.emit("game", gameData);
+				}
+			}
+		});
+		scene.add(gltf.scene);
+	});
 	//console.log(pce);
-	let newMat = new THREE.MeshBasicMaterial({ color: colors[pce] });
+	/* let newMat = new THREE.MeshBasicMaterial({ color: colors[pce] });
 	let newCube = new THREE.Mesh(GUIgeo, newMat);
 	newCube.name = PceChar[pce] + array[0];
 	array.shift();
@@ -211,9 +264,9 @@ function AddGUIPiece(sq, pce) {
 			});
 			MakeUserMove();
 		}
-		//console.log("scene lenght: " + scene.children.length);
+		console.log("scene lenght: " + scene.children.length);
 
-	});
+	}); */
 	//scene.add(newCube);
 	//group3D.add(newCube);
 }
@@ -254,14 +307,13 @@ function MoveGUIPiece(move) {
 	if (isCaptured) {
 		let killed = scene.getObjectByName(capName);
 		killed.position.x = -5;
+		scene.remove(killed);
 	}
 	if (move & MFLAGCA) {
-		let bKing = "K4";
-		let wKing = "k28";
-		let bRook1 = "r24";
-		let bRook2 = "r31";
-		let wRook1 = "R0";
-		let wRook2 = "R7";
+		let bRook1 = "r91";
+		let bRook2 = "r98";
+		let wRook1 = "R21";
+		let wRook2 = "R28";
 		switch (to) {
 			case SQUARES.G1:
 				RemoveGUIPiece(SQUARES.H1);

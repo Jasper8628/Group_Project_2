@@ -1,7 +1,7 @@
 
 
 var socketCast = io.connect("http://localhost:3000");
-var socketGame = io.connect("http://localhost:4000/chest.html");
+//var socketGame = io.connect("http://localhost:4000/chest.html");
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(
     75,
@@ -9,6 +9,17 @@ const camera = new THREE.PerspectiveCamera(
     0.1,
     1000
 );
+let light = new THREE.SpotLight(0xffffff,2.0,600);
+scene.add(light);
+let dirLight = new THREE.DirectionalLight(0xcccccc,1);
+dirLight.position.set(2,-3,2);
+dirLight.castShadow = true;
+scene.add(dirLight);
+
+let backLight = new THREE.DirectionalLight(0xcccccc,1);
+backLight.position.set(0,3,1);
+backLight.castShadow = true;
+scene.add(backLight);
 
 const renderer = new THREE.WebGLRenderer();
 const w = window.innerWidth;
@@ -30,8 +41,11 @@ var mtlLoader = new THREE.MTLLoader();
                 object.position.x = 0;
                 object.position.y = 0;
                 object.position.z = 0;
+                object.scale.x=0.01;
+                object.scale.y=0.01;
+                object.scale.z=0.01;
                 scene.add( object );
-                console.log(object);
+                //console.log(scene, object);
                 renderer.render(scene,camera);
             });
         });
@@ -50,14 +64,17 @@ objloader.load("/images/new-bishop.obj", function (object) {
     console.log(3);
 }); */
 
+/* 
+ var loader = new THREE.GLTFLoader();
+loader.load("/images/queen/scene.gltf", function (gltf) {
+    gltf.scene.position.z = 0;
+    gltf.scene.scale.z = 2.5;
+    gltf.scene.scale.y = 2.5;
+    gltf.scene.scale.x = 2.5;
+    gltf.scene.rotation.x = 1.5;
 
-/*var loader = new THREE.GLTFLoader();
-loader.load("/images/queen.gltf", function (gltf) {
-    gltf.scene.position.z = 2;
     scene.add(gltf.scene);
-    renderer.render(scene, camera);
-}); */
-
+});   */
 
 const geometry = new THREE.BoxGeometry(1, 1, 0.2);
 let alt = false;
@@ -74,11 +91,11 @@ for (i = -4; i < 4; i++) {
         let material;
         let cube;
         if (alt) {
-            material = new THREE.MeshBasicMaterial({ color: 0x000ff });
+            material = new THREE.MeshBasicMaterial({ color: 0x582418 });
             cube = new THREE.Mesh(geometry, material);
             alt = false;
         } else {
-            material = new THREE.MeshBasicMaterial({ color: 0xfffff });
+            material = new THREE.MeshBasicMaterial({ color: 0xccccc });
             cube = new THREE.Mesh(geometry, material);
             alt = true;
         }
@@ -96,11 +113,14 @@ for (i = -4; i < 4; i++) {
                     capName: capName,
                     to: UserMove.to,
                     from: UserMove.from,
-                    fen:""
+                    fen:"",
+                    side:gameSide
                 };
-                MakeUserMove();
-                gameData.fen=newFen;
-                socketCast.emit("game",gameData);
+				if (playerColor == playerSide) {
+					MakeUserMove();
+					gameData.fen = newFen;
+					socketCast.emit("game", gameData);
+				}
             }
             selected3D = false;
         });

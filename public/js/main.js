@@ -1,15 +1,18 @@
-
+let playerColor="w";
+let playerSide="w";
 let startingFen;
 let newGame = true;
 socketCast.on("all", function (data) {
-	console.log("listening on cast")
+	console.log("listening on Cast")
 	UserMove.to = data.to;
 	UserMove.from = data.from;
 	pieceName = data.pieceName;
 	capName = data.capName;
+	playerSide=data.side;
 
 	MakeUserMove();
 });
+
 $(function () {
 	init();
 	socketCast.on("all", function (data) {

@@ -17,6 +17,12 @@ var ioGame = socket(game);
 var ioCast = socket(cast);
 let whitePicked = false;
 let moveArray = [];
+let room1={
+    name:"room1",
+    whiteTaken:false,
+    blackTaken:false
+
+}
 
 
 
