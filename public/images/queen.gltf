@@ -1,0 +1,206 @@
+{
+  "accessors": [
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 2259,
+      "max": [
+        146.53450012207031,
+        146.53450012207031,
+        537.81390380859375
+      ],
+      "min": [
+        -146.53450012207031,
+        -146.53460693359375,
+        0
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 27108,
+      "componentType": 5126,
+      "count": 2259,
+      "max": [
+        1,
+        1,
+        1
+      ],
+      "min": [
+        -1,
+        -1,
+        -1
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 13422,
+      "max": [
+        2258
+      ],
+      "min": [
+        0
+      ],
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "Bùi Xuân Sơn (https://sketchfab.com/sonbx126)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/models/c3f543f51acd40218e6fc95f17f207fa",
+      "title": "Queen Chess"
+    },
+    "generator": "Sketchfab-3.32.3",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 53688,
+      "byteOffset": 0,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 54216,
+      "byteOffset": 53688,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 107904,
+      "uri": "scene.bin"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": false,
+      "emissiveFactor": [
+        0,
+        0,
+        0
+      ],
+      "name": "material_0",
+      "pbrMetallicRoughness": {
+        "baseColorFactor": [
+          1,
+          0.84313700000000003,
+          0,
+          1
+        ],
+        "metallicFactor": 0.5,
+        "roughnessFactor": 0.29999999999999999
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0
+          },
+          "indices": 2,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "name": "RootNode (gltf orientation matrix)",
+      "rotation": [
+        -0.70710678118654746,
+        -0,
+        -0,
+        0.70710678118654757
+      ]
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "RootNode (model correction matrix)"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "root"
+    },
+    {
+      "children": [
+        4
+      ],
+      "matrix": [
+        1,
+        0,
+        0,
+        0,
+        0,
+        2.2204460492503131e-16,
+        1,
+        0,
+        0,
+        -1,
+        2.2204460492503131e-16,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "GLTF_SceneRootNode"
+    },
+    {
+      "children": [
+        5
+      ],
+      "matrix": [
+        0.0010000000474974513,
+        0,
+        -0,
+        0,
+        -0,
+        0,
+        -0.0010000000474974513,
+        0,
+        0,
+        0.0010000000474974513,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "name": "Layer 2_1"
+    },
+    {
+      "mesh": 0,
+      "name": ""
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "OSG_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ]
+}
+

@@ -68,7 +68,6 @@ function ParseMove(from, to) {
 			break;
 		}		
 	}
-	
 	if(found != BOOL.FALSE) {
 		if(MakeMove(Move) == BOOL.FALSE) {
 			return NOMOVE;
@@ -76,7 +75,6 @@ function ParseMove(from, to) {
 		TakeMove();
 		return Move;
 	}
-	
 	return NOMOVE;
 }
 
