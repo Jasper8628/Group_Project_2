@@ -33,8 +33,8 @@ require('./routes/html-routes.js')(app)
 require('./routes/api-routes.js')(app)
 
 // >>>>> Login to the db and then start the web server application >>>>>
-db.sequelize.sync().then(function () {
-  app.listen(PORTSEQ, function () {
+db.sequelize.sync().then(() => {
+  app.listen(PORTSEQ, () => {
     console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORTSEQ, PORTSEQ)
   })
 })
