@@ -11,6 +11,7 @@
     "foundation-sites": "^6.6.1",
     "jquery": "3.4.1",
     "mysql": "^2.18.1",
+    "mysql2": "^2.1.0",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "sequelize": "^5.21.5",

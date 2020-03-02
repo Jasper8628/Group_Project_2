@@ -1,72 +1,80 @@
 <!doctype html>
-  <html class="no-js" lang="en">
+<html class="no-js" lang="en">
 
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Jack Plays Chess</title>
-    <!-- CSS -->
-    <link rel="stylesheet" href="./css/styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css"
-      crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Special+Elite&display=swap" rel="stylesheet">
-  </head>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jack Plays Chess</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css"
+    crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Special+Elite&display=swap" rel="stylesheet">
+</head>
 
 <body>
-	<section class="content">
-		<img src="./images/Chess-3D-Animation-Wallpaper.jpg" class="chessImage" alt="chess">
-		<div class="welcomeHeader">
-			<div>Jack Plays Chess</div>
+  <section class="content">
+    <img src="./images/Chess-3D-Animation-Wallpaper.jpg" class="chessImage" alt="chess">
+    <div class="welcomeHeader">
+      <div>Jack Plays Chess</div>
 
-    <form data-abide novalidate class="login" id="loginForm">
-      <div data-abide-error class="alert callout" style="display: none;">
-        <p><i class="fi-alert"></i> There are some errors in your form.</p>
-      </div>
-      <div class="grid-container">
-        <div class="grid-x grid-margin-x">
-          <div class="cell small-12">
-            <label id="usernameLabel"> Username:
-              <input id="userForm" type="text" placeholder="Jack" aria-describedby="example1Hint1"
-                aria-errormessage="example1Error1" required>
-              <span class="form-error">
-                This field is required.
-              </span>
-            </label>
+      <form data-abide novalidate class="login" id="loginForm">
+        <div data-abide-error class="alert callout" id="errorHead" style="display: none;">
+          <p><i class="fi-alert"></i> All fields are required.</p>
+        </div>
+        <div data-abide-error class="alert callout" id="errorEntry" style="display: none;">
+          <p><i class="fi-alert"></i> Password entries don't match. Please check and re-enter password.</p>
+        </div>
+        <div class="grid-container">
+          <div class="grid-x grid-margin-x">
+            <div class="cell small-12">
+              <label id="usernameLabel"> Username:
+                <input id="userForm" type="text" placeholder="Jack" aria-describedby="example1Hint1"
+                  aria-errormessage="example1Error1" required>
+                <span id="formNameError" class="form-error">
+                  This field is required.
+                </span>
+              </label>
+            </div>
+            <div class="cell small-12">
+              <label id="passwordLabel"> Password:
+                <input id="passwordForm" type="password" placeholder="password" aria-describedby="example1Hint2"
+                  aria-errormessage="example1Error2" required>
+                <span id="formPasswordError" class="form-error">
+                  This field is required.
+                </span>
+              </label>
+            </div>
+            <br>
+            <div class="cell small-12">
+              <label id="rePasswordLabel">Re-enter password:
+                <input id="rePasswordForm" type="password" placeholder="password" aria-describedby="example1Hint3"
+                  aria-errormessage="example1Error3" required pattern="alpha_numeric" data-equalto="password">
+                <span id="formRePasswordError" class="form-error">
+                  Password does not match.
+                </span>
+              </label>
+            </div>
+            <br>
+            <button class="alert button" id="loginButton" type="submit" value="Submit">Create my account</button>
           </div>
-          <div class="cell small-12">
-            <label id="passwordLabel"> Password:
-              <input id="passwordForm" type="password" id="password" placeholder="password"
-                aria-describedby="example1Hint2" aria-errormessage="example1Error2" required>
-              <span class="form-error">
-                This field is required.
-              </span>
-            </label>
-          </div>
-          <br>
-          <div class="cell small-12">
-            <label id="rePasswordLabel">Re-enter password:
-              <input id="rePasswordForm" type="password" placeholder="password" aria-describedby="example1Hint3"
-                aria-errormessage="example1Error3" required pattern="alpha_numeric" data-equalto="password">
-              <span class="form-error">
-                Password does not match.
-              </span>
-            </label>
+          <div>
+            <p class="goToLogin">Click <a href="./index.html">here</a> to go back to login page.</p>
           </div>
         </div>
-        <div>
-					<p class="goToLogin">Click <a href="./index.html">here</a> to go back to login page.</p>
-				</div>
-      </div>
+      </form>
+    </div>
   </section>
 
-    <section class="scripts">
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.2.6/what-input.min.js"></script>
-      <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js"
-        crossorigin="anonymous"></script>
-    </section>
+  <section class="scripts">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.2.6/what-input.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js"
+      crossorigin="anonymous"></script>
+    <script src="./js/register.js"></script>
+  </section>
 
-  </body>
+</body>
 
-  </html>
+</html>
