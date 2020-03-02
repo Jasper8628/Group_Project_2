@@ -12,8 +12,8 @@ const passport = require('./orm/passport')
 const db = require('./models')
 const app = express()
 
-const PORTSOCKET = process.env.PORTSOCKET || 4000 // This is for socket.io; does .env.PORTSOCKET exist?
-const PORTSEQ = process.env.PORTSEQ || 8080 // This is for sequelize; should this be end.PORTSEQ?
+const PORTSOCKET = process.env.PORTSOCKET || 4000 // This is for socket.io server
+const PORTSEQ = process.env.PORTSEQ || 8080 // This is for the html server
 
 // >>>>> Middleware >>>>>
 app.use(express.static('public')) // Serve static content
@@ -31,13 +31,6 @@ app.set('view engine', 'handlebars')
 // Requiring our routes
 require('./routes/html-routes.js')(app)
 require('./routes/api-routes.js')(app)
-
-// >>>>> Login to the db and then start the web server application >>>>>
-db.sequelize.sync().then(() => {
-  app.listen(PORTSEQ, () => {
-    console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORTSEQ, PORTSEQ)
-  })
-})
 
 // >>>>> Chat and chess socket events >>>>>
 const ioserver = app.listen(PORTSOCKET, () => console.log('listening for socket.io messages on port 4000'))
@@ -68,5 +61,15 @@ io.on('connection', socket => {
     socket.broadcast.emit('user-disconnected', chatUsers[socket.id])
     console.log(`User ${chatUsers[socket.id]} left the chat`)
     delete chatUsers[socket.id]
+  })
+})
+
+/**************************************************************
+ * Login to the db and then start the web server application  *
+ **************************************************************
+*/
+db.sequelize.sync().then(() => {
+  app.listen(PORTSEQ, () => {
+    console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORTSEQ, PORTSEQ)
   })
 })
