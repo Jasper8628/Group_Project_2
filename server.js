@@ -45,10 +45,10 @@ const io = socket(ioserver)
 const chatUsers = {}
 const fenArray = []
 
-io.on('connection', function (socket) {
+io.on('connection', socket => {
   console.log(`Connection made by socketid: [${socket.id}]`)
 
-  socket.on('fen', function (data) {
+  socket.on('fen', data => {
     const fen = data.message
     io.sockets.emit('fen', data)
     console.log(fen)
