@@ -30,25 +30,6 @@ const controls = new THREE.OrbitControls(camera, renderer.domElement);
 const domEvents = new THREEx.DomEvents(camera, renderer.domElement);
 
 
-var mtlLoader = new THREE.MTLLoader();
-    mtlLoader.setPath( '/images/' );
-    mtlLoader.load( 'new-bishop.mtl', function( materials ) {
-    materials.preload();
-    var objLoader = new THREE.OBJLoader();
-    objLoader.setMaterials( materials );
-    objLoader.setPath( '/images/' );
-    objLoader.load( 'new-bishop.obj', function ( object ) {
-                object.position.x = 0;
-                object.position.y = 0;
-                object.position.z = 0;
-                object.scale.x=0.01;
-                object.scale.y=0.01;
-                object.scale.z=0.01;
-                scene.add( object );
-                //console.log(scene, object);
-                renderer.render(scene,camera);
-            });
-        });
 
 /* var objloader = new THREE.OBJLoader();
 objloader.load("/images/new-bishop.obj", function (object) {
@@ -116,11 +97,10 @@ for (i = -4; i < 4; i++) {
                     fen:"",
                     side:gameSide
                 };
-				if (playerColor == playerSide) {
 					MakeUserMove();
 					gameData.fen = newFen;
 					socketCast.emit("game", gameData);
-				}
+				
             }
             selected3D = false;
         });

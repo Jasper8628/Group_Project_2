@@ -202,7 +202,7 @@ function AddGUIPiece(sq, pce) {
 		domEvents.addEventListener(gltf.scene, "click", event => {
 			cubePos.x = gltf.scene.position.x;
 			cubePos.y = gltf.scene.position.y;
-			console.log("current piecename: " + pieceName);
+			//console.log("current piecename: " + pieceName);
 			console.log(" clicked: " + gltf.scene.name);
 
 			if (selected3D == false) {
@@ -222,11 +222,10 @@ function AddGUIPiece(sq, pce) {
 					fen: "",
 					side: gameSide
 				};
-				if (playerColor == playerSide) {
 					MakeUserMove();
 					gameData.fen = newFen;
 					socketCast.emit("game", gameData);
-				}
+				
 			}
 		});
 		scene.add(gltf.scene);
