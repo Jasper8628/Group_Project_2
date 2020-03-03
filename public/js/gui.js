@@ -4,7 +4,31 @@ $("#SetFen").click(function () {
 });
 //$("#ready").on("click",function(){$.get("/api/ready")});
 
-
+$("#save").on("click", function () {
+	$.post("/save", function (res) {
+		console.log(res);
+	});
+});
+$("#replay").on("click", function () {
+	watching = true;
+	$.get("/replay", function (data) {
+		let i = 0;
+		let moves=JSON.parse(data);
+		function replay() {
+			pieceName = moves[i].pieceName;
+			capName = moves[i].capName;
+			UserMove.to = moves[i].to;
+			UserMove.from = moves[i].from;
+			MakeUserMove();
+			i++;
+			if (i === moves.length) {
+				clearInterval(interval);
+				watching = false;
+			}
+		}
+		let interval = setInterval(replay, 1000);
+	});
+});
 
 function NewGame(fenStr) {
 	ParseFen(fenStr);
@@ -222,10 +246,11 @@ function AddGUIPiece(sq, pce) {
 					fen: "",
 					side: gameSide
 				};
-					MakeUserMove();
-					gameData.fen = newFen;
-					socketCast.emit("game", gameData);
-				
+				console.log(gameData.to, gameData.from);
+				MakeUserMove();
+				gameData.fen = newFen;
+				socketCast.emit("game", gameData);
+
 			}
 		});
 		scene.add(gltf.scene);

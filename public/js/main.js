@@ -1,69 +1,73 @@
-let playerColor="w";
-let playerSide="w";
+let playerColor = "w";
+let playerSide = "w";
 let startingFen;
 let newGame = true;
+let watching = false;
 socketCast.on("all", function (data) {
-	console.log("listening on Cast")
-	UserMove.to = data.to;
-	UserMove.from = data.from;
-	pieceName = data.pieceName;
-	capName = data.capName;
-	playerSide=data.side;
+  if (watching == false) {
+    console.log("listening on Cast")
+    UserMove.to = data.to;
+    UserMove.from = data.from;
+    pieceName = data.pieceName;
+    capName = data.capName;
+    playerSide = data.side;
 
-	MakeUserMove();
+    MakeUserMove();
+
+  }
 });
 
 $(function () {
-	init();
-	socketCast.on("all", function (data) {
-		if (newGame) {
-			startingFen = data.fen;
-			console.log(startingFen);
-			if (startingFen != null) {
-				NewGame(startingFen);
-			} else {
-				NewGame(START_FEN);
-			}
-			newGame=false;
-		}
-	});
+  init();
+  socketCast.on("all", function (data) {
+    if (newGame) {
+      startingFen = data.fen;
+      console.log(startingFen);
+      if (startingFen != null) {
+        NewGame(startingFen);
+      } else {
+        NewGame(START_FEN);
+      }
+      newGame = false;
+    }
+  });
 
-	console.log("Main Init Called");
+  console.log("Main Init Called");
 });
 
 function InitFilesRanksBrd() {
 
-	var index = 0;
-	var file = FILES.FILE_A;
-	var rank = RANKS.RANK_1;
-	var sq = SQUARES.A1;
+  var index = 0;
+  var file = FILES.FILE_A;
+  var rank = RANKS.RANK_1;
+  var sq = SQUARES.A1;
 
-	for (index = 0; index < BRD_SQ_NUM; ++index) {
-		FilesBrd[index] = SQUARES.OFFBOARD;
-		RanksBrd[index] = SQUARES.OFFBOARD;
-	}
+  for (index = 0; index < BRD_SQ_NUM; ++index) {
+    FilesBrd[index] = SQUARES.OFFBOARD;
+    RanksBrd[index] = SQUARES.OFFBOARD;
+  }
 
-	for (rank = RANKS.RANK_1; rank <= RANKS.RANK_8; ++rank) {
-		for (file = FILES.FILE_A; file <= FILES.FILE_H; ++file) {
-			sq = FR2SQ(file, rank);
-			FilesBrd[sq] = file;
-			RanksBrd[sq] = rank;
-		}
-	}
+  for (rank = RANKS.RANK_1; rank <= RANKS.RANK_8; ++rank) {
+    for (file = FILES.FILE_A; file <= FILES.FILE_H; ++file) {
+      sq = FR2SQ(file, rank);
+      FilesBrd[sq] = file;
+      RanksBrd[sq] = rank;
+    }
+  }
 }
 
 function InitHashKeys() {
-	var index = 0;
+  var index = 0;
 
-	for (index = 0; index < 14 * 120; ++index) {
-		PieceKeys[index] = RAND_32();
-	}
+  for (index = 0; index < 14 * 120; ++index) {
+    PieceKeys[index] = RAND_32();
+  }
 
-	SideKey = RAND_32();
+  SideKey = RAND_32();
 
-	for (index = 0; index < 16; ++index) {
-		CastleKeys[index] = RAND_32();
-	}
+  for (index = 0; index < 16; ++index) {
+    CastleKeys[index] = RAND_32();
+  }
 }
 
 

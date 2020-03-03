@@ -3,30 +3,44 @@
 var socketCast = io.connect("http://localhost:3000");
 //var socketGame = io.connect("http://localhost:4000/chest.html");
 const scene = new THREE.Scene();
+//scene.background = new THREE.Color( 0xff0000 );
+const tloader = new THREE.TextureLoader();
+tloader.load("./images/dark.jpg", function(texture)
+            {
+             scene.background = texture;  
+            });
+
+
+
+
 const camera = new THREE.PerspectiveCamera(
     75,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
 );
-let light = new THREE.SpotLight(0xffffff,2.0,600);
+let ambient = new THREE.AmbientLight(0x696969);
+scene.add(ambient);
+let light = new THREE.SpotLight(0xffffff, 2.0, 600);
 scene.add(light);
-let dirLight = new THREE.DirectionalLight(0xcccccc,1);
-dirLight.position.set(2,-3,2);
+let dirLight = new THREE.DirectionalLight(0xffffff, 1);
+dirLight.position.set(2, -3, 2);
 dirLight.castShadow = true;
 scene.add(dirLight);
 
-let backLight = new THREE.DirectionalLight(0xcccccc,1);
-backLight.position.set(0,3,1);
+let backLight = new THREE.DirectionalLight(0xffffff, 1);
+backLight.position.set(0, 3, 1);
 backLight.castShadow = true;
 scene.add(backLight);
 
 const renderer = new THREE.WebGLRenderer();
 const w = window.innerWidth;
 const h = window.innerHeight;
-renderer.setSize(0.8 * w, 0.8 * h);
+renderer.setSize(w, 0.85 * h);
 $("#scene").append(renderer.domElement);
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enableScroll = false;
+controls.enablePan = true;
 const domEvents = new THREEx.DomEvents(camera, renderer.domElement);
 
 
@@ -72,11 +86,11 @@ for (i = -4; i < 4; i++) {
         let material;
         let cube;
         if (alt) {
-            material = new THREE.MeshBasicMaterial({ color: 0x582418 });
+            material = new THREE.MeshBasicMaterial({ color: 0x000000 });
             cube = new THREE.Mesh(geometry, material);
             alt = false;
         } else {
-            material = new THREE.MeshBasicMaterial({ color: 0xccccc });
+            material = new THREE.MeshBasicMaterial({ color: 0xffffff });
             cube = new THREE.Mesh(geometry, material);
             alt = true;
         }
@@ -94,23 +108,23 @@ for (i = -4; i < 4; i++) {
                     capName: capName,
                     to: UserMove.to,
                     from: UserMove.from,
-                    fen:"",
-                    side:gameSide
+                    fen: "",
+                    side: gameSide
                 };
-					MakeUserMove();
-					gameData.fen = newFen;
-					socketCast.emit("game", gameData);
-				
+                MakeUserMove();
+                gameData.fen = newFen;
+                socketCast.emit("game", gameData);
+
             }
             selected3D = false;
         });
     }
 
 }
-camera.position.z = 8;
-camera.position.y = -3.5;
+camera.position.z = 5.5;
+camera.position.y = -5.5;
 controls.minDistance = 1;
-controls.maxDistance = 1000;
+controls.maxDistance = 100;
 function animate() {
     requestAnimationFrame(animate);
     controls.update();
