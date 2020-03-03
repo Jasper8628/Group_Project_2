@@ -19,6 +19,7 @@
 }
 
 #EngineOutput {
+  display: none;
   position: absolute;
   left: 600px;
   top: 250px;
