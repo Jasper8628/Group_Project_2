@@ -7,7 +7,7 @@
 
 let PORT2 = 3000;
 let PORTSOCKET = process.env.PORTSOCKET || 4000;
-let PORTSEQ = process.env.PORTSOCKET || 8080;
+let PORTSEQ = process.env.PORTSEQ || 8080;
 let app = express();
 var exphbs = require('express-handlebars')
 let cast = app.listen(PORT2, function () {
@@ -28,8 +28,8 @@ const passport = require('./orm/passport')
 const db = require('./models')
 const app = express()
 
-const PORTSOCKET = process.env.PORTSOCKET || 3000 // This is for socket.io server
-const PORTSEQ = process.env.PORTSEQ || 8080 // This is for the html server
+// const PORTSOCKET = process.env.PORTSOCKET || 3000 // This is for socket.io server
+// const PORTSEQ = process.env.PORTSEQ || 8080 // This is for the html server
 
 // >>>>> Middleware >>>>>
 app.use(express.static('public')) // Serve static content
