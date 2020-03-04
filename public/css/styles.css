@@ -229,6 +229,10 @@ a:active {
   text-decoration: none;
 }
 
+#profileForm {
+  background-image: url("../images/Chess-3D-Animation-Wallpaper.jpg")
+}
+
 /* >>>>>>>>>>>>>>>>>>>>>> REALTIME CHAT BELOW (Stew) >>>>>>>>>>>>>>>>>>> */
 /* #message-container {
   width: 80%;
