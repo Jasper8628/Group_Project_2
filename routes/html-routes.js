@@ -22,6 +22,24 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, '../public/register.html'))
   })
 
+  app.get("/profile", function(req, res) {
+
+    db.User.findOne({
+      where: {
+        id: req.user.id
+      }
+    }).then(function(data){
+      console.log("-----------------------"+JSON.stringify(data));
+      console.log("-----------------------");
+      var hbsObject = {
+        users: data
+      };
+      console.log(hbsObject, hbsObject);
+      res.render("profile", hbsObject);
+    })
+
+  });
+
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the register page
   app.get('/chess', isAuthenticated, function (req, res) {
