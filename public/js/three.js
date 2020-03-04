@@ -19,8 +19,6 @@ const camera = new THREE.PerspectiveCamera(
     0.1,
     1000
 );
-let ambient = new THREE.AmbientLight(0x696969);
-scene.add(ambient);
 let light = new THREE.SpotLight(0xffffff, 2.0, 600);
 scene.add(light);
 let dirLight = new THREE.DirectionalLight(0xffffff, 1);
@@ -36,7 +34,7 @@ scene.add(backLight);
 const renderer = new THREE.WebGLRenderer();
 const w = window.innerWidth;
 const h = window.innerHeight;
-renderer.setSize(w, 0.85 * h);
+renderer.setSize(0.8*w, 0.6 * h);
 $("#scene").append(renderer.domElement);
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableScroll = false;
@@ -100,6 +98,8 @@ for (i = -4; i < 4; i++) {
         cube.name = i + " " + j;
         scene.add(cube);
         domEvents.addEventListener(cube, "click", event => {
+            console.log(cube.id);
+            console.log(scene);
             if (selected3D) {
                 UserMove.to = ClickedSquare3D(cube.position.x + 4, cube.position.y + 4);
                 // console.log(UserMove.to);

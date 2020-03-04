@@ -2,39 +2,25 @@ module.exports = function (sequlize, DataTypes) {
     var Replay = sequlize.define("Replay", {
         
         playerName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
+            type: DataTypes.STRING
         },
         pieceName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
+            type: DataTypes.STRING
         },
         capName: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
+            type: DataTypes.STRING
         },
         to: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            unique: true
+            type: DataTypes.INTEGER
         },
         from: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            unique: true
+            type: DataTypes.INTEGER
         },
         side: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
+            type: DataTypes.STRING
         },
         replay: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true
+            type: DataTypes.STRING
         },
     });
     return Replay;

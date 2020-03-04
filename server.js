@@ -49,7 +49,6 @@ ioCast.on("connection", function (socket) {
   ioCast.sockets.emit("all", { fen: fenStr });
 
   socket.on("game", function (data) {
-    console.log(data);
     fenArray.push(data.fen);
     let gameMove = {};
     gameMove.pieceName = data.pieceName;
@@ -57,6 +56,7 @@ ioCast.on("connection", function (socket) {
     gameMove.to = data.to;
     gameMove.from = data.from;
     moveArray.push(gameMove);
+    console.log(typeof (gameMove.to));
 
     ioCast.sockets.emit("all", data);
 
@@ -70,22 +70,56 @@ db.sequelize.sync().then(function () {
   });
 });
 
+app.post("/new",function(req,res){
+  moveArray=[];
+});
+
 app.get("/replay", function (req, res) {
-  // Here we add an "include" property to our options in our findOne query
-  // We set the value to an array of the models we want to include in a left outer join
-  // In this case, just db.Author
-  db.Replay.findAll().then(function (data) {
+  db.Replay.findAll(
+  ).then(function (data) {
     res.json(data);
   });
 });
 
+
+
 app.post("/save", function (req, res) {
-  let storageStr=JSON.stringify(moveArray);
-      db.Replay.create({
-        playerName:playerName,
-        replay:storageStr
-      }).then(function (data) {
-        res.json(data);
-      });
-  
+  db.Replay.destroy({
+    where: {},
+    truncate: true
+  });
+  db.sequelize.transaction(function (t) {
+    var promises = []
+    for (move of moveArray) {
+      var newPromise = db.Replay.create({
+        pieceName: move.pieceName,
+        capName: move.capName,
+        to: move.to,
+        from: move.from,
+        replay: "a "
+      }, { transaction: t });
+      promises.push(newPromise);
+    };
+    return Promise.all(promises).then(function (data) {
+      console.log("logged");
+    });
+  });
 });
+
+/*
+console.log(moveArray);
+let storageStr = JSON.stringify(moveArray);
+for (move of moveArray) {
+  db.Replay.create({
+    pieceName: move.pieceName,
+    capName: move.capName,
+    to: move.to,
+    from: move.from,
+    replay: "a "
+  }).then(function (data) {
+    console.log("logged");
+  })
+
+} */
+
+

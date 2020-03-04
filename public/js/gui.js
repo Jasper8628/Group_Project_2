@@ -3,7 +3,16 @@ $("#SetFen").click(function () {
 	NewGame(fenStr);
 });
 //$("#ready").on("click",function(){$.get("/api/ready")});
-
+$("#new").on("click",function(){
+	for(i=86;i<210;i++){
+	let toDelete = scene.getObjectById(i);
+	scene.remove(toDelete);
+	}
+	NewGame(START_FEN);
+	$.post("/new",function(res){
+		console.log(res);
+	});
+});
 $("#save").on("click", function () {
 	$.post("/save", function (res) {
 		console.log(res);
@@ -11,9 +20,14 @@ $("#save").on("click", function () {
 });
 $("#replay").on("click", function () {
 	watching = true;
+	for(i=86;i<210;i++){
+	let toDelete = scene.getObjectById(i);
+	scene.remove(toDelete);
+	}
+	NewGame(START_FEN);
 	$.get("/replay", function (data) {
 		let i = 0;
-		let moves=JSON.parse(data);
+		let moves=data;
 		function replay() {
 			pieceName = moves[i].pieceName;
 			capName = moves[i].capName;
@@ -227,7 +241,7 @@ function AddGUIPiece(sq, pce) {
 			cubePos.x = gltf.scene.position.x;
 			cubePos.y = gltf.scene.position.y;
 			//console.log("current piecename: " + pieceName);
-			console.log(" clicked: " + gltf.scene.name);
+			console.log(" clicked: " + gltf.scene.name,gltf.scene.id);
 
 			if (selected3D == false) {
 				pieceName = gltf.scene.name;

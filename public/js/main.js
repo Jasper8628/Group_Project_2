@@ -1,8 +1,10 @@
 let playerColor = "w";
 let playerSide = "w";
+let playerName="Jasper";
 let startingFen;
 let newGame = true;
 let watching = false;
+
 socketCast.on("all", function (data) {
   if (watching == false) {
     console.log("listening on Cast")
