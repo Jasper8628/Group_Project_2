@@ -45,4 +45,20 @@ module.exports = function (app) {
   app.get('/chess', isAuthenticated, function (req, res) {
     res.sendFile(path.join(__dirname, '../public/chess.html'))
   })
+  
+  app.get("/chat", function(req, res) {
+
+    db.User.findOne({
+      where: {
+        id: req.user.id
+      }
+    }).then(function(data){
+
+      var hbsObject = {
+        users: data
+      };
+      console.log(hbsObject, hbsObject);
+      res.render("chat", hbsObject);
+    })
+  })
 }
