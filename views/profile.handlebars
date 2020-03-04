@@ -1,25 +1,34 @@
-<form class="create-form">
-    <div class="form-group align-self-center">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-sm-5">
-                    <h4 class="header">Profile</h4>
+<div class="welcomeHeader">
+    <div>My Profile</div>
 
-                    <ul class="username">
-                        username:
-                        {{users.username}}
-                    </ul>
-                    <ul class="useremail">
-                        email:
-                        {{users.email}}
-                    </ul>
-                    <ul class="userskill">
-                        Skill Level:
-                        {{users.skillLevel}}
-                    </ul>
+    <form class="login" id="loginForm">
+        <div class="alert callout" id="errorEntry" style="display: none;">
+            <p><i class="fi-alert"></i> Please enter a valid email address</p>
+        </div>
+        <div class="grid-container">
+            <div class="grid-x grid-margin-x">
+                <div class="cell small-12">
+                    <label id="usernameLabel">Username: {{users.username}}
+                    </label>
                 </div>
-                <button type="submit" class="fnButton">Save</button>
+                <div class="cell small-12">
+                    <label id="usernameLabel">Skill Level: {{users.skillLevel}} </label>
+                </div>
+                <div class="cell small-12">
+                    <label id="usernameLabel">Email:
+                        <input id="userForm" type="text" placeholder="{{users.email}}" aria-describedby="emailField"
+                            aria-errormessage="emailError" required>
+                        <span id="formNameError" class="form-error">
+                            This field is required.
+                        </span>
+                    </label>
+                </div>
+            </div>
+            <button class="alert button" id="updateButton" type="submit" value="Submit">Edit my
+                profile</button>
+            <div>
+                <p class="goToChess">Click <a href="./chess.html">here</a> to go back to the Game.</p>
             </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
