@@ -1,3 +1,7 @@
+config/config.json 
+
+public/foundation6/
+
 # Logs
 logs
 *.log
