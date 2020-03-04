@@ -47,7 +47,7 @@ module.exports = function (app) {
   app.get('/chat', function (req, res) {
     db.User.findOne({
       where: {
-        id: req.user.id
+        id: "1"
       }
     }).then(function (data) {
       var hbsObject = {
