@@ -4,27 +4,31 @@
  * Sequelize connects to the default port of the remote db server:
  * mySQL(3306), PostGres(5432) or JawsDB(?)
  */
-
-let PORT2 = 3000;
-let PORTSOCKET = process.env.PORTSOCKET || 4000;
-let PORTSEQ = process.env.PORTSOCKET || 8080;
-var exphbs = require('express-handlebars')
 const express = require('express')
 const socket = require('socket.io')
 const session = require('express-session')
 const passport = require('./orm/passport')
 const db = require('./models')
 const app = express()
-var exphbs = require('express-handlebars')
+const exphbs = require('express-handlebars')
 
 
 // >>>>> Middleware >>>>>
-app.use(express.static('public')) // Serve static content
-app.use(express.urlencoded({ extended: true })) // Take care of encodings and json
-app.use(express.json())
-app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })) // Track the logged in user
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(express.static("public"));
+// Parse application body as JSON
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+// We need to use sessions to keep track of our user's login status
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+let PORT2 = 3000;
+const PORTSOCKET = process.env.PORTSOCKET || 4000 // This is for socket.io server
+const PORTSEQ = process.env.PORTSEQ || 8080 // This is for the html server
+let cast = app.listen(PORT2, function () {
+  console.log("server listening on 3000");
+})
 
 // Set Handlebars Template Language
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -69,12 +73,6 @@ ioCast.on('connection', socket => {
   })
 
 
-// Syncing our database and logging a message to the user upon success
-db.sequelize.sync().then(function () {
-  app.listen(PORTSEQ, function () {
-    console.log("==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.", PORTSEQ, PORTSEQ);
-  });
-});
 
 app.post("/new",function(req,res){
   moveArray=[];
@@ -149,6 +147,7 @@ for (move of moveArray) {
  * Login to the db and then start the web server application  *
  **************************************************************
 */
+// Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(() => {
   app.listen(PORTSEQ, () => {
     console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORTSEQ, PORTSEQ)

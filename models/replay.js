@@ -1,5 +1,5 @@
-module.exports = function (sequlize, DataTypes) {
-    var Replay = sequlize.define("Replay", {
+module.exports = function (sequelize, DataTypes) {
+    var Replay = sequelize.define("Replay", {
         
         playerName: {
             type: DataTypes.STRING

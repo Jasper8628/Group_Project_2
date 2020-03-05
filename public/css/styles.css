@@ -1,18 +1,15 @@
 #FenInDiv {
-<<<<<<< HEAD
-	position: relative;
+position: relative;
     left: 60px;
     display:none;
 }
 body{
-    background-color: black;
+  background-color: black;
 }
 #buttons{
-    z-index: 10;
-=======
+  z-index: 10;
   position: relative;
   left: 60px;
->>>>>>> b0eb8568a5360eb49e75b33e15cc8f16d10324c2
 }
 
 #fenIn {
@@ -21,7 +18,6 @@ body{
 }
 
 #Board {
-<<<<<<< HEAD
 	position: relative;
 	top: 20px;
 	left: 60px;
@@ -37,7 +33,6 @@ body{
 	position: absolute;
 	left: 600px;
 	top: 250px;	
-=======
   position: relative;
   top: 20px;
   left: 60px;
@@ -52,7 +47,6 @@ body{
   position: absolute;
   left: 600px;
   top: 250px;
->>>>>>> b0eb8568a5360eb49e75b33e15cc8f16d10324c2
 }
 
 .Square {
