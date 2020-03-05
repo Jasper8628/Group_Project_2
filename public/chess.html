@@ -5,6 +5,8 @@
 	<meta charset="utf-8">
 	<title>JSChess</title>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
+	
+	<link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
 	<link href="css/styles.css" rel="stylesheet" type="text/css">
 	<script> if (!window.console) console = { log: function () { } }; </script>
 </head>
@@ -18,14 +20,25 @@
 		<input type="text" id="fenIn" />
 		<button type="button" id="SetFen">Set Position</button>
 	</div>
+	<div id="turn">
+
+	</div>
+	
+	<div class="modal" id="message">
+		<div class="modal-content">
+		  <h5 id="user-color"></h5>
+		  <button class="modal-message hollow button secondary tiny ">OK</button>
+		</div>
+	  </div>
 
 	<div id="scene">
 	</div>
-	
+
 	<div id="buttons">
-		<button id="new">New Game</button>
-		<button id="save">Save</button>
-		<button id="replay">Replay</button>
+		<button id="new" class="hollow button secondary">New Game</button>
+		<button id="ready" class="hollow button secondary">Ready</button>
+		<button id="save" class="hollow button secondary">Save</button>
+		<button id="replay" class="hollow button secondary">Replay</button>
 	</div>
 
 	<div id="Board">
@@ -51,7 +64,7 @@
 		<button type="button" id="FlipButton">Flip Board</button><br /><br />
 		<button type="button" id="TakeButton">Take Back</button><br /><br /><br />
 		<span id="GameStatus"></span>
-	</div> 
+	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<!-- <script src="js/jquery-1.10.1.min.js"></script> -->

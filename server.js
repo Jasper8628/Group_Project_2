@@ -38,6 +38,8 @@ app.set('view engine', 'handlebars')
 require('./routes/html-routes.js')(app)
 require('./routes/api-routes.js')(app)
 
+//let cast = app.listen(PORT2, function () { console.log("server listening on 3000");});
+
 // >>>>> Chat and chess socket events >>>>>
 const ioserver = app.listen(PORTSOCKET, () => console.log(`listening for socket.io messages on port ${PORTSOCKET}`))
 const ioCast = socket(ioserver)
@@ -46,6 +48,7 @@ const fenArray = []
 const fenCode = ''
 const whitePicked = false
 const moveArray = []
+
 const room1 = {
   name: 'room1',
   whiteTaken: false,
@@ -64,31 +67,13 @@ ioCast.on('connection', socket => {
     gameMove.pieceName = data.pieceName
     gameMove.capName = data.capName
     gameMove.to = data.to
-    gameMove.from = data.from
+    gameMove.from = data.from,
+    gameMove.side = data.side
     moveArray.push(gameMove)
 
     ioCast.sockets.emit('all', data)
   })
 
-ioCast.on("connection", function (socket) {
-  console.log("connection made" + socket.id);
-  let fenStr = fenArray[fenArray.length - 1];
-  ioCast.sockets.emit("all", { fen: fenStr });
-
-  socket.on("game", function (data) {
-    fenArray.push(data.fen);
-    let gameMove = {};
-    gameMove.pieceName = data.pieceName;
-    gameMove.capName = data.capName;
-    gameMove.to = data.to;
-    gameMove.from = data.from;
-    moveArray.push(gameMove);
-    console.log(typeof (gameMove.to));
-
-    ioCast.sockets.emit("all", data);
-
-  });
-});
 
 
 app.post("/new",function(req,res){
@@ -100,6 +85,23 @@ app.get("/replay", function (req, res) {
   ).then(function (data) {
     res.json(data);
   });
+});
+
+app.get("/ready", function (req, res) {
+  let color;
+  if(room1.whiteTaken==false && room1.blackTaken==false){
+    room1.whiteTaken=true;
+    color="w";
+  } else if(room1.blackTaken==false){
+    room1.blackTaken=true;
+    color="b";
+  } else if(room1.whiteTaken==true && room1.blackTaken==true){
+    color="observer";
+  }
+  
+  res.json({color:color});
+  console.log(color);
+  
 });
 
 

@@ -3,15 +3,35 @@ $("#SetFen").click(function () {
 	NewGame(fenStr);
 });
 //$("#ready").on("click",function(){$.get("/api/ready")});
-$("#new").on("click",function(){
-	for(i=86;i<210;i++){
-	let toDelete = scene.getObjectById(i);
-	scene.remove(toDelete);
+$("#new").on("click", function () {
+	for (i = 86; i < 210; i++) {
+		let toDelete = scene.getObjectById(i);
+		scene.remove(toDelete);
 	}
 	NewGame(START_FEN);
-	$.post("/new",function(res){
+	$.post("/new", function (res) {
 		console.log(res);
 	});
+});
+$("#ready").on("click", function () {
+	$.get("/ready", function (data) {
+
+		playerColor = data.color;
+		console.log("your color is: " + playerColor);
+		console.log("your side is :" + playerSide);
+		$("#message").css("display", "block");
+		if (playerColor == "w") {
+			$("#user-color").text("You are playing as: White" );
+		} else if (playerColor == "b") {
+			$("#user-color").text("You are playing as: Black" );
+		} else {
+			$("#user-color").text("You are observing the game" );
+		}
+	});
+});
+
+$(".modal-message").on("click", function () {
+	$("#message").css("display", "none");
 });
 $("#save").on("click", function () {
 	$.post("/save", function (res) {
@@ -20,14 +40,14 @@ $("#save").on("click", function () {
 });
 $("#replay").on("click", function () {
 	watching = true;
-	for(i=86;i<210;i++){
-	let toDelete = scene.getObjectById(i);
-	scene.remove(toDelete);
+	for (i = 86; i < 210; i++) {
+		let toDelete = scene.getObjectById(i);
+		scene.remove(toDelete);
 	}
 	NewGame(START_FEN);
 	$.get("/replay", function (data) {
 		let i = 0;
-		let moves=data;
+		let moves = data;
 		function replay() {
 			pieceName = moves[i].pieceName;
 			capName = moves[i].capName;
@@ -241,7 +261,7 @@ function AddGUIPiece(sq, pce) {
 			cubePos.x = gltf.scene.position.x;
 			cubePos.y = gltf.scene.position.y;
 			//console.log("current piecename: " + pieceName);
-			console.log(" clicked: " + gltf.scene.name,gltf.scene.id);
+			console.log(" clicked: " + gltf.scene.name, gltf.scene.id);
 
 			if (selected3D == false) {
 				pieceName = gltf.scene.name;
@@ -261,9 +281,12 @@ function AddGUIPiece(sq, pce) {
 					side: gameSide
 				};
 				console.log(gameData.to, gameData.from);
-				MakeUserMove();
-				gameData.fen = newFen;
-				socketCast.emit("game", gameData);
+				if (playerColor == playerSide) {
+					MakeUserMove();
+					gameData.fen = newFen;
+					socketCast.emit("game", gameData);
+
+				}
 
 			}
 		});

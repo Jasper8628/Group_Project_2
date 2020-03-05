@@ -1,5 +1,5 @@
-let playerColor = "w";
-let playerSide = "w";
+let playerColor = " ";
+let playerSide = " ";
 let playerName="Jasper";
 let startingFen;
 let newGame = true;
@@ -12,9 +12,9 @@ socketCast.on("all", function (data) {
     UserMove.from = data.from;
     pieceName = data.pieceName;
     capName = data.capName;
-    playerSide = data.side;
 
     MakeUserMove();
+    console.log(playerSide);
 
   }
 });

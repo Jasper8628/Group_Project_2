@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "users_db",
+    "password": "Antares28",
+    "database": "chess",
     "host": "localhost",
     "dialect": "mysql"
   },
