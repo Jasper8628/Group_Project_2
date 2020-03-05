@@ -47,7 +47,7 @@ module.exports = function (app) {
   app.get('/chat', function (req, res) {
     db.User.findOne({
       where: {
-        id: "1"
+        id: '1' // TODO: This should be req.params.id but that gives errors!
       }
     }).then(function (data) {
       var hbsObject = {
