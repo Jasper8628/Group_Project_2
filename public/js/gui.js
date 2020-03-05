@@ -4,10 +4,12 @@ $("#SetFen").click(function () {
 });
 //$("#ready").on("click",function(){$.get("/api/ready")});
 $("#new").on("click", function () {
-	for (i = 86; i < 210; i++) {
+	for (i = 86; i < 1000; i++) {
 		let toDelete = scene.getObjectById(i);
 		scene.remove(toDelete);
 	}
+	playerReady = false;
+	playerSide = " ";
 	NewGame(START_FEN);
 	$.post("/new", function (res) {
 		console.log(res);
@@ -15,17 +17,19 @@ $("#new").on("click", function () {
 });
 $("#ready").on("click", function () {
 	$.get("/ready", function (data) {
+		playerReady = true;
+		PrintBoard();
 
 		playerColor = data.color;
 		console.log("your color is: " + playerColor);
 		console.log("your side is :" + playerSide);
 		$("#message").css("display", "block");
 		if (playerColor == "w") {
-			$("#user-color").text("You are playing as: White" );
+			$("#user-color").text("You are playing as: White");
 		} else if (playerColor == "b") {
-			$("#user-color").text("You are playing as: Black" );
+			$("#user-color").text("You are playing as: Black");
 		} else {
-			$("#user-color").text("You are observing the game" );
+			$("#user-color").text("Both sides are take,you may observe the game");
 		}
 	});
 });
@@ -40,7 +44,7 @@ $("#save").on("click", function () {
 });
 $("#replay").on("click", function () {
 	watching = true;
-	for (i = 86; i < 210; i++) {
+	for (i = 86; i < 1000; i++) {
 		let toDelete = scene.getObjectById(i);
 		scene.remove(toDelete);
 	}
@@ -93,7 +97,7 @@ function SetInitialBoardPieces() {
 		sq120 = SQ120(sq);
 		pce = GameBoard.pieces[sq120];
 		if (pce >= PIECES.wP && pce <= PIECES.bK) {
-			AddGUIPiece(sq120, pce);
+			AddGUIPiece(sq120, pce,pieceArray);
 		}
 	}
 	//console.log(scene);
@@ -219,10 +223,11 @@ let selected3D = false;
 let group3D = new THREE.Group();
 
 
-function AddGUIPiece(sq, pce) {
+let pieceArrayReverse = [0, "bpawn", "bknight", "bbishop", "brook", "bqueen", "bking", "pawn", "knight", "bishop", "rook", "queen", "king"];
+let pieceArray = [0, "pawn", "knight", "bishop", "rook", "queen", "king", "bpawn", "bknight", "bbishop", "brook", "bqueen", "bking"];
+function AddGUIPiece(sq, pce,array) {
 	let GUIgeo = new THREE.BoxGeometry(0.8, 0.8, 1.6);
-	let pieceArray = [0, "pawn", "knight", "bishop", "rook", "queen", "king", "bpawn", "bknight", "bbishop", "brook", "bqueen", "bking"]
-	let thisPce = pieceArray[pce];
+	let thisPce = array[pce];
 	let addressStr = "/images/" + thisPce + "/scene.gltf";
 
 	var file = FilesBrd[sq];
@@ -257,7 +262,13 @@ function AddGUIPiece(sq, pce) {
 			gltf.scene.rotation.x = 1.5;
 		}
 		gltf.scene.name = PceChar[pce] + sq;
-		domEvents.addEventListener(gltf.scene, "click", event => {
+		domEvents.addEventListener(gltf.scene, "click", event => 
+		{/* 
+
+			let newMaterial = new THREE.MeshBasicMaterial({ color: 0xfffff });
+
+			gltf.scene.material=newMaterial; */
+
 			cubePos.x = gltf.scene.position.x;
 			cubePos.y = gltf.scene.position.y;
 			//console.log("current piecename: " + pieceName);
@@ -266,6 +277,7 @@ function AddGUIPiece(sq, pce) {
 			if (selected3D == false) {
 				pieceName = gltf.scene.name;
 				UserMove.from = ClickedSquare3D(cubePos.x + 4, cubePos.y + 4);
+				console.log("from :" + UserMove.from);
 				selected3D = true;
 			} else {
 				UserMove.to = ClickedSquare3D(cubePos.x + 4, cubePos.y + 4);

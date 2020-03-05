@@ -44,10 +44,10 @@ require('./routes/api-routes.js')(app)
 const ioserver = app.listen(PORTSOCKET, () => console.log(`listening for socket.io messages on port ${PORTSOCKET}`))
 const ioCast = socket(ioserver)
 const chatUsers = {}
-const fenArray = []
+let fenArray = []
 const fenCode = ''
 const whitePicked = false
-const moveArray = []
+let moveArray = []
 
 const room1 = {
   name: 'room1',
@@ -77,7 +77,10 @@ ioCast.on('connection', socket => {
 
 
 app.post("/new",function(req,res){
-  moveArray=[];
+  fenArray=[];
+  room1.whiteTaken=false;
+  room1.blackTaken=false;
+
 });
 
 app.get("/replay", function (req, res) {
