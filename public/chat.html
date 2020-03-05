@@ -13,62 +13,12 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Special+Elite&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./css/styles.css">
-    <style>
-        /* I've purposely left all the styling inline so that it is easy to remove to put in styles.css */
-        /* Also so that we can check on conflicts with Foundation class/id names */
-        #headerBanner {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            /* This does a vertical align */
-            color: white;
-            height: 150px;
-            font-size: 20px;
-            text-align: left;
-            padding-top: 5px;
-            padding-right: 5px;
-            padding-bottom: 0px;
-            padding-left: 5px;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url("./images/Chess-3D-Animation-Wallpaper.jpg");
-            background-size: cover;
-            background-position: center;
-        }
-
-        .footer {
-            position: fixed;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 70px;
-            color: white;
-            padding: 0px 20px;
-            font-size: 20px;
-            text-align: center;
-            background-color: #0f1012;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            font-family: "Amatic SC", sans-serif;
-        }
-
-        #welcomeJack {
-            margin-left: 50px;
-            font-size: 100px;
-            font-family: "Amatic SC", sans-serif;
-            color: white;
-            line-height: 75px;
-        }
-    </style>
 </head>
 
 <body style="background-color: #0c0d10;">
     <!-- This stores the application name, the hidden chat, the user name and profile button -->
-    <section id="headerBanner">
-        <div id="welcomeJack">Jack Plays Chess</div>
+    <section id="chatbanner">
+        <div id="chatjack">Jack Plays Chess</div>
         <!-- Drop down box stores the chat history and the chat input form on the right hand side -->
         <div id="chat"
             style="position: absolute; right: 50px; float: right; width: 35%; display: flex; flex-direction: column; padding: 10px 5px;">
@@ -100,7 +50,7 @@
         <img src="./images/mock-board.png" alt="chessboard">
     </section>
 
-    <footer class="footer">
+    <footer id="chatfooter">
         <div>USyd Boot Camp Feb 2020</div>
         <div>Project Two Chess Game</div>
         <div>&copy; Jasper,Rita,Gerald,Stewart</div>
