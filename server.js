@@ -4,27 +4,28 @@
  * Sequelize connects to the default port of the remote db server:
  * mySQL(3306), PostGres(5432) or JawsDB(?)
  */
-
 const express = require('express')
 const socket = require('socket.io')
 const session = require('express-session')
 const passport = require('./orm/passport')
 const db = require('./models')
 const app = express()
-
-const PORTSOCKET = process.env.PORTSOCKET || 3000 // This is for socket.io server
-const PORTSEQ = process.env.PORTSEQ || 8080 // This is for the html server
+const exphbs = require('express-handlebars')
 
 // >>>>> Middleware >>>>>
-app.use(express.static('public')) // Serve static content
-app.use(express.urlencoded({ extended: true })) // Take care of encodings and json
+app.use(express.static('public'))
+// Parse application body as JSON
+app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
-app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })) // Track the logged in user
+// We need to use sessions to keep track of our user's login status
+app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true }))
 app.use(passport.initialize())
 app.use(passport.session())
 
+const PORTSOCKET = process.env.PORTSOCKET || 4000 // This is for socket.io server
+const PORTSEQ = process.env.PORTSEQ || 8080 // This is for the html server
+
 // Set Handlebars Template Language
-var exphbs = require('express-handlebars')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
@@ -35,11 +36,12 @@ require('./routes/api-routes.js')(app)
 // >>>>> Chat and chess socket events >>>>>
 const ioserver = app.listen(PORTSOCKET, () => console.log(`listening for socket.io messages on port ${PORTSOCKET}`))
 const ioCast = socket(ioserver)
+ioCast.set('origins', '*:*')
 const chatUsers = {}
 const fenArray = []
 const fenCode = ''
 const whitePicked = false
-const moveArray = []
+let moveArray = []
 const room1 = {
   name: 'room1',
   whiteTaken: false,
@@ -64,6 +66,75 @@ ioCast.on('connection', socket => {
     ioCast.sockets.emit('all', data)
   })
 
+  ioCast.on('connection', function (socket) {
+    console.log('connection made' + socket.id)
+    const fenStr = fenArray[fenArray.length - 1]
+    ioCast.sockets.emit('all', { fen: fenStr })
+
+    socket.on('game', function (data) {
+      fenArray.push(data.fen)
+      const gameMove = {}
+      gameMove.pieceName = data.pieceName
+      gameMove.capName = data.capName
+      gameMove.to = data.to
+      gameMove.from = data.from
+      moveArray.push(gameMove)
+      console.log(typeof (gameMove.to))
+
+      ioCast.sockets.emit('all', data)
+    })
+  })
+
+  app.post('/new', function (req, res) {
+    moveArray = []
+  })
+
+  app.get('/replay', function (req, res) {
+    db.Replay.findAll(
+    ).then(function (data) {
+      res.json(data)
+    })
+  })
+
+  app.post('/save', function (req, res) {
+    db.Replay.destroy({
+      where: {},
+      truncate: true
+    })
+    db.sequelize.transaction(function (t) {
+      var promises = []
+      for (const move of moveArray) {
+        var newPromise = db.Replay.create({
+          pieceName: move.pieceName,
+          capName: move.capName,
+          to: move.to,
+          from: move.from,
+          replay: 'a '
+        }, { transaction: t })
+        promises.push(newPromise)
+      };
+      return Promise.all(promises).then(function (data) {
+        console.log('logged')
+      })
+    })
+  })
+
+  /*
+console.log(moveArray);
+let storageStr = JSON.stringify(moveArray);
+for (move of moveArray) {
+  db.Replay.create({
+    pieceName: move.pieceName,
+    capName: move.capName,
+    to: move.to,
+    from: move.from,
+    replay: "a "
+  }).then(function (data) {
+    console.log("logged");
+  })
+
+} */
+
   socket.on('new-user', name => {
     chatUsers[socket.id] = name
     socket.broadcast.emit('user-connected', name)
@@ -84,6 +155,7 @@ ioCast.on('connection', socket => {
  * Login to the db and then start the web server application  *
  **************************************************************
 */
+// Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(() => {
   app.listen(PORTSEQ, () => {
     console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORTSEQ, PORTSEQ)
