@@ -5,6 +5,9 @@
     }
 </style>
 <section id="chatbanner">
+        <div><a href="./profile"><img src="./images/wK.png" alt="Link to Profile Page"></a>
+    </div>
+    
     <div id="chatjack">Jack Plays Chess</div>
     <!-- Drop down box stores the chat history and the chat input form on the right hand side -->
     {{!-- <div id="chat"
@@ -31,6 +34,7 @@
     <div>{{users.username}}</div>
     <div><a href="./profile"><img src="./images/wK.png" alt="Link to Profile Page"></a>
     </div>
+    
 </section>
 <div style="background-color: #07080d;">
     <div id="FenInDiv">
@@ -39,67 +43,65 @@
         <button type="button" id="SetFen">Set Position</button>
     </div>
 
-    <div id="scene" style="background-color: #07080d;">
+<br>
+
+<section id="chess" style="width: auto; height: auto; padding: 5px; margin-top: 5px;">
+    {{!-- <img src="./images/mock-board.png" alt="chessboard"> --}}
+    <div id="FenInDiv">
+        Fen:<br />
+        <input type="text" id="fenIn" />
+        <button type="button" id="SetFen">Set Position</button>
+    </div>
+    <div id="turn">
+    </div>
+    <div class="modal" id="message">
+        <div class="modal-content">
+            <h5 id="user-color"></h5>
+            <button class="modal-message hollow button secondary tiny ">OK</button>
+        </div>
     </div>
 
-    <div style="background-color: #07080d;">
-        <div id="buttons">
-            <button id="new">New Game</button>
-            <button id="save">Save</button>
-            <button id="replay">Replay</button>
-        </div>
-
-        <div id="Board">
-        </div>
-        <div id="EngineOutput">Thinking Time: <br />
-            <select id="ThinkTimeChoice">
-                <option value="1">1s</option>
-                <option value="2">2s</option>
-                <option value="4">4s</option>
-                <option value="6">6s</option>
-                <option value="8">8s</option>
-                <option value="10">10s</option>
-            </select><br /><br /><br />
-            <span id="BestOut">BestMove:</span><br />
-            <span id="DepthOut">Depth:</span><br />
-            <span id="ScoreOut">Score:</span><br />
-            <span id="NodesOut">Nodes:</span><br />
-            <span id="OrderingOut">Ordering:</span><br />
-            <span id="TimeOut">Time:</span><br /><br />
-            <button id="ready">Ready</button>
-            <button type="button" id="SearchButton">Move Now</button><br />
-            <button type="button" id="NewGameButton">New Game</button><br />
-            <button type="button" id="FlipButton">Flip Board</button><br /><br />
-            <button type="button" id="TakeButton">Take Back</button><br /><br /><br />
-            <span id="GameStatus"></span>
-        </div>
+    <div id="scene">
     </div>
-</div>
+
+    <div id="buttons">
+        <button id="new" class="hollow button secondary">New Game</button>
+        <button id="ready" class="hollow button secondary">Ready</button>
+        <button id="save" class="hollow button secondary">Save</button>
+        <button id="replay" class="hollow button secondary">Replay</button>
+    </div>
+
+    <div id="Board">
+    </div>
+    <div id="EngineOutput">Thinking Time: <br />
+        <select id="ThinkTimeChoice">
+            <option value="1">1s</option>
+            <option value="2">2s</option>
+            <option value="4">4s</option>
+            <option value="6">6s</option>
+            <option value="8">8s</option>
+            <option value="10">10s</option>
+        </select><br /><br /><br />
+        <span id="BestOut">BestMove:</span><br />
+        <span id="DepthOut">Depth:</span><br />
+        <span id="ScoreOut">Score:</span><br />
+        <span id="NodesOut">Nodes:</span><br />
+        <span id="OrderingOut">Ordering:</span><br />
+        <span id="TimeOut">Time:</span><br /><br />
+        <button id="ready">Ready</button>
+        <button type="button" id="SearchButton">Move Now</button><br />
+        <button type="button" id="NewGameButton">New Game</button><br />
+        <button type="button" id="FlipButton">Flip Board</button><br /><br />
+        <button type="button" id="TakeButton">Take Back</button><br /><br /><br />
+        <span id="GameStatus"></span>
+    </div>
+</section>
 
 <footer id="chatfooter">
     <div>USyd Boot Camp Feb 2020</div>
     <div>Project Two Chess Game</div>
-    <div>&copy; Jasper,Rita,Gerald,Stewart</div>
+    <div>&copy; Jasper Du, Rita Pang, Gerald Lam, Stewart Anstey</div>
 </footer>
 
 
-<script src="./js/chat-client.js"></script> <!-- socket IO must have been preloaded -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://threejs.org/build/three.js"></script>
-<script src="js/OrbitControls.js"></script>
-<script src="js/MTLLoader.js"></script>
-<script src="js/OBJLoader.js"></script>
-<script src="js/GLTFLoader.js"></script>
-<script src="js/threex.domevents.js"></script>
-<script src="js/three.js"></script>
-<script src="js/defs.js"></script>
-<script src="js/io.js"></script>
-<script src="js/board.js"></script>
-<script src="js/movegen.js"></script>
-<script src="js/makemove.js"></script>
-<script src="js/evaluate.js"></script>
-<script src="js/pvtable.js"></script>
-<script src="js/search.js"></script>
-<script src="js/perft.js"></script>
-<script src="js/gui.js"></script>
-<script src="js/main.js"></script>
+<script src="./js/chat-client.js"></script>
