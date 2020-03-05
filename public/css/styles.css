@@ -3,7 +3,30 @@ position: relative;
     left: 60px;
     display:none;
 }
-body {
+
+.modal {
+  display: none;
+  position: fixed;
+  padding-top: 50px;
+  margin: auto;
+  width: 80%;
+  height: 80%;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#message{
+  text-align: center;
+  width: 100%;
+  z-index: 100;
+  position: absolute;
+  height:200px;
+  color:grey;
+}
+#turn{
+  font-size: 14;
+  color: white;
+}
+body{
   background-color: black;
 }
 
