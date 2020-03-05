@@ -37,8 +37,7 @@ const h = window.innerHeight;
 renderer.setSize(0.8*w, 0.6 * h);
 $("#scene").append(renderer.domElement);
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enableScroll = false;
-controls.enablePan = true;
+controls.maxPolarAngle = THREE.Math.degToRad(359);
 const domEvents = new THREEx.DomEvents(camera, renderer.domElement);
 
 
@@ -99,7 +98,6 @@ for (i = -4; i < 4; i++) {
         scene.add(cube);
         domEvents.addEventListener(cube, "click", event => {
             console.log(cube.id);
-            console.log(scene);
             if (selected3D) {
                 UserMove.to = ClickedSquare3D(cube.position.x + 4, cube.position.y + 4);
                 // console.log(UserMove.to);
@@ -111,21 +109,30 @@ for (i = -4; i < 4; i++) {
                     fen: "",
                     side: gameSide
                 };
-                MakeUserMove();
-                gameData.fen = newFen;
-                socketCast.emit("game", gameData);
-
+				if (playerColor == playerSide) {
+					MakeUserMove();
+					gameData.fen = newFen;
+					socketCast.emit("game", gameData);
+				}
             }
             selected3D = false;
         });
     }
 
 }
+let delta=0;
+
 camera.position.z = 5.5;
 camera.position.y = -5.5;
+//camera.lookAt(1,0,1);
 controls.minDistance = 1;
 controls.maxDistance = 100;
-function animate() {
+function animate() {/* 
+    delta+=0.01
+    console.log(delta);
+    camera.lookAt(light.position);
+    camera.position.z=Math.sin(delta)*10;
+    camera.position.x=Math.cos(delta)*10; */
     requestAnimationFrame(animate);
     controls.update();
     renderer.render(scene, camera);

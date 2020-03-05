@@ -48,6 +48,7 @@ const fenArray = []
 const fenCode = ''
 const whitePicked = false
 const moveArray = []
+
 const room1 = {
   name: 'room1',
   whiteTaken: false,
@@ -66,7 +67,8 @@ ioCast.on('connection', socket => {
     gameMove.pieceName = data.pieceName
     gameMove.capName = data.capName
     gameMove.to = data.to
-    gameMove.from = data.from
+    gameMove.from = data.from,
+    gameMove.side = data.side
     moveArray.push(gameMove)
 
     ioCast.sockets.emit('all', data)
@@ -83,6 +85,23 @@ app.get("/replay", function (req, res) {
   ).then(function (data) {
     res.json(data);
   });
+});
+
+app.get("/ready", function (req, res) {
+  let color;
+  if(room1.whiteTaken==false && room1.blackTaken==false){
+    room1.whiteTaken=true;
+    color="w";
+  } else if(room1.blackTaken==false){
+    room1.blackTaken=true;
+    color="b";
+  } else if(room1.whiteTaken==true && room1.blackTaken==true){
+    color="observer";
+  }
+  
+  res.json({color:color});
+  console.log(color);
+  
 });
 
 
