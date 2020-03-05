@@ -23,8 +23,11 @@ position: relative;
   color:grey;
 }
 #turn{
-  font-size: 14;
+  font-size: 3vmax;
   color: white;
+  font-family: "Special Elite", sans-serif;
+  position: absolute;
+  left: 28%;
 }
 body{
   background-color: black;
@@ -32,8 +35,13 @@ body{
 
 #buttons{
   z-index: 10;
-  position: relative;
-  left: 60px;
+  position: absolute;
+  left: 25%;
+}
+
+.button{
+  border-radius: 5px;
+  font-family: "Special Elite", sans-serif;
 }
 
 #fenIn {
@@ -324,11 +332,18 @@ a:active {
 }
 
 #chatjack {
-  margin-left: 50px;
+  margin-left: 5%;
   font-size: 100px;
   font-family: "Amatic SC", sans-serif;
   color: white;
   line-height: 75px;
+}
+
+#chatUsername{
+  font-size: 14px; /*14px*/
+  font-family: "Special Elite", sans-serif;
+  color: white;
+  margin-right: 10%;
 }
 
 
