@@ -8,28 +8,15 @@
 let PORT2 = 3000;
 let PORTSOCKET = process.env.PORTSOCKET || 4000;
 let PORTSEQ = process.env.PORTSOCKET || 8080;
-let app = express();
 var exphbs = require('express-handlebars')
-let cast = app.listen(PORT2, function () {
-  console.log("server listening on 3000");
-})
-app.use(express.static("public"));
-// Parse application body as JSON
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-// We need to use sessions to keep track of our user's login status
-app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
 const express = require('express')
 const socket = require('socket.io')
 const session = require('express-session')
 const passport = require('./orm/passport')
 const db = require('./models')
 const app = express()
+var exphbs = require('express-handlebars')
 
-const PORTSOCKET = process.env.PORTSOCKET || 3000 // This is for socket.io server
-const PORTSEQ = process.env.PORTSEQ || 8080 // This is for the html server
 
 // >>>>> Middleware >>>>>
 app.use(express.static('public')) // Serve static content
@@ -40,13 +27,14 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // Set Handlebars Template Language
-var exphbs = require('express-handlebars')
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 // Requiring our routes
 require('./routes/html-routes.js')(app)
 require('./routes/api-routes.js')(app)
+
+//let cast = app.listen(PORT2, function () { console.log("server listening on 3000");});
 
 // >>>>> Chat and chess socket events >>>>>
 const ioserver = app.listen(PORTSOCKET, () => console.log(`listening for socket.io messages on port ${PORTSOCKET}`))
@@ -80,25 +68,6 @@ ioCast.on('connection', socket => {
     ioCast.sockets.emit('all', data)
   })
 
-ioCast.on("connection", function (socket) {
-  console.log("connection made" + socket.id);
-  let fenStr = fenArray[fenArray.length - 1];
-  ioCast.sockets.emit("all", { fen: fenStr });
-
-  socket.on("game", function (data) {
-    fenArray.push(data.fen);
-    let gameMove = {};
-    gameMove.pieceName = data.pieceName;
-    gameMove.capName = data.capName;
-    gameMove.to = data.to;
-    gameMove.from = data.from;
-    moveArray.push(gameMove);
-    console.log(typeof (gameMove.to));
-
-    ioCast.sockets.emit("all", data);
-
-  });
-});
 
 // Syncing our database and logging a message to the user upon success
 db.sequelize.sync().then(function () {

@@ -1,6 +1,6 @@
 
 
-var socketCast = io.connect("http://localhost:3000");
+var socketCast = io.connect("http://localhost:4000");
 //var socketGame = io.connect("http://localhost:4000/chest.html");
 const scene = new THREE.Scene();
 //scene.background = new THREE.Color( 0xff0000 );
