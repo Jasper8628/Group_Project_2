@@ -29,6 +29,7 @@ position: relative;
 body{
   background-color: black;
 }
+
 #buttons{
   z-index: 10;
   position: relative;
@@ -148,13 +149,14 @@ body{
   position: relative;
   margin: 0;
   padding: 0;
+  background-color: black;
 }
 
 .welcomeHeader {
   position: absolute;
   top: 5%;
   left: 10%;
-  font-size: 100px;
+  font-size: 8vmax; /*100px*/
   font-family: "Amatic SC", sans-serif;
   color: white;
 }
@@ -173,7 +175,7 @@ body{
   position: absolute;
   top: 110%;
   left: 0;
-  font-size: 18px;
+  font-size: 2vmax; /*18px*/
   font-family: "Special Elite", sans-serif;
   color: white;
 }
@@ -207,7 +209,7 @@ body{
 }
 
 #usernameLabel {
-  font-size: 18px;
+  font-size: 18px; /*18px*/
   font-family: "Special Elite", sans-serif;
   color: white;
   background-color: none;
@@ -215,7 +217,7 @@ body{
 }
 
 #passwordLabel {
-  font-size: 18px;
+  font-size: 18px; /*18px*/
   font-family: "Special Elite", sans-serif;
   color: white;
   background-color: none;
@@ -223,7 +225,7 @@ body{
 }
 
 #rePasswordLabel {
-  font-size: 18px;
+  font-size: 18px; /*18px*/
   font-family: "Special Elite", sans-serif;
   color: white;
   background-color: none;
@@ -231,24 +233,24 @@ body{
 }
 
 .goToRegister {
-  font-size: 14px;
+  font-size: 14px; /*14px*/
   font-family: "Special Elite", sans-serif;
   color: white;
 }
 
 .goToLogin {
-  font-size: 14px;
+  font-size: 14px; /*14px*/
   font-family: "Special Elite", sans-serif;
   color: white;
 }
 
 #errorHead {
-  font-size: 16px;
+  font-size: 14px; /*16px*/
   border-radius: 5px;
 }
 
 #errorEntry {
-  font-size: 16px;
+  font-size: 14px; /*16px*/
   border-radius: 5px;
 }
 
@@ -328,6 +330,8 @@ a:active {
   color: white;
   line-height: 75px;
 }
+
+
 /* #message-container {
   width: 80%;
   max-width: 1200px;
