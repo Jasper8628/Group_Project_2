@@ -4,19 +4,14 @@
  */
 
 const socket = io('http://localhost:4000')
-const messageContainer = document.getElementById('message-container')
-const messageForm = document.getElementById('send-container')
-const messageInput = document.getElementById('message-input')
-const name = document.getElementById('user-name').textContent
+const messageContainer = document.getElementById('chatHistory')
+const messageForm = document.getElementById('chatContainer')
+const messageInput = document.getElementById('messageInput')
+const name = document.getElementById('hdbusername').textContent
 
 appendMessage(`Hi ${name} thanks for joining the game`)
-try {
-  document.getElementById('chat-flash-message').textContent = `${name} has joined the game`
-} catch (error) {
-  console.log('Could not update the flash message!')
-}
-
 console.log(`%c chat-client.js -> Good news [${name}] you joined the game`, 'background: #0000FF; color: #FFFFFF;')
+
 socket.emit('new-user', name)
 
 socket.on('chat-message', data => {
@@ -60,8 +55,6 @@ function appendMessage (message) {
     const messageElement = document.createElement('div')
     messageElement.innerText = message
     messageContainer.append(messageElement)
-
-    document.getElementById('chat-flash-message').textContent = message
     console.log(`%c chat-client.js -> APPENDING MESSAGE [${message}]`, 'background: #0000FF; color: #FFFFFF;')
   } catch (error) {
     console.log('%c chat-client.js -> EXCEPTION ON APPEND', 'background: #FF0000; color: #FFFFFF;')
