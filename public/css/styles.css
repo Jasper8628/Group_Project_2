@@ -6,6 +6,7 @@
 
 #scene{
   position: absolute;
+  top: 20%;
   left: 0;
   z-index: 200;
 }
@@ -13,12 +14,16 @@
 .modal {
   display: none;
   position: fixed;
+  top: 15%;
+  left: -10%;
+  z-index: 800;
   padding-top: 50px;
   margin: auto;
-  width: 80%;
-  height: 80%;
+  width: 60%;
+  height: 60%;
   background-color: rgb(0, 0, 0);
   background-color: rgba(0, 0, 0, 0.5);
+  color: white;
 }
 #message {
   text-align: center;
@@ -30,12 +35,14 @@
   font-family: 'Rajdhani', sans-serif;
 }
 #turn {
-  font-size: 5vmax;
+  font-size: 2vmax;
   color: white;
   font-family: 'Rajdhani', sans-serif;
   position: absolute;
-  left: 25%;
+  top: 23%;
+  left: 30%;
   z-index: 400;
+  padding: 20px;
 }
 
 body {
@@ -234,10 +241,13 @@ body {
   padding: 0;
 }
 
-canvas {
+/* canvas {
   display: block;
   margin: 0px auto;
-}
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 600;
+} */
 
 #loginForm {
   position: absolute;
@@ -442,7 +452,7 @@ a:active {
   position: absolute;
   top: 20%;
   right: 17%;
-  height: 800px;
+  height: 600px;
   width: 300px;
 }
 
