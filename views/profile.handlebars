@@ -8,9 +8,9 @@
     <div>My Profile</div>
 
     <form id="profileFORM" class="profile">
-        {{!-- <div data-abide-error class="alert callout" id="errorEntry" style="display: none;">
+        <div data-abide-error class="alert callout" id="errorEntry" style="display: none;">
             <p><i class="fi-alert"></i> Password entries don't match. Please check and re-enter password.</p>
-        </div> --}}
+        </div>
         <div class="alert callout" id="errorEntry" style="display: none;">
             <p><i class="fi-alert"></i> Please enter a valid email address</p>
         </div>
@@ -20,7 +20,7 @@
                     <label id="usernameLabel">Username: {{users.username}}
                     </label>
                 </div>
-                {{!-- <div class="cell small-12">
+                <div class="cell small-12">
                     <label id="passwordLabel"> Password: 
                         <input id="passwordForm" type="password" placeholder="password" aria-describedby="example1Hint2"
                             aria-errormessage="example1Error2" required>
@@ -38,7 +38,7 @@
                             Password does not match.
                         </span>
                     </label>
-                </div> --}}
+                </div>
                 <div class="cell small-12">
                     <label id="usernameLabel">Email: {{users.email}}
                         <input id="emailForm" type="text" placeholder="Add Your Email" aria-describedby="emailField"
