@@ -10,25 +10,13 @@
     </div> --}}
 
     <div id="chatjack">Jack Plays Chess</div>
-    <div>{{users.username}}</div>
-    <div class="profile-buttons"><a href="./profile"><img src="./images/wK.png" alt="Link to Profile Page" id="profilelogo">My Profile</a>
+    <div id="user-name">{{users.username}}</div>
+    <div class="profile-buttons"><a href="./profile"><img src="./images/wK.png" alt="Link to Profile Page"
+                id="profilelogo">My Profile</a>
     </div>
 
 </section>
 <div>
-    <div id="FenInDiv">
-        Fen:<br />
-        <input type="text" id="fenIn" />
-        <button type="button" id="SetFen">Set Position</button>
-    </div>
-
-    <br>
-
-    <div id="FenInDiv">
-        Fen:<br />
-        <input type="text" id="fenIn" />
-        <button type="button" id="SetFen">Set Position</button>
-    </div>
     <div id="turn">
     </div>
     <div class="modal" id="message">
@@ -46,6 +34,8 @@
         <button id="ready" class="hollow button secondary" style="margin-bottom: 6px;">Ready</button>
         <button id="save" class="hollow button secondary" style="margin-bottom: 6px;">Save</button>
         <button id="replay" class="hollow button secondary" style="margin-bottom: 6px;">Replay</button>
+
+
         <form id="send-container" style="display: inline-block;">
             <div style="display:flex;">
                 <input type="text" id="message-input" placeholder="chat as {{users.username}}" required

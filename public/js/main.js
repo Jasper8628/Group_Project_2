@@ -1,6 +1,6 @@
 let playerColor = " ";
 let playerSide = " ";
-let playerName="Jasper";
+let playerName=$("#user-name").text();
 let startingFen;
 let newGame = true;
 let watching = false;

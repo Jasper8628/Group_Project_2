@@ -2,6 +2,8 @@ $("#SetFen").click(function () {
 	var fenStr = $("#fenIn").val();
 	NewGame(fenStr);
 });
+
+
 //$("#ready").on("click",function(){$.get("/api/ready")});
 $("#new").on("click", function () {
 	for (i = 86; i < 1000; i++) {
@@ -15,23 +17,61 @@ $("#new").on("click", function () {
 		console.log(res);
 	});
 });
-$("#ready").on("click", function () {
-	$.get("/ready", function (data) {
-		playerReady = true;
-		PrintBoard();
 
+socketCast.on("ready", function (data) {
+	console.log(data.color);
+	PrintBoard();
+	$("#message").css("display", "block");
+	let color;
+	let msg;
+	if (data.color == "w") {
+		
+		$("#turn").text("Awaiting player black");
+		color = "white";
+		msg=" is playing as white";
+	} else if (data.color == "b") {
+		color = "black";
+		$("#turn").text("Game ready,white's turn");
+		
+		msg=" is playing as black";
+	} else {
+		color = "Observer";
+		msg=" observes the game";
+	}
+	let name = data.name;
+	if (playerName == name) {
 		playerColor = data.color;
-		console.log("your color is: " + playerColor);
-		console.log("your side is :" + playerSide);
-		$("#message").css("display", "block");
-		if (playerColor == "w") {
-			$("#user-color").text("You are playing as: White");
-		} else if (playerColor == "b") {
-			$("#user-color").text("You are playing as: Black");
-		} else {
-			$("#user-color").text("Both sides are take,you may observe the game");
-		}
-	});
+		$("#user-color").text("You are playing as: " + color);
+	} else {
+		$("#user-color").text(name + msg);
+
+	}
+});
+
+$("#ready").on("click", function () {
+	
+	playerReady = true;
+	let readyData = {
+		name: playerName
+	};
+	socketCast.emit("ready", readyData);
+
+	/* 	$.get("/ready", function (data) {
+			playerReady = true;
+			PrintBoard();
+	
+			playerColor = data.color;
+			console.log("your color is: " + playerColor);
+			console.log("your side is :" + playerSide);
+			$("#message").css("display", "block");
+			if (playerColor == "w") {
+				$("#user-color").text("You are playing as: White");
+			} else if (playerColor == "b") {
+				$("#user-color").text("You are playing as: Black");
+			} else {
+				$("#user-color").text("Both sides are take,you may observe the game");
+			}
+		}); */
 });
 
 $(".modal-message").on("click", function () {
