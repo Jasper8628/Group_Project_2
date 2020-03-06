@@ -1,73 +1,118 @@
-$('#SetFen').click(function () {
-  var fenStr = $('#fenIn').val()
-  NewGame(fenStr)
-})
-// $("#ready").on("click",function(){$.get("/api/ready")});
-$('#new').on('click', function () {
-  for (i = 86; i < 210; i++) {
-    const toDelete = scene.getObjectById(i)
-    scene.remove(toDelete)
-  }
-  NewGame(START_FEN)
-  $.post('/new', function (res) {
-    console.log(res)
-  })
-})
-$('#ready').on('click', function () {
-  $.get('/ready', function (data) {
-    playerColor = data.color
-    console.log('your color is: ' + playerColor)
-    console.log('your side is :' + playerSide)
-    $('#message').css('display', 'block')
-    if (playerColor == 'w') {
-      $('#user-color').text('You are playing as: White')
-    } else if (playerColor == 'b') {
-      $('#user-color').text('You are playing as: Black')
-    } else {
-      $('#user-color').text('You are observing the game')
-    }
-  })
-})
+$("#SetFen").click(function () {
+	var fenStr = $("#fenIn").val();
+	NewGame(fenStr);
+});
 
-$('.modal-message').on('click', function () {
-  $('#message').css('display', 'none')
-})
-$('#save').on('click', function () {
-  $.post('/save', function (res) {
-    console.log(res)
-  })
-})
-$('#replay').on('click', function () {
-  watching = true
-  for (i = 86; i < 210; i++) {
-    const toDelete = scene.getObjectById(i)
-    scene.remove(toDelete)
-  }
-  NewGame(START_FEN)
-  $.get('/replay', function (data) {
-    let i = 0
-    const moves = data
-    function replay () {
-      pieceName = moves[i].pieceName
-      capName = moves[i].capName
-      UserMove.to = moves[i].to
-      UserMove.from = moves[i].from
-      MakeUserMove()
-      i++
-      if (i === moves.length) {
-        clearInterval(interval)
-        watching = false
-      }
-    }
-    const interval = setInterval(replay, 1000)
-  })
-})
 
-function NewGame (fenStr) {
-  ParseFen(fenStr)
-  PrintBoard()
-  SetInitialBoardPieces()
-  CheckAndSet()
+//$("#ready").on("click",function(){$.get("/api/ready")});
+$("#new").on("click", function () {
+	for (i = 86; i < 1000; i++) {
+		let toDelete = scene.getObjectById(i);
+		scene.remove(toDelete);
+	}
+	playerReady = false;
+	playerSide = " ";
+	NewGame(START_FEN);
+	$.post("/new", function (res) {
+		console.log(res);
+	});
+});
+
+socketCast.on("ready", function (data) {
+	console.log(data.color);
+	PrintBoard();
+	$("#message").css("display", "block");
+	let color;
+	let msg;
+	if (data.color == "w") {
+		
+		$("#turn").text("Awaiting player black");
+		color = "white";
+		msg=" is playing as white";
+	} else if (data.color == "b") {
+		color = "black";
+		$("#turn").text("Game ready,white's turn");
+		
+		msg=" is playing as black";
+	} else {
+		color = "Observer";
+		msg=" observes the game";
+	}
+	let name = data.name;
+	if (playerName == name) {
+		playerColor = data.color;
+		$("#user-color").text("You are playing as: " + color);
+	} else {
+		$("#user-color").text(name + msg);
+
+	}
+});
+
+$("#ready").on("click", function () {
+	
+	playerReady = true;
+	let readyData = {
+		name: playerName
+	};
+	socketCast.emit("ready", readyData);
+
+	/* 	$.get("/ready", function (data) {
+			playerReady = true;
+			PrintBoard();
+	
+			playerColor = data.color;
+			console.log("your color is: " + playerColor);
+			console.log("your side is :" + playerSide);
+			$("#message").css("display", "block");
+			if (playerColor == "w") {
+				$("#user-color").text("You are playing as: White");
+			} else if (playerColor == "b") {
+				$("#user-color").text("You are playing as: Black");
+			} else {
+				$("#user-color").text("Both sides are take,you may observe the game");
+			}
+		}); */
+});
+
+$(".modal-message").on("click", function () {
+	$("#message").css("display", "none");
+});
+$("#save").on("click", function () {
+	$.post("/save", function (res) {
+		console.log(res);
+	});
+});
+$("#replay").on("click", function () {
+	watching = true;
+	for (i = 86; i < 1000; i++) {
+		let toDelete = scene.getObjectById(i);
+		scene.remove(toDelete);
+	}
+	NewGame(START_FEN);
+	$.get("/replay", function (data) {
+		let i = 0;
+		let moves = data;
+		function replay() {
+			pieceName = moves[i].pieceName;
+			capName = moves[i].capName;
+			UserMove.to = moves[i].to;
+			UserMove.from = moves[i].from;
+			MakeUserMove();
+			i++;
+			if (i === moves.length) {
+				clearInterval(interval);
+				watching = false;
+			}
+		}
+		let interval = setInterval(replay, 1000);
+	});
+});
+
+function NewGame(fenStr) {
+	ParseFen(fenStr);
+	PrintBoard();
+	SetInitialBoardPieces();
+	CheckAndSet();
 }
 
 function ClearAllPieces () {
@@ -196,88 +241,98 @@ function RemoveGUIPiece (sq) {
   })
 }
 
-const cubePos = {
-  x: 0,
-  y: 0
-}
-let pieceName = ''
-let capName = ''
-let selected3D = false
-const group3D = new THREE.Group()
+let cubePos = {
+	x: 0,
+	y: 0
+};
+let pieceName = "";
+let capName = "";
+let selected3D = false;
+let group3D = new THREE.Group();
 
-function AddGUIPiece (sq, pce) {
-  const GUIgeo = new THREE.BoxGeometry(0.8, 0.8, 1.6)
-  const pieceArray = [0, 'pawn', 'knight', 'bishop', 'rook', 'queen', 'king', 'bpawn', 'bknight', 'bbishop', 'brook', 'bqueen', 'bking']
-  const thisPce = pieceArray[pce]
-  const addressStr = '/images/' + thisPce + '/scene.gltf'
 
-  var file = FilesBrd[sq]
-  var rank = RanksBrd[sq]
-  var rankName = 'rank' + (rank + 1)
-  var fileName = 'file' + (file + 1)
-  var pieceFileName = 'images/' + SideChar[PieceCol[pce]] + PceChar[pce].toUpperCase() + '.png'
-  var imageString = '<image src="' + pieceFileName + '" class="Piece ' + rankName + ' ' + fileName + '"/>'
-  // console.log(imageString);
-  $('#Board').append(imageString)
+function AddGUIPiece(sq, pce) {
+	let pieceArrayReverse = [0, "bpawn", "bknight", "bbishop", "brook", "bqueen", "bking", "pawn", "knight", "bishop", "rook", "queen", "king"];
+	let pieceArray = [0, "pawn", "knight", "bishop", "rook", "queen", "king", "bpawn", "bknight", "bbishop", "brook", "bqueen", "bking"];
+	let GUIgeo = new THREE.BoxGeometry(0.8, 0.8, 1.6);
+	let thisPce = pieceArray[pce];
+	let addressStr = "/images/" + thisPce + "/scene.gltf";
 
-  var loader = new THREE.GLTFLoader()
-  loader.load(addressStr, function (gltf) {
-    if (thisPce == 'knight' || thisPce == 'bknight') {
-      gltf.scene.position.z = 0
-      gltf.scene.position.x = file - 4
-      gltf.scene.position.y = rank - 4
-      gltf.scene.scale.z = 0.007
-      gltf.scene.scale.y = 0.007
-      gltf.scene.scale.x = 0.007
-      gltf.scene.rotation.x = 1.5
-      if (thisPce == 'knight') {
-        gltf.scene.rotation.y = 3
-      }
-    } else {
-      gltf.scene.position.z = 0
-      gltf.scene.position.x = file - 4
-      gltf.scene.position.y = rank - 4
-      gltf.scene.scale.z = 0.009
-      gltf.scene.scale.y = 0.009
-      gltf.scene.scale.x = 0.009
-      gltf.scene.rotation.x = 1.5
-    }
-    gltf.scene.name = PceChar[pce] + sq
-    domEvents.addEventListener(gltf.scene, 'click', event => {
-      cubePos.x = gltf.scene.position.x
-      cubePos.y = gltf.scene.position.y
-      // console.log("current piecename: " + pieceName);
-      console.log(' clicked: ' + gltf.scene.name, gltf.scene.id)
+	var file = FilesBrd[sq];
+	var rank = RanksBrd[sq];
+	var rankName = "rank" + (rank + 1);
+	var fileName = "file" + (file + 1);
+	var pieceFileName = "images/" + SideChar[PieceCol[pce]] + PceChar[pce].toUpperCase() + ".png";
+	var imageString = "<image src=\"" + pieceFileName + "\" class=\"Piece " + rankName + " " + fileName + "\"/>";
+	//console.log(imageString);
+	$("#Board").append(imageString);
 
-      if (selected3D == false) {
-        pieceName = gltf.scene.name
-        UserMove.from = ClickedSquare3D(cubePos.x + 4, cubePos.y + 4)
-        selected3D = true
-      } else {
-        UserMove.to = ClickedSquare3D(cubePos.x + 4, cubePos.y + 4)
-        capName = gltf.scene.name
-        // console.log("capName:" + capName);
-        selected3D = false
-        const gameData = {
-          pieceName: pieceName,
-          capName: capName,
-          to: UserMove.to,
-          from: UserMove.from,
-          fen: '',
-          side: gameSide
-        }
-        console.log(gameData.to, gameData.from)
-        if (playerColor == playerSide) {
-          MakeUserMove()
-          gameData.fen = newFen
-          socketCast.emit('game', gameData)
-        }
-      }
-    })
-    scene.add(gltf.scene)
-  })
-  // console.log(pce);
-  /* let newMat = new THREE.MeshBasicMaterial({ color: colors[pce] });
+	var loader = new THREE.GLTFLoader();
+	loader.load(addressStr, function (gltf) {
+		if (thisPce == "knight" || thisPce == "bknight") {
+			gltf.scene.position.z = 0;
+			gltf.scene.position.x = file - 4;
+			gltf.scene.position.y = rank - 4;
+			gltf.scene.scale.z = 0.007;
+			gltf.scene.scale.y = 0.007;
+			gltf.scene.scale.x = 0.007;
+			gltf.scene.rotation.x = 1.5;
+			if (thisPce == "knight") {
+				gltf.scene.rotation.y = 3;
+			}
+		} else {
+			gltf.scene.position.z = 0;
+			gltf.scene.position.x = file - 4;
+			gltf.scene.position.y = rank - 4;
+			gltf.scene.scale.z = 0.009;
+			gltf.scene.scale.y = 0.009;
+			gltf.scene.scale.x = 0.009;
+			gltf.scene.rotation.x = 1.5;
+		}
+		gltf.scene.name = PceChar[pce] + sq;
+		domEvents.addEventListener(gltf.scene, "click", event => {/* 
+
+			let newMaterial = new THREE.MeshBasicMaterial({ color: 0xfffff });
+
+			gltf.scene.material=newMaterial; */
+
+			cubePos.x = gltf.scene.position.x;
+			cubePos.y = gltf.scene.position.y;
+			//console.log("current piecename: " + pieceName);
+			console.log(" clicked: " + gltf.scene.name, gltf.scene.id);
+
+			if (selected3D == false) {
+				pieceName = gltf.scene.name;
+				UserMove.from = ClickedSquare3D(cubePos.x + 4, cubePos.y + 4);
+				console.log("from :" + UserMove.from);
+				selected3D = true;
+			} else {
+				UserMove.to = ClickedSquare3D(cubePos.x + 4, cubePos.y + 4);
+				capName = gltf.scene.name;
+				//console.log("capName:" + capName);
+				selected3D = false;
+				let gameData = {
+					pieceName: pieceName,
+					capName: capName,
+					to: UserMove.to,
+					from: UserMove.from,
+					fen: "",
+					side: gameSide
+				};
+				console.log(gameData.to, gameData.from);
+				if (playerColor == playerSide) {
+					MakeUserMove();
+					gameData.fen = newFen;
+					socketCast.emit("game", gameData);
+
+				}
+
+			}
+		});
+		scene.add(gltf.scene);
+	});
+	//console.log(pce);
+	/* let newMat = new THREE.MeshBasicMaterial({ color: colors[pce] });
 	let newCube = new THREE.Mesh(GUIgeo, newMat);
 	newCube.name = PceChar[pce] + array[0];
 	array.shift();

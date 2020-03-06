@@ -40,10 +40,10 @@ const ioserver = app.listen(PORTSOCKET, () => console.log(`listening for socket.
 const ioCast = socket(ioserver)
 ioCast.set('origins', '*:*')
 const chatUsers = {}
-const fenArray = []
+let fenArray = []
 const fenCode = ''
 const whitePicked = false
-const moveArray = []
+let moveArray = []
 
 const room1 = {
   name: 'room1',
@@ -54,7 +54,28 @@ const room1 = {
 ioCast.on('connection', socket => {
   console.log(`Connection made by socketid: [${socket.id}]`)
   const fenStr = fenArray[fenArray.length - 1]
-  ioCast.sockets.emit('all', { fen: fenStr })
+  ioCast.sockets.emit('all', { fen: fenStr });
+
+  socket.on("ready", function (rd) {
+    console.log(rd.name);
+    let name = rd.name;
+    let color;
+    if (room1.whiteTaken == false && room1.blackTaken == false) {
+      room1.whiteTaken = true;
+      color = "w";
+    } else if (room1.blackTaken == false) {
+      room1.blackTaken = true;
+      color = "b";
+    } else if (room1.whiteTaken == true && room1.blackTaken == true) {
+      color = "observer";
+    }
+    let newData = {
+      color: color,
+      name: name
+    }
+    ioCast.sockets.emit("ready", newData);
+
+  });
 
   socket.on('game', function (data) {
     console.log(data)
@@ -70,9 +91,6 @@ ioCast.on('connection', socket => {
     ioCast.sockets.emit('all', data)
   })
 
-  app.post('/new', function (req, res) {
-    moveArray = []
-  })
 
   app.get('/replay', function (req, res) {
     db.Replay.findAll(
@@ -81,27 +99,44 @@ ioCast.on('connection', socket => {
     })
   })
 
-  app.get('/ready', function (req, res) {
-    let color
+  app.post("/new", function (req, res) {
+    fenArray = [];
+    room1.whiteTaken = false;
+    room1.blackTaken = false;
+
+  });
+
+  app.get("/replay", function (req, res) {
+    db.Replay.findAll(
+    ).then(function (data) {
+      res.json(data);
+    });
+  });
+/* 
+  app.get("/ready", function (req, res) {
+    let color;
     if (room1.whiteTaken == false && room1.blackTaken == false) {
-      room1.whiteTaken = true
-      color = 'w'
+      room1.whiteTaken = true;
+      color = "w";
     } else if (room1.blackTaken == false) {
-      room1.blackTaken = true
-      color = 'b'
+      room1.blackTaken = true;
+      color = "b";
     } else if (room1.whiteTaken == true && room1.blackTaken == true) {
-      color = 'observer'
+      color = "observer";
     }
 
-    res.json({ color: color })
-    console.log(color)
-  })
+    res.json({ color: color });
+    console.log(color);
 
-  app.post('/save', function (req, res) {
+  }); */
+
+
+
+  app.post("/save", function (req, res) {
     db.Replay.destroy({
       where: {},
       truncate: true
-    })
+    });
     db.sequelize.transaction(function (t) {
       var promises = []
       for (move of moveArray) {
@@ -110,31 +145,31 @@ ioCast.on('connection', socket => {
           capName: move.capName,
           to: move.to,
           from: move.from,
-          replay: 'a '
-        }, { transaction: t })
-        promises.push(newPromise)
+          replay: "a "
+        }, { transaction: t });
+        promises.push(newPromise);
       };
       return Promise.all(promises).then(function (data) {
-        console.log('logged')
-      })
-    })
-  })
+        console.log("logged");
+      });
+    });
+  });
 
   /*
-console.log(moveArray);
-let storageStr = JSON.stringify(moveArray);
-for (move of moveArray) {
-  db.Replay.create({
-    pieceName: move.pieceName,
-    capName: move.capName,
-    to: move.to,
-    from: move.from,
-    replay: "a "
-  }).then(function (data) {
-    console.log("logged");
-  })
-
-} */
+  console.log(moveArray);
+  let storageStr = JSON.stringify(moveArray);
+  for (move of moveArray) {
+    db.Replay.create({
+      pieceName: move.pieceName,
+      capName: move.capName,
+      to: move.to,
+      from: move.from,
+      replay: "a "
+    }).then(function (data) {
+      console.log("logged");
+    })
+  
+  } */
 
   socket.on('new-user', name => {
     try {
