@@ -137,6 +137,13 @@ function PrintBoard() {
 	newFen = fenCode.join("") + " " + side +
 		" " + line + " " + GameBoard.enPas;
 	gameSide = side;
+	playerSide = gameSide;
+	if (playerSide == "w") {
+		$("#turn").text("White's Turn");
+	} else {
+		$("#turn").text("Black's Turn");
+	}
+	console.log("gameside: " + gameSide);
 	//console.log(newFen);
 }
 

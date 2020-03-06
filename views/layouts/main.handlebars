@@ -2,21 +2,42 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="icon" type="image/png" href="./images/favicon.png">
-    <title>Jack Plays Chess</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css"
-        crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Special+Elite&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/styles.css">
+	<meta charset="UTF-8">
+	<link rel="icon" type="image/png" href="./images/favicon.png">
+	<title>Jack Plays Chess</title>
+	{{!-- Socket IO must be imported before 3.js or else error occurs --}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css"
+		crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Special+Elite&display=swap" rel="stylesheet">
+	<link rel=" stylesheet" href="/css/styles.css">
 </head>
 
 <body>
-    {{{ body }}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.2.6/what-input.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+	{{{ body }}}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.2.6/what-input.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+	<script> if (!window.console) console = { log: function () { } }; </script>
+	<script src="https://threejs.org/build/three.js"></script>
+	<script src="js/OrbitControls.js"></script>
+	<script src="js/MTLLoader.js"></script>
+	<script src="js/OBJLoader.js"></script>
+	<script src="js/GLTFLoader.js"></script>
+	<script src="js/threex.domevents.js"></script>
+	<script src="js/three.js"></script>
+	<script src="js/defs.js"></script>
+	<script src="js/io.js"></script>
+	<script src="js/board.js"></script>
+	<script src="js/movegen.js"></script>
+	<script src="js/makemove.js"></script>
+	<script src="js/evaluate.js"></script>
+	<script src="js/pvtable.js"></script>
+	<script src="js/search.js"></script>
+	<script src="js/perft.js"></script>
+	<script src="js/gui.js"></script>
+	<script src="js/main.js"></script>
 </body>
 
 </html>
