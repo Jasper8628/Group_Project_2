@@ -130,23 +130,27 @@ function PrintBoard() {
 	if (GameBoard.castlePerm & CASTLEBIT.WQCA) line += 'Q';
 	if (GameBoard.castlePerm & CASTLEBIT.BKCA) line += 'k';
 	if (GameBoard.castlePerm & CASTLEBIT.BQCA) line += 'q';
-	//console.log("castle:" + line);
-	//console.log("key:" + GameBoard.posKey.toString(16));
 
 	var fenCode = array.slice(0, array.length - 1);
 	newFen = fenCode.join("") + " " + side +
 		" " + line + " " + GameBoard.enPas;
 	gameSide = side;
-	playerSide = gameSide;
+	if (playerReady) {
+		playerSide = gameSide;
+
+	}
 	if (playerSide == "w") {
 		$("#turn").text("White's Turn");
-	} else {
+	} else if (playerSide == "b") {
 		$("#turn").text("Black's Turn");
+	} else {
+		$("#turn").text("Awaiting player(s)");
+
 	}
 	console.log("gameside: " + gameSide);
 	//console.log(newFen);
 }
-
+let playerReady = false;
 let gameSide;
 function GeneratePosKey() {
 
