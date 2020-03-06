@@ -54,7 +54,7 @@ module.exports = function (app) {
   app.post('/api/profile', function (req, res) {
     db.User.update({
       email: req.body.email,
-      // password: req.body.password
+      password: req.body.password
     }, {
       where: {
         username: req.user.username
