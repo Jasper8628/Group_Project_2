@@ -137,18 +137,32 @@ for (move of moveArray) {
 } */
 
   socket.on('new-user', name => {
-    chatUsers[socket.id] = name
-    socket.broadcast.emit('user-connected', name)
+    try {
+      chatUsers[socket.id] = name
+      socket.broadcast.emit('user-connected', name)
+      console.log(`%c SERVER.js -> New User [${name}] Connected`, 'background: #00FF00; color: #FFFFFF;')
+    } catch (error) {
+      console.log('%c SERVER.js -> EXCEPTION ON NEW USER', 'background: #FF0000; color: #FFFFFF;')
+    }
   })
 
   socket.on('send-chat-message', message => {
-    socket.broadcast.emit('chat-message', { message: message, name: chatUsers[socket.id] })
+    try {
+      socket.broadcast.emit('chat-message', { message: message, name: chatUsers[socket.id] })
+      console.error(`%c SERVER.js -> New CHAT [${message}]`, 'background: #00FF00; color: #FFFFFF;')
+    } catch (error) {
+      console.log('%c SERVER.js -> EXCEPTION ON SEND-CHAT-MESSAGE', 'background: #FF0000; color: #FFFFFF;')
+    }
   })
 
   socket.on('disconnect', () => {
-    socket.broadcast.emit('user-disconnected', chatUsers[socket.id])
-    console.log(`User ${chatUsers[socket.id]} left the chat`)
-    delete chatUsers[socket.id]
+    try {
+      socket.broadcast.emit('user-disconnected', chatUsers[socket.id])
+      delete chatUsers[socket.id]
+      console.log(`%c SERVER.js -> User [${socket.id}] DISconnected`, 'background: #00FF00; color: #FFFFFF;')
+    } catch (error) {
+      console.log('%c SERVER.js -> EXCEPTION ON DISCONNECT', 'background: #FF0000; color: #FFFFFF;')
+    }
   })
 })
 
