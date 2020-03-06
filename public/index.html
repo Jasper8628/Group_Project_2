@@ -1,93 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>JSChess</title>	
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.dev.js"></script>
-		<link href="styles.css" rel="stylesheet" type="text/css">	
-		<script type="text/javascript"> if (!window.console) console = {log: function() {}}; </script>
-	</head>
-	<body>
-		<header>
-			<h3>JS Chess</h3>			
-		</header>	
-		<div id="FenInDiv">
-			Fen:<br/>
-			<input type="text" id="fenIn"/>		
-			<button type="button" id="SetFen">Set Position</button>			
-		</div>		
-		<div id="Board">
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Jack Plays Chess</title>
+	<!-- CSS -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/css/foundation.min.css"
+		crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Amatic+SC|Special+Elite&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+	<section class="content">
+		<img src="./images/Chess-3D-Animation-Wallpaper.jpg" class="chessImage" alt="chess">
+		<div class="welcomeHeader grid-x">
+			<div class="cell auto">Jack Plays Chess</div>
+
+			<form data-abide novalidate class="login" id="loginForm">
+				<div data-abide-error class="alert callout" id="errorHead" style="display: none;">
+					<p><i class="fi-alert"></i> All fields are required.</p>
+				</div>
+				<div data-abide-error class="alert callout" id="errorEntry" style="display: none;">
+					<p><i class="fi-alert"></i> Please enter the correct username and password. If you don't have an
+						account, please create a new account using the link below.</p>
+				</div>
+				<div class="grid-container">
+					<div class="grid-x grid-margin-x">
+						<div class="cell small-12">
+							<label id="usernameLabel"> Username:
+								<input id="userForm" type="text" placeholder="Jack" aria-describedby="usernameinput"
+									aria-errormessage="usernameinputerror" required>
+								<span id="formNameError" class="form-error">
+									This field is required.
+								</span>
+							</label>
+						</div>
+						<div class="cell small-12">
+							<label id="passwordLabel"> Password:
+								<input id="passwordForm" type="password" placeholder="password"
+									aria-describedby="passwordinput" aria-errormessage="passwordinputerror" required>
+								<span id="formPasswordError" class="form-error">
+									This field is required.
+								</span>
+							</label>
+						</div>
+						<br>
+						<button class="alert button" id="loginButton" type="submit" value="Submit">Login</button>
+						<hr>
+					</div>
+					<div>
+						<p class="goToRegister">No account yet? Click <a href="./register.html">here</a> to create an
+							account.</p>
+					</div>
+				</div>
+			</form>
 		</div>
-		<div id="EngineOutput">Thinking Time: <br/>
-			<select id="ThinkTimeChoice">
-			<option value="1">1s</option>
-			  <option value="2">2s</option>
-			  <option value="4">4s</option>
-			  <option value="6">6s</option>
-			  <option value="8">8s</option>
-			  <option value="10">10s</option>
-			</select><br/><br/><br/>
-			<span id="BestOut">BestMove:</span><br/>
-			<span id="DepthOut">Depth:</span><br/>
-			<span id="ScoreOut">Score:</span><br/>
-			<span id="NodesOut">Nodes:</span><br/>
-			<span id="OrderingOut">Ordering:</span><br/>
-			<span id="TimeOut">Time:</span><br/><br/>
-			<button type="button" id="SearchButton">Move Now</button><br/>
-			<button type="button" id="NewGameButton">New Game</button><br/>
-			<button type="button" id="FlipButton">Flip Board</button><br/><br/>
-			<button type="button" id="TakeButton">Take Back</button><br/><br/><br/>
-			<span id="GameStatus"></span>
-		</div>
-		
-		<script src="js/jquery-1.10.1.min.js"></script>		
-		<script src="js/defs.js"></script>	
-		<script src="js/io.js"></script>	
-		<script src="js/board.js"></script>	
-		<script src="js/movegen.js"></script>	
-		<script src="js/makemove.js"></script>		
-		<script src="js/evaluate.js"></script>	
-		<script src="js/pvtable.js"></script>
-		<script src="js/search.js"></script>
-		<script src="js/perft.js"></script>
-		<script src="js/gui.js"></script>
-		<script src="js/main.js"></script>
-	</body>
+	</section>
+	<footer id="chatfooter">
+		<div>USyd Boot Camp Feb 2020</div>
+		<div>Project Two Chess Game</div>
+		<div>&copy; Jasper Du, Rita Pang, Gerald Lam, Stewart Anstey</div>
+	</footer>
+	<section class="scripts">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.2.6/what-input.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js"
+			crossorigin="anonymous"></script>
+		<script src="./js/login.js"></script>
+	</section>
+
+</body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -81,9 +81,9 @@ function PrintBoard() {
 	var sq, file, rank, piece;
 	var array = [];
 
-	console.log("\nGame Board:\n");
+	//console.log("\nGame Board:\n");
 	for (rank = RANKS.RANK_8; rank >= RANKS.RANK_1; rank--) {
-		var line = "/"; //= (RankChar[rank] + "  ");
+		var line = (RankChar[rank] + "  ");
 		var lastSpace = false;
 		var counter = 0;
 		var array1 = [];
@@ -107,38 +107,51 @@ function PrintBoard() {
 
 		}
 		//console.log(counter);
-		console.log(line);
+		//console.log(line);
 		if (lastSpace) {
 			array.push(array1.length);
 		}
 		array.push("/");
 	}
 
-	console.log("");
+	//console.log("");
 	var line = "   ";
 	for (file = FILES.FILE_A; file <= FILES.FILE_H; file++) {
 		line += (' ' + FileChar[file] + ' ');
 	}
 
-	console.log(line);
+	//console.log(line);
 	var side = SideChar[GameBoard.side]
-	console.log("side:" + side);
-	console.log("enPas:" + GameBoard.enPas);
+	//console.log("side:" + side);
+	//console.log("enPas:" + GameBoard.enPas);
 	line = "";
 
 	if (GameBoard.castlePerm & CASTLEBIT.WKCA) line += 'K';
 	if (GameBoard.castlePerm & CASTLEBIT.WQCA) line += 'Q';
 	if (GameBoard.castlePerm & CASTLEBIT.BKCA) line += 'k';
 	if (GameBoard.castlePerm & CASTLEBIT.BQCA) line += 'q';
-	console.log("castle:" + line);
-	console.log("key:" + GameBoard.posKey.toString(16));
-	
+
 	var fenCode = array.slice(0, array.length - 1);
-	 newFen = fenCode.join("") + " " + side +
+	newFen = fenCode.join("") + " " + side +
 		" " + line + " " + GameBoard.enPas;
+	gameSide = side;
+	if (playerReady) {
+		playerSide = gameSide;
+
+	}
+	if (playerSide == "w") {
+		$("#turn").text("White's Turn");
+	} else if (playerSide == "b") {
+		$("#turn").text("Black's Turn");
+	} else {
+		$("#turn").text("Awaiting player(s)");
+
+	}
+	console.log("gameside: " + gameSide);
+	//console.log(newFen);
 }
-
-
+let playerReady = false;
+let gameSide;
 function GeneratePosKey() {
 
 	var sq = 0;

@@ -1,0 +1,510 @@
+#FenInDiv {
+  position: relative;
+  left: 60px;
+  display: none;
+}
+
+#scene{
+  position: absolute;
+  left: 0;
+  z-index: 200;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  padding-top: 50px;
+  margin: auto;
+  width: 80%;
+  height: 80%;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#message {
+  text-align: center;
+  width: 100%;
+  z-index: 100;
+  position: absolute;
+  height: 200px;
+  color: grey;
+  font-family: 'Rajdhani', sans-serif;
+}
+#turn {
+  font-size: 5vmax;
+  color: white;
+  font-family: 'Rajdhani', sans-serif;
+  position: absolute;
+  left: 25%;
+  z-index: 400;
+}
+
+body {
+  background-color: black;
+}
+
+#hdbusername{
+  display: none;
+}
+
+#buttons {
+  z-index: 300;
+  position: absolute;
+  left: 22%;
+  top: 80%;
+}
+
+#new {
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+}
+
+#ready {
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+}
+
+#save {
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+}
+
+#replay {
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+}
+
+#logout{
+  border-radius: 5px;
+  font-family: "Amatic SC", sans-serif;
+  font-size: 22 px;
+  font-weight: bold;
+  z-index: 400;
+  background-color: white;
+  color: black;
+  margin: 10px;
+  padding: 10px;
+}
+
+#logoutButton{
+  margin: 5px;
+  position: absolute;
+  right: 1%;
+}
+
+#sendButton{
+  border-radius: 5px;
+}
+
+#fenIn {
+  width: 480px;
+  left: 60px;
+}
+
+#Board {
+  position: relative;
+  top: 20px;
+  left: 60px;
+  width: 480px;
+  height: 480px;
+  border-style: solid;
+  border-width: 2px;
+  display: none;
+}
+
+#EngineOutput {
+  display: none;
+  position: absolute;
+  left: 600px;
+  top: 250px;
+  position: relative;
+  top: 20px;
+  left: 60px;
+  width: 480px;
+  height: 480px;
+  border-style: solid;
+  border-width: 2px;
+}
+
+#EngineOutput {
+  display: none;
+  position: absolute;
+  left: 600px;
+  top: 250px;
+}
+
+.Square {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+}
+
+.Dark {
+  background-color: #5fbcd3;
+}
+
+.Light {
+  background-color: #afdde9;
+}
+
+.SqSelected {
+  background-color: #216778;
+}
+
+.rank1 {
+  top: 420px;
+}
+.rank2 {
+  top: 360px;
+}
+.rank3 {
+  top: 300px;
+}
+.rank4 {
+  top: 240px;
+}
+.rank5 {
+  top: 180px;
+}
+.rank6 {
+  top: 120px;
+}
+.rank7 {
+  top: 60px;
+}
+.rank8 {
+  top: 0px;
+}
+
+.file1 {
+  left: 0px;
+}
+.file2 {
+  left: 60px;
+}
+.file3 {
+  left: 120px;
+}
+.file4 {
+  left: 180px;
+}
+.file5 {
+  left: 240px;
+}
+.file6 {
+  left: 300px;
+}
+.file7 {
+  left: 360px;
+}
+.file8 {
+  left: 420px;
+}
+
+.Piece {
+  position: absolute;
+}
+
+.content {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
+
+.welcomeHeader {
+  position: absolute;
+  top: 5%;
+  left: 10%;
+  font-size: 8vmax; /*100px*/
+  font-family: "Amatic SC", sans-serif;
+  color: white;
+}
+
+.chessImage {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 500px 500px;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+  margin: 0px auto;
+}
+
+#loginForm {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  font-size: 2vmax; /*18px*/
+  font-family: "Special Elite", sans-serif;
+  color: white;
+}
+
+#userForm {
+  border-radius: 5px;
+  height: 40px;
+  width: 300px;
+}
+
+#emailForm {
+  border-radius: 5px;
+  height: 40px;
+  width: 300px;
+}
+
+#passwordForm {
+  border-radius: 5px;
+  height: 40px;
+  width: 300px;
+}
+
+#rePasswordForm {
+  border-radius: 5px;
+  height: 40px;
+  width: 300px;
+}
+
+#loginButton {
+  background-color: white;
+  color: darkslateblue;
+  font-family: "Special Elite", sans-serif;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  margin: 15px;
+}
+
+#usernameLabel {
+  font-size: 18px; /*18px*/
+  font-family: "Special Elite", sans-serif;
+  color: white;
+  background-color: none;
+  border-radius: 5px;
+}
+
+#passwordLabel {
+  font-size: 18px; /*18px*/
+  font-family: "Special Elite", sans-serif;
+  color: white;
+  background-color: none;
+  border-radius: 5px;
+}
+
+#rePasswordLabel {
+  font-size: 18px; /*18px*/
+  font-family: "Special Elite", sans-serif;
+  color: white;
+  background-color: none;
+  border-radius: 5px;
+}
+
+.goToRegister {
+  font-size: 14px; /*14px*/
+  font-family: "Special Elite", sans-serif;
+  color: white;
+}
+
+.goToLogin {
+  font-size: 14px; /*14px*/
+  font-family: "Special Elite", sans-serif;
+  color: white;
+}
+
+#errorHead {
+  font-size: 14px; /*16px*/
+  border-radius: 5px;
+}
+
+#errorEntry {
+  font-size: 14px; /*16px*/
+  border-radius: 5px;
+}
+
+a:link {
+  color: rgb(253, 208, 82);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(245, 168, 24);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:active {
+  color: rgb(218, 75, 32);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+#profileForm {
+  background-image: url("../images/Chess-3D-Animation-Wallpaper.jpg");
+}
+
+/* >>>>>>>>>>>>>>>>>>>>>> REALTIME CHAT BELOW (Stew) >>>>>>>>>>>>>>>>>>> */
+#chatbanner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; /* This does a vertical align */
+  color: white;
+  height: 150px;
+  font-size: 20px;
+  text-align: left;
+  padding-top: 5px;
+  padding-right: 5px;
+  padding-bottom: 0px;
+  padding-left: 5px;
+  background-size: cover;
+  background-position: center;
+}
+
+#chatjack {
+  margin-left: 50px;
+  font-size: 100px;
+  font-family: "Amatic SC", sans-serif;
+  color: white;
+  line-height: 75px;
+}
+
+#chatUsername{
+  font-size: 14px; /*14px*/
+  font-family: "Special Elite", sans-serif;
+  color: white;
+  margin-right: 10%;
+}
+
+#profilelogo{
+  font-family: "Amatic SC", sans-serif;
+  font-size: 16px; /*14px*/
+}
+
+.profile-buttons {
+  padding: 20px;
+  font-family: "Amatic SC", sans-serif;
+  font-size: 18px; /*14px*/
+  margin: 5px;
+  position: absolute;
+  right: 7%;
+}
+
+#chatfooter {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+  color: white;
+  padding: 0px 20px;
+  font-size: 20px;
+  text-align: center;
+  background-color: #0f1012;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Amatic SC", sans-serif;
+}
+
+#chatHistory{
+  width: 280px;
+  height: 500px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  position: absolute;
+  top: 5%;
+  right: -50%;
+}
+
+#chatContainer{
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  z-index: 500;
+  position: absolute;
+  top: 20%;
+  right: 17%;
+  height: 800px;
+  width: 300px;
+}
+
+#messageInput{
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  z-index: 500;
+  position: absolute;
+  top: 70%;
+  right: -50%;
+  width: 280px;
+}
+
+#sendButton{
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  top: 78%;
+  right: 4%;
+  position: absolute;
+}
+
+.chatroomLabel{
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  top: 0%;
+  right: -13%;
+  color: white;
+  position: absolute;
+}
+
+/* 
+
+#message-container {
+  width: 80%;
+  max-width: 1200px;
+}
+
+#message-container div {
+  background-color: #ccc;
+  padding: 5px;
+}
+
+#message-container div:nth-child(2n) {
+  background-color: #fff;
+}
+
+#send-container {
+  position: fixed;
+  padding-bottom: 30px;
+  bottom: 0;
+  background-color: white;
+  max-width: 1200px;
+  width: 80%;
+  display: flex;
+}
+
+#message-input {
+  flex-grow: 1;
+} 
+
+*/
+
+/* >>>>>>>>>>>>>>>>>>>>>> REALTIME CHAT ABOVE >>>>>>>>>>>>>>>>>>> */
