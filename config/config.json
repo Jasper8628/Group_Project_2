@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "Antares28",
+    "password": "150990PILLage",
     "database": "chess",
     "host": "localhost",
     "dialect": "mysql"
