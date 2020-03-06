@@ -199,6 +199,12 @@ canvas {
   width: 300px;
 }
 
+#emailForm {
+  border-radius: 5px;
+  height: 40px;
+  width: 300px;
+}
+
 #passwordForm {
   border-radius: 5px;
   height: 40px;
@@ -319,6 +325,13 @@ a:active {
   font-family: "Amatic SC", sans-serif;
   color: white;
   line-height: 75px;
+}
+
+#chatUsername{
+  font-size: 14px; /*14px*/
+  font-family: "Special Elite", sans-serif;
+  color: white;
+  margin-right: 10%;
 }
 
 .profile-buttons {

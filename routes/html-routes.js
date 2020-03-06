@@ -22,7 +22,10 @@ module.exports = function (app) {
     res.sendFile(path.join(__dirname, '../public/register.html'))
   })
 
-  app.get('/profile', function (req, res) {
+  // Here we've add our isAuthenticated middleware to this route.
+  // If a user who is not logged in tries to access this route they will be redirected to the register page
+  app.get('/profile', isAuthenticated, function (req, res) {
+    if (req.user) {
     db.User.findOne({
       where: {
         id: req.user.id
@@ -34,18 +37,14 @@ module.exports = function (app) {
       console.log(hbsObject, hbsObject)
       res.render('profile', hbsObject)
     })
+  } else {
+    res.sendFile(path.join(__dirname, '../public/index.html'))
+  }
   })
 
-  // Here we've add our isAuthenticated middleware to this route.
-  // If a user who is not logged in tries to access this route they will be redirected to the register page
-  // app.get('/chess', isAuthenticated, function (req, res) {
-  //   res.sendFile(path.join(__dirname, '../public/chess.html'))
-  // })
-
-  app.get('/chat', function (req, res) {
-    console.log(req.user + ' this is req.user')
+  app.get('/chat', isAuthenticated, function (req, res) {
+    if (req.user) {
     db.User.findOne({
-
       where: {
         id: req.user.id
       }
@@ -53,8 +52,10 @@ module.exports = function (app) {
       var hbsObject = {
         users: data
       }
-      console.log(hbsObject, hbsObject)
       res.render('chat', hbsObject)
     })
+  } else {
+    res.sendFile(path.join(__dirname, '../public/index.html'))
+  }
   })
 }
