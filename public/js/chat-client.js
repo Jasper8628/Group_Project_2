@@ -61,11 +61,11 @@ function appendMessage (message) {
   }
 }
 
-$("#logout").on('click', function (event) {
-  event.preventDefault()
-  window.location.replace('/')
+// $("#logout").on('click', function (event) {
+//   event.preventDefault()
+//   window.location.replace('/')
 
-})
+// })
 
 // const messageText = $('#chat-flash-message')
 // messageText.innerText = message
