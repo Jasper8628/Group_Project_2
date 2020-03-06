@@ -35,7 +35,7 @@ Simply `git clone https://github.com/Jasper8628/Group_Project_2.git` while in yo
 
 ## Usage
 
-Please see following link: 
+Please see following link: https://project-two-heroku-test.herokuapp.com/ 
 
 ## Credits
 
@@ -43,9 +43,13 @@ Collaborators
 
 - No collaborators.
 
-Libraries and Frameworks
+## Libraries and Frameworks
+
+<b>Build with<b>
 
 - JQuery v3.4.1
+- NodeJS
+- Express.js
 - Foundation v6.4.3
 - Sequelize
 - Socket.io
@@ -90,6 +94,6 @@ I haven't written any tests yet
 
 ---
 
-© 2019 Code Connoisseurs, Sydney, Australia. All Rights Reserved.
+© 2020 Code Connoisseurs, Sydney, Australia. All Rights Reserved.
 
 If you are still reading you get [this bonus comic strip about Git](https://xkcd.com/1597/).
