@@ -321,6 +321,13 @@ a:active {
   line-height: 75px;
 }
 
+#chatUsername{
+  font-size: 14px; /*14px*/
+  font-family: "Special Elite", sans-serif;
+  color: white;
+  margin-right: 10%;
+}
+
 .profile-buttons {
   padding: 20px;
 }
