@@ -199,6 +199,12 @@ canvas {
   width: 300px;
 }
 
+#emailForm {
+  border-radius: 5px;
+  height: 40px;
+  width: 300px;
+}
+
 #passwordForm {
   border-radius: 5px;
   height: 40px;

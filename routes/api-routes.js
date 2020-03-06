@@ -48,4 +48,26 @@ module.exports = function (app) {
       })
     }
   })
+// Route for updating user data from the profile page. The user's password is automatically hashed and stored securely thanks to
+  // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
+  // otherwise send back an error
+  app.post('/api/profile', function (req, res) {
+    db.User.update({
+      email: req.body.email,
+      // password: req.body.password
+    }, {
+      where: {
+        username: req.user.username
+      }
+    })
+      .then(function (data) {
+        var object = {
+          users: data
+        }
+        res.render('profile', object)
+      })
+      .catch(function (err) {
+        console.log(err)
+      })
+  })
 }
