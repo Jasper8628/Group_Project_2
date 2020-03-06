@@ -6,12 +6,12 @@
 </style>
 <section id="chatbanner" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
     url('./images/Chess-3D-Animation-Wallpaper.jpg');">
-    <div class="profile-buttons"><a href="./profile"><img src="./images/wK.png" alt="Link to Profile Page"></a>
-    </div>
+    {{!-- <div class="profile-buttons"><a href="./profile"><img src="./images/wK.png" alt="Link to Profile Page">My Profile</a>
+    </div> --}}
 
     <div id="chatjack">Jack Plays Chess</div>
     <div>{{users.username}}</div>
-    <div class="profile-buttons"><a href="./profile"><img src="./images/wK.png" alt="Link to Profile Page"></a>
+    <div class="profile-buttons"><a href="./profile"><img src="./images/wK.png" alt="Link to Profile Page" id="profilelogo">My Profile</a>
     </div>
 
 </section>
@@ -48,7 +48,7 @@
         <button id="replay" class="hollow button secondary" style="margin-bottom: 6px;">Replay</button>
         <form id="send-container" style="display: inline-block;">
             <div style="display:flex;">
-                <input type="text" id="message-input" placeholder="message" required
+                <input type="text" id="message-input" placeholder="chat as {{users.username}}" required
                     style="display: inline-block; background-color: #19202A; margin-right: 5px;">
                 <button id="send-button" type="submit" class="hollow button secondary"
                     style="display: inline-block;">Chat</button>
