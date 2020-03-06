@@ -4,6 +4,12 @@
   display: none;
 }
 
+#scene{
+  position: absolute;
+  left: 0;
+  z-index: 200;
+}
+
 .modal {
   display: none;
   position: fixed;
@@ -21,27 +27,76 @@
   position: absolute;
   height: 200px;
   color: grey;
+  font-family: 'Rajdhani', sans-serif;
 }
 #turn {
-  font-size: 3vmax;
+  font-size: 5vmax;
   color: white;
-  font-family: "Special Elite", sans-serif;
+  font-family: 'Rajdhani', sans-serif;
   position: absolute;
-  left: 28%;
+  left: 25%;
+  z-index: 400;
 }
+
 body {
   background-color: black;
 }
 
-#buttons {
-  z-index: 10;
-  position: absolute;
-  left: 25%;
+#hdbusername{
+  display: none;
 }
 
-.button {
+#buttons {
+  z-index: 300;
+  position: absolute;
+  left: 22%;
+  top: 80%;
+}
+
+#new {
   border-radius: 5px;
-  font-family: "Special Elite", sans-serif;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+}
+
+#ready {
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+}
+
+#save {
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+}
+
+#replay {
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+}
+
+#logout{
+  border-radius: 5px;
+  font-family: "Amatic SC", sans-serif;
+  font-size: 22 px;
+  font-weight: bold;
+  z-index: 400;
+  background-color: white;
+  color: black;
+  margin: 10px;
+  padding: 10px;
+}
+
+#logoutButton{
+  margin: 5px;
+  position: absolute;
+  right: 1%;
+}
+
+#sendButton{
+  border-radius: 5px;
 }
 
 #fenIn {
@@ -334,8 +389,18 @@ a:active {
   margin-right: 10%;
 }
 
+#profilelogo{
+  font-family: "Amatic SC", sans-serif;
+  font-size: 16px; /*14px*/
+}
+
 .profile-buttons {
   padding: 20px;
+  font-family: "Amatic SC", sans-serif;
+  font-size: 18px; /*14px*/
+  margin: 5px;
+  position: absolute;
+  right: 7%;
 }
 
 #chatfooter {
@@ -356,6 +421,58 @@ a:active {
   justify-content: space-between;
   align-items: center;
   font-family: "Amatic SC", sans-serif;
+}
+
+#chatHistory{
+  width: 280px;
+  height: 500px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  position: absolute;
+  top: 5%;
+  right: -50%;
+}
+
+#chatContainer{
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  z-index: 500;
+  position: absolute;
+  top: 20%;
+  right: 17%;
+  height: 800px;
+  width: 300px;
+}
+
+#messageInput{
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  z-index: 500;
+  position: absolute;
+  top: 70%;
+  right: -50%;
+  width: 280px;
+}
+
+#sendButton{
+  border-radius: 5px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px;
+  top: 78%;
+  right: 4%;
+  position: absolute;
+}
+
+.chatroomLabel{
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px;
+  top: 0%;
+  right: -13%;
+  color: white;
+  position: absolute;
 }
 
 /* 
