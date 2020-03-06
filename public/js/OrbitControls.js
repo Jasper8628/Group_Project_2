@@ -236,25 +236,36 @@ THREE.OrbitControls = function (object, domElement, localElement) {
     }
   }
 
-  function getAutoRotationAngle () {
+  function getAutoRotationAngle() {
     return 2 * Math.PI / 60 / 60 * scope.autoRotateSpeed
   }
 
-  function getZoomScale () {
+  function getZoomScale() {
     return Math.pow(0.95, scope.zoomSpeed)
   }
   var rPressed = false
+  /* 
+  $("#rotate").on("click", function () {
+    if(rPressed==false){
+      rPressed=true;
+    } else {
+      rPressed = false;
+    }
+  }); */
+  
   $(document).on('keypress', function (event) {
     // use e.which
-    if (event.code == 'KeyR') {
+    if (event.code == "Backquote") {
+      console.log(rPressed);
       if (rPressed == false) {
         rPressed = true
       } else {
         rPressed = false
       }
     }
-  })
-  function onMouseDown (event) {
+  }) ;
+
+  function onMouseDown(event) {
     if (scope.enabled === false) { return }
     event.preventDefault()
 
@@ -284,7 +295,7 @@ THREE.OrbitControls = function (object, domElement, localElement) {
     scope.domElement.addEventListener('mouseup', onMouseUp, false)
   }
 
-  function onMouseMove (event) {
+  function onMouseMove(event) {
     if (scope.enabled === false) return
 
     event.preventDefault()
@@ -331,7 +342,7 @@ THREE.OrbitControls = function (object, domElement, localElement) {
     scope.update()
   }
 
-  function onMouseUp (/* event */) {
+  function onMouseUp(/* event */) {
     if (scope.enabled === false) return
 
     // Greggman fix: https://github.com/greggman/three.js/commit/fde9f9917d6d8381f06bf22cdff766029d1761be
@@ -341,7 +352,7 @@ THREE.OrbitControls = function (object, domElement, localElement) {
     state = STATE.NONE
   }
 
-  function onMouseWheel (event) {
+  function onMouseWheel(event) {
     if (scope.enabled === false || scope.noZoom === true) return
 
     var delta = 0
@@ -360,7 +371,7 @@ THREE.OrbitControls = function (object, domElement, localElement) {
     }
   }
 
-  function onKeyDown (event) {
+  function onKeyDown(event) {
     if (scope.enabled === false) { return }
     if (scope.noKeys === true) { return }
     if (scope.noPan === true) { return }
@@ -394,7 +405,7 @@ THREE.OrbitControls = function (object, domElement, localElement) {
     }
   }
 
-  function touchstart (event) {
+  function touchstart(event) {
     if (scope.enabled === false) { return }
 
     switch (event.touches.length) {
@@ -430,7 +441,7 @@ THREE.OrbitControls = function (object, domElement, localElement) {
     }
   }
 
-  function touchmove (event) {
+  function touchmove(event) {
     if (scope.enabled === false) { return }
 
     event.preventDefault()
@@ -491,7 +502,7 @@ THREE.OrbitControls = function (object, domElement, localElement) {
     }
   }
 
-  function touchend (/* event */) {
+  function touchend(/* event */) {
     if (scope.enabled === false) { return }
 
     state = STATE.NONE
