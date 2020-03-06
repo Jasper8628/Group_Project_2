@@ -3,7 +3,7 @@
  *  Why doesn't any of this need to be in document.ready?
  */
 
-const socket = io('http://localhost:4000')
+const socket = io('https://mighty-caverns-93048.herokuapp.com/')
 //const messageContainer = document.getElementById('message-container')
 const messageForm = document.getElementById('send-container')
 const messageInput = document.getElementById('message-input')
