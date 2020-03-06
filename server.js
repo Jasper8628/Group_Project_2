@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-let express= require("express")
-=======
 let express = require("express");
 let socket = require("socket.io");
 let fenArray = [];
@@ -21,4 +18,3 @@ io.on("connection", function (socket) {
         fenArray.push(fen);
     });
 });
->>>>>>> b1af171450848180c8b8466bc70d3fef5a019c69
