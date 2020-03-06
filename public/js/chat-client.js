@@ -7,8 +7,8 @@ const socket = io('http://localhost:4000')
 const messageContainer = document.getElementById('message-container')
 const messageForm = document.getElementById('send-container')
 const messageInput = document.getElementById('message-input')
+const name = document.getElementById('hdbusername').textContent
 
-const name = document.getElementById('hdbusername')[0]
 appendMessage(`Hi ${name} thanks for joining the game`)
 
 console.log(`%c chat-client.js -> Good news [${name}] you joined the game`, 'background: #0000FF; color: #FFFFFF;')
@@ -68,3 +68,19 @@ function appendMessage (message) {
 //   messageText.innerText = ''
 //   messageText.slideUp('slow')
 // }, 3000)
+
+// if (name === undefined) {
+//   console.log('Name is undefined!')
+// } else {
+//   if (name === null) {
+//     console.log('Name is null!')
+//   } else {
+//     console.log(`name[0] is ${name[0]}`)
+//     console.log(`name value is ${name.value}`)
+//     console.log(`name textcontent is ${name.textContent}`)
+//     console.log(`name innerHTML is ${name.innerHTML}`)
+//     console.log(`name innerText is ${name.innerText}`)
+//   }
+//   console.log(`messageInput is ${messageInput}`)
+//   console.log(messageInput.value)
+// }
