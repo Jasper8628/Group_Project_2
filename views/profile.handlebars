@@ -1,7 +1,16 @@
+<style>
+    body {
+        background-image: url("../images/Chess-3D-Animation-Wallpaper.jpg")
+    }
+</style>
+
 <div class="welcomeHeader">
     <div>My Profile</div>
 
-    <form class="login" id="loginForm">
+    <form id="profileFORM" class="profile">
+        {{!-- <div data-abide-error class="alert callout" id="errorEntry" style="display: none;">
+            <p><i class="fi-alert"></i> Password entries don't match. Please check and re-enter password.</p>
+        </div> --}}
         <div class="alert callout" id="errorEntry" style="display: none;">
             <p><i class="fi-alert"></i> Please enter a valid email address</p>
         </div>
@@ -11,24 +20,49 @@
                     <label id="usernameLabel">Username: {{users.username}}
                     </label>
                 </div>
-                <div class="cell small-12">
-                    <label id="usernameLabel">Skill Level: {{users.skillLevel}} </label>
+                {{!-- <div class="cell small-12">
+                    <label id="passwordLabel"> Password: 
+                        <input id="passwordForm" type="password" placeholder="password" aria-describedby="example1Hint2"
+                            aria-errormessage="example1Error2" required>
+                        <span id="formPasswordError" class="form-error">
+                            This field is required.
+                        </span>
+                    </label>
                 </div>
                 <div class="cell small-12">
-                    <label id="usernameLabel">Email:
-                        <input id="userForm" type="text" placeholder="{{users.email}}" aria-describedby="emailField"
+                    <label id="rePasswordLabel">Re-enter password:
+                        <input id="rePasswordForm" type="password" placeholder="password"
+                            aria-describedby="example1Hint3" aria-errormessage="example1Error3" required
+                            pattern="alpha_numeric" data-equalto="password">
+                        <span id="formRePasswordError" class="form-error">
+                            Password does not match.
+                        </span>
+                    </label>
+                </div> --}}
+                <div class="cell small-12">
+                    <label id="usernameLabel">Email: {{users.email}}
+                        <input id="emailForm" type="text" placeholder="Add Your Email" aria-describedby="emailField"
                             aria-errormessage="emailError" required>
                         <span id="formNameError" class="form-error">
                             This field is required.
                         </span>
                     </label>
                 </div>
+                <div class="cell small-12">
+                    <label id="usernameLabel">Skill Level: {{users.skillLevel}} </label>
+                </div>
             </div>
             <button class="alert button" id="updateButton" type="submit" value="Submit">Edit my
                 profile</button>
             <div>
-                <p class="goToChess">Click <a href="./chess.html">here</a> to go back to the Game.</p>
+                <p class="goToChess">No Changes. Click <a href="./chess.html">here</a> to go back to the Game.</p>
             </div>
         </div>
     </form>
 </div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.2.6/what-input.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.4.3/dist/js/foundation.min.js"
+    crossorigin="anonymous"></script>
+<script src="js/profile.js" type="text/javascript"></script>
