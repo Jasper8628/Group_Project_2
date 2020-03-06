@@ -97,7 +97,7 @@ function SetInitialBoardPieces() {
 		sq120 = SQ120(sq);
 		pce = GameBoard.pieces[sq120];
 		if (pce >= PIECES.wP && pce <= PIECES.bK) {
-			AddGUIPiece(sq120, pce,pieceArray);
+			AddGUIPiece(sq120, pce);
 		}
 	}
 	//console.log(scene);
@@ -223,11 +223,11 @@ let selected3D = false;
 let group3D = new THREE.Group();
 
 
-let pieceArrayReverse = [0, "bpawn", "bknight", "bbishop", "brook", "bqueen", "bking", "pawn", "knight", "bishop", "rook", "queen", "king"];
-let pieceArray = [0, "pawn", "knight", "bishop", "rook", "queen", "king", "bpawn", "bknight", "bbishop", "brook", "bqueen", "bking"];
-function AddGUIPiece(sq, pce,array) {
+function AddGUIPiece(sq, pce) {
+	let pieceArrayReverse = [0, "bpawn", "bknight", "bbishop", "brook", "bqueen", "bking", "pawn", "knight", "bishop", "rook", "queen", "king"];
+	let pieceArray = [0, "pawn", "knight", "bishop", "rook", "queen", "king", "bpawn", "bknight", "bbishop", "brook", "bqueen", "bking"];
 	let GUIgeo = new THREE.BoxGeometry(0.8, 0.8, 1.6);
-	let thisPce = array[pce];
+	let thisPce = pieceArray[pce];
 	let addressStr = "/images/" + thisPce + "/scene.gltf";
 
 	var file = FilesBrd[sq];
@@ -262,8 +262,7 @@ function AddGUIPiece(sq, pce,array) {
 			gltf.scene.rotation.x = 1.5;
 		}
 		gltf.scene.name = PceChar[pce] + sq;
-		domEvents.addEventListener(gltf.scene, "click", event => 
-		{/* 
+		domEvents.addEventListener(gltf.scene, "click", event => {/* 
 
 			let newMaterial = new THREE.MeshBasicMaterial({ color: 0xfffff });
 
