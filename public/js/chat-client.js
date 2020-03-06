@@ -1,9 +1,10 @@
 /**
  *  This is imported into the client html to provide socket.io connectivity
+ *  Why doesn't any of this need to be in document.ready?
  */
 
 const socket = io('http://localhost:3000')
-const messageContainer = document.getElementById('message-container')
+//const messageContainer = document.getElementById('message-container')
 const messageForm = document.getElementById('send-container')
 const messageInput = document.getElementById('message-input')
 
@@ -31,7 +32,13 @@ messageForm.addEventListener('submit', e => {
 })
 
 function appendMessage (message) {
-  const messageElement = document.createElement('div')
-  messageElement.innerText = message
-  messageContainer.append(messageElement)
+  // const messageElement = document.createElement('div')
+  // messageElement.innerText = message
+  // messageContainer.append(messageElement)
+  const messageText = $('#chat-flash-message')
+  messageText.innerText = message
+  messageText.slideDown('fast')
+  setTimeout(() => {
+    messageText.slideUp('slow')
+  }, 3000)
 }
