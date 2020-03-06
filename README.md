@@ -1,6 +1,6 @@
 Sydney Uni Bootcamp 2019
 
-# Project TWO Group Work **TO UPDATE PLS**
+# Project TWO Group Work 
 
 Contributors:
 
@@ -13,9 +13,12 @@ Contributors:
 
 Chess Game
 
-The application [home page](https://riezen.github.io/Project1/index.html) preview is below:
+Please see the application's screenshot as follows:
 
-![screenshot](assets/images/social-pic.png).
+![screenshot](public/images/screenshots/login.png).
+![screenshot](public/images/screenshots/registration.png).
+![screenshot](public/images/screenshots/profile.png).
+![screenshot](public/images/screenshots/chat&chess.png).
 
 ## Table of Contents (Optional)
 
@@ -28,11 +31,11 @@ The application [home page](https://riezen.github.io/Project1/index.html) previe
 
 If you want to get a copy of the project on your own machine, you can do so using git.
 
-Simply `git clone https://github.com/riezen/Project1.git` while in your target folder.
+Simply `git clone https://github.com/Jasper8628/Group_Project_2.git` while in your target folder.
 
 ## Usage
 
-The home page of the application is located [here](https://riezen.github.io/Project1/).
+Please see following link: 
 
 ## Credits
 
@@ -43,11 +46,9 @@ Collaborators
 Libraries and Frameworks
 
 - JQuery v3.4.1
-- FontAwesome v5.3.1
-- Bulma 0.8
-- EBay API
-- Google Maps API
-- SMS Broadcast API
+- Foundation v6.4.3
+- Sequelize
+- Socket.io
 
 ## License
 
@@ -85,7 +86,7 @@ Haven't produced anything as yet.
 
 ## Tests
 
-I haven't written any tests yet as we have not covered this in the course.
+I haven't written any tests yet
 
 ---
 
