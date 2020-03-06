@@ -33,8 +33,7 @@ $(function () {
       newGame = false;
     }
   });
-
-  console.log("Main Init Called");
+  //console.log("Main Init Called");
 });
 
 function InitFilesRanksBrd() {
