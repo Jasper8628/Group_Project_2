@@ -36,6 +36,180 @@ require('./routes/api-routes.js')(app)
 // let cast = app.listen(PORT2, function () { console.log("server listening on 3000");});
 
 // >>>>> Chat and chess socket events >>>>>
+// const ioserver = app.listen(PORTSOCKET, () => console.log(`listening for socket.io messages on port ${PORTSOCKET}`))
+// const ioCast = socket(ioserver)
+// ioCast.set('origins', '*:*')
+// const chatUsers = {}
+// let fenArray = []
+// const fenCode = ''
+// const whitePicked = false
+// let moveArray = []
+
+// const room1 = {
+//   name: 'room1',
+//   whiteTaken: false,
+//   blackTaken: false
+// }
+
+// ioCast.on('connection', socket => {
+//   console.log(`Connection made by socketid: [${socket.id}]`)
+//   const fenStr = fenArray[fenArray.length - 1]
+//   ioCast.sockets.emit('all', { fen: fenStr });
+
+//   socket.on("ready", function (rd) {
+//     console.log(rd.name);
+//     let name = rd.name;
+//     let color;
+//     if (room1.whiteTaken == false && room1.blackTaken == false) {
+//       room1.whiteTaken = true;
+//       color = "w";
+//     } else if (room1.blackTaken == false) {
+//       room1.blackTaken = true;
+//       color = "b";
+//     } else if (room1.whiteTaken == true && room1.blackTaken == true) {
+//       color = "observer";
+//     }
+//     let newData = {
+//       color: color,
+//       name: name
+//     }
+//     ioCast.sockets.emit("ready", newData);
+
+//   });
+
+//   socket.on('game', function (data) {
+//     console.log(data)
+//     fenArray.push(data.fen)
+//     const gameMove = {}
+//     gameMove.pieceName = data.pieceName
+//     gameMove.capName = data.capName
+//     gameMove.to = data.to
+//     gameMove.from = data.from
+//     gameMove.side = data.side
+//     moveArray.push(gameMove)
+
+//     ioCast.sockets.emit('all', data)
+//   })
+
+
+//   app.get('/replay', function (req, res) {
+//     db.Replay.findAll(
+//     ).then(function (data) {
+//       res.json(data)
+//     })
+//   })
+
+//   app.post("/new", function (req, res) {
+//     fenArray = [];
+//     room1.whiteTaken = false;
+//     room1.blackTaken = false;
+
+//   });
+
+//   app.get("/replay", function (req, res) {
+//     db.Replay.findAll(
+//     ).then(function (data) {
+//       res.json(data);
+//     });
+//   });
+// /* 
+//   app.get("/ready", function (req, res) {
+//     let color;
+//     if (room1.whiteTaken == false && room1.blackTaken == false) {
+//       room1.whiteTaken = true;
+//       color = "w";
+//     } else if (room1.blackTaken == false) {
+//       room1.blackTaken = true;
+//       color = "b";
+//     } else if (room1.whiteTaken == true && room1.blackTaken == true) {
+//       color = "observer";
+//     }
+
+//     res.json({ color: color });
+//     console.log(color);
+
+//   }); */
+
+
+
+//   app.post("/save", function (req, res) {
+//     db.Replay.destroy({
+//       where: {},
+//       truncate: true
+//     });
+//     db.sequelize.transaction(function (t) {
+//       var promises = []
+//       for (move of moveArray) {
+//         var newPromise = db.Replay.create({
+//           pieceName: move.pieceName,
+//           capName: move.capName,
+//           to: move.to,
+//           from: move.from,
+//           replay: "a "
+//         }, { transaction: t });
+//         promises.push(newPromise);
+//       };
+//       return Promise.all(promises).then(function (data) {
+//         console.log("logged");
+//       });
+//     });
+//   });
+
+//   /*
+//   console.log(moveArray);
+//   let storageStr = JSON.stringify(moveArray);
+//   for (move of moveArray) {
+//     db.Replay.create({
+//       pieceName: move.pieceName,
+//       capName: move.capName,
+//       to: move.to,
+//       from: move.from,
+//       replay: "a "
+//     }).then(function (data) {
+//       console.log("logged");
+//     })
+  
+//   } */
+
+//   socket.on('new-user', name => {
+//     try {
+//       chatUsers[socket.id] = name
+//       socket.broadcast.emit('user-connected', name)
+//       console.log(`%c SERVER.js -> New User [${name}] Connected`, 'background: #00FF00; color: #FFFFFF;')
+//     } catch (error) {
+//       console.log('%c SERVER.js -> EXCEPTION ON NEW USER', 'background: #FF0000; color: #FFFFFF;')
+//     }
+//   })
+
+//   socket.on('send-chat-message', message => {
+//     try {
+//       socket.broadcast.emit('chat-message', { message: message, name: chatUsers[socket.id] })
+//       console.error(`%c SERVER.js -> New CHAT [${message}]`, 'background: #00FF00; color: #FFFFFF;')
+//     } catch (error) {
+//       console.log('%c SERVER.js -> EXCEPTION ON SEND-CHAT-MESSAGE', 'background: #FF0000; color: #FFFFFF;')
+//     }
+//   })
+
+//   socket.on('disconnect', () => {
+//     try {
+//       socket.broadcast.emit('user-disconnected', chatUsers[socket.id])
+//       delete chatUsers[socket.id]
+//       console.log(`%c SERVER.js -> User [${socket.id}] DISconnected`, 'background: #00FF00; color: #FFFFFF;')
+//     } catch (error) {
+//       console.log('%c SERVER.js -> EXCEPTION ON DISCONNECT', 'background: #FF0000; color: #FFFFFF;')
+//     }
+//   })
+// })
+
+/**************************************************************
+ * Login to the db and then start the web server application  *
+ **************************************************************
+*/
+// Syncing our database and logging a message to the user upon success
+db.sequelize.sync().then(() => {
+  app.listen(PORTSEQ, () => {
+    console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORTSEQ, PORTSEQ)
+    // >>>>> Chat and chess socket events >>>>>
 const ioserver = app.listen(PORTSOCKET, () => console.log(`listening for socket.io messages on port ${PORTSOCKET}`))
 const ioCast = socket(ioserver)
 ioCast.set('origins', '*:*')
@@ -200,14 +374,5 @@ ioCast.on('connection', socket => {
     }
   })
 })
-
-/**************************************************************
- * Login to the db and then start the web server application  *
- **************************************************************
-*/
-// Syncing our database and logging a message to the user upon success
-db.sequelize.sync().then(() => {
-  app.listen(PORTSEQ, () => {
-    console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORTSEQ, PORTSEQ)
   })
 })
