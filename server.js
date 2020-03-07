@@ -110,7 +110,7 @@ io.on('connection', socket => {
 
   });
 
-/* 
+
   app.get("/ready", function (req, res) {
     let color;
     if (room1.whiteTaken == false && room1.blackTaken == false) {
@@ -126,7 +126,7 @@ io.on('connection', socket => {
     res.json({ color: color });
     console.log(color);
 
-  }); */
+  }); 
 
 
 

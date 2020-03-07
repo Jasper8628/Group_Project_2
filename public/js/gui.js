@@ -57,7 +57,7 @@ $("#ready").on("click", function () {
 	};
 	socketCast.emit("ready", readyData);
 
-	/* 	$.get("/ready", function (data) {
+	 	$.get("/ready", function (data) {
 			playerReady = true;
 			PrintBoard();
 	
@@ -72,7 +72,7 @@ $("#ready").on("click", function () {
 			} else {
 				$("#user-color").text("Both sides are take,you may observe the game");
 			}
-		}); */
+		}); 
 });
 
 $(".modal-message").on("click", function () {
