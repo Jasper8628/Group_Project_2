@@ -40,7 +40,14 @@ require('./routes/api-routes.js')(app)
 // >>>>> Chat and chess socket events >>>>>
 const server = http.createServer(app)
 const io = require('socket.io').listen(server)
-server.listen(PORTSOCKET, () => console.log(`listening for socket.io messages on port ${PORTSOCKET}`))
+db.sequelize.sync().then(() => {
+  server.listen(PORTSOCKET, () => console.log(`listening for socket.io messages on port ${PORTSOCKET}`))
+  // app.listen(PORTSEQ, () => {
+  //   console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORTSEQ, PORTSEQ)
+
+  // })
+})
+
 // const ioCast = socket(ioserver)
 // ioCast.set('origins', '*:*')
 const chatUsers = {}
@@ -210,9 +217,9 @@ io.on('connection', socket => {
  **************************************************************
 */
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync().then(() => {
-  app.listen(PORTSEQ, () => {
-    console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORTSEQ, PORTSEQ)
+// db.sequelize.sync().then(() => {
+//   app.listen(PORTSEQ, () => {
+//     console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORTSEQ, PORTSEQ)
 
-  })
-})
+//   })
+// })
