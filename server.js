@@ -6,7 +6,6 @@
  */
 const express = require('express')
 const http = require('http')
-
 const session = require('express-session')
 const passport = require('./orm/passport')
 const db = require('./models')
@@ -25,7 +24,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 const PORTSOCKET = process.env.PORT || 8080 // This is for socket.io server on express
-// const PORTSEQ = process.env.PORTSEQ || 8080 // This is for the html server
 
 // Set Handlebars Template Language
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -34,8 +32,6 @@ app.set('view engine', 'handlebars')
 // Requiring our routes
 require('./routes/html-routes.js')(app)
 require('./routes/api-routes.js')(app)
-
-// let cast = app.listen(PORT2, function () { console.log("server listening on 3000");});
 
 // >>>>> Chat and chess socket events >>>>>
 const server = http.createServer(app)

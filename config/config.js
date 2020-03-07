@@ -1,7 +1,7 @@
 module.exports = {
   "development": {
     "username": "root",
-    "password": "Root11!!",
+    "password": null,
     "database": "chess_db",
     "host": "127.0.0.1",
     "dialect": "mysql",
