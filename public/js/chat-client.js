@@ -4,9 +4,7 @@
  */
 
 
-const socket = io('http://localhost:8080')
-
-
+const socket = io.connect('http://localhost:8080')
 
 const messageContainer = document.getElementById('chatHistory')
 const messageForm = document.getElementById('chatContainer')
