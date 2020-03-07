@@ -1,9 +1,9 @@
-<style>
+{{!-- <style>
     body {
         background-image: url("../images/Chess-3D-Animation-Wallpaper.jpg")
     }
-</style>
-
+</style> --}}
+<img src="./images/Chess-3D-Animation-Wallpaper.jpg" class="chessImage" alt="chess">
 <div class="welcomeHeader">
     <div>My Profile</div>
 
@@ -22,7 +22,7 @@
                 </div>
                 <div class="cell small-12">
                     <label id="passwordLabel"> Password: 
-                        <input id="passwordForm" type="password" placeholder="password" aria-describedby="example1Hint2"
+                        <input id="passwordForm" type="password" placeholder="change new password" aria-describedby="example1Hint2"
                             aria-errormessage="example1Error2" required>
                         <span id="formPasswordError" class="form-error">
                             This field is required.
@@ -31,7 +31,7 @@
                 </div>
                 <div class="cell small-12">
                     <label id="rePasswordLabel">Re-enter password:
-                        <input id="rePasswordForm" type="password" placeholder="password"
+                        <input id="rePasswordForm" type="password" placeholder="re-enter password"
                             aria-describedby="example1Hint3" aria-errormessage="example1Error3" required
                             pattern="alpha_numeric" data-equalto="password">
                         <span id="formRePasswordError" class="form-error">
@@ -41,7 +41,7 @@
                 </div>
                 <div class="cell small-12">
                     <label id="usernameLabel">Email: {{users.email}}
-                        <input id="emailForm" type="text" placeholder="Add Your Email" aria-describedby="emailField"
+                        <input id="emailForm" type="text" placeholder="add your email" aria-describedby="emailField"
                             aria-errormessage="emailError" required>
                         <span id="formNameError" class="form-error">
                             This field is required.
