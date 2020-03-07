@@ -3,7 +3,11 @@
  *  Why doesn't any of this need to be in document.ready?
  */
 
-const socket = io('http://localhost:4000')
+
+const socket = io()
+
+
+
 const messageContainer = document.getElementById('chatHistory')
 const messageForm = document.getElementById('chatContainer')
 const messageInput = document.getElementById('messageInput')
@@ -60,6 +64,8 @@ function appendMessage (message) {
     console.log('%c chat-client.js -> EXCEPTION ON APPEND', 'background: #FF0000; color: #FFFFFF;')
   }
 }
+
+
 
 // $("#logout").on('click', function (event) {
 //   event.preventDefault()
