@@ -1,25 +1,22 @@
-{
+module.exports = {
   "development": {
     "username": "root",
-<<<<<<< HEAD
-    "password": "Antares28",
-    "database": "chess",
-=======
     "password": null,
     "database": "chess_db",
->>>>>>> b27c7fe6eede9a2eaede78d898ab230ffe71c01f
-    "host": "localhost",
-    "dialect": "mysql"
+    "host": "127.0.0.1",
+    "dialect": "mysql",
+    "operatorsAliases": false
   },
   "test": {
     "username": "root",
     "password": null,
     "database": "database_test",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "operatorsAliases": false
   },
   "production": {
     "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
-}
+  }
 }
