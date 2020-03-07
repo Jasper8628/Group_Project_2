@@ -24,8 +24,8 @@ app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true 
 app.use(passport.initialize())
 app.use(passport.session())
 
-const PORTSOCKET = process.env.PORTSOCKET || 4000 // This is for socket.io server
-const PORTSEQ = process.env.PORTSEQ || 8080 // This is for the html server
+const PORTSOCKET = process.env.PORTSOCKET || 8080 // This is for socket.io server on express
+// const PORTSEQ = process.env.PORTSEQ || 8080 // This is for the html server
 
 // Set Handlebars Template Language
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -41,11 +41,8 @@ require('./routes/api-routes.js')(app)
 const server = http.createServer(app)
 const io = require('socket.io').listen(server)
 db.sequelize.sync().then(() => {
-  server.listen(PORTSOCKET, () => console.log(`listening for socket.io messages on port ${PORTSOCKET}`))
-  // app.listen(PORTSEQ, () => {
-  //   console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORTSEQ, PORTSEQ)
-
-  // })
+  server.listen(PORTSOCKET, () => console.log('==> 🌎  Listening for socket.io messages on port %s. Visit http://localhost:%s/ in your browser.', PORTSOCKET, PORTSOCKET))
+  
 })
 
 // const ioCast = socket(ioserver)
