@@ -36,7 +36,8 @@ require('./routes/api-routes.js')(app)
 // let cast = app.listen(PORT2, function () { console.log("server listening on 3000");});
 
 // >>>>> Chat and chess socket events >>>>>
-const ioserver = app.listen(PORTSOCKET, () => console.log(`listening for socket.io messages on port ${PORTSOCKET}`))
+//const ioserver = app.listen(PORTSOCKET, () => console.log(`listening for socket.io messages on port ${PORTSOCKET}`))
+
 const ioCast = socket(ioserver)
 ioCast.set('origins', '*:*')
 const chatUsers = {}
