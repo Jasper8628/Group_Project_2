@@ -110,12 +110,6 @@ io.on('connection', socket => {
 
   });
 
-  app.get("/replay", function (req, res) {
-    db.Replay.findAll(
-    ).then(function (data) {
-      res.json(data);
-    });
-  });
 /* 
   app.get("/ready", function (req, res) {
     let color;

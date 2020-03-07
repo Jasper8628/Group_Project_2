@@ -45,7 +45,8 @@ socketCast.on("ready", function (data) {
 	} else {
 		$("#user-color").text(name + msg);
 
-	}
+  }
+  console.log(playerColor,playerSide);
 });
 
 $("#ready").on("click", function () {
