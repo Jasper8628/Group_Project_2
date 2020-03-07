@@ -224,6 +224,7 @@ function MakeUserMove () {
     UserMove.from = SQUARES.NO_SQ
     UserMove.to = SQUARES.NO_SQ
   }
+  console.log(playerSide,playerColor);
 }
 
 function PieceIsOnSq (sq, top, left) {
