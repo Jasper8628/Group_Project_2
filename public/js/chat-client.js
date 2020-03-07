@@ -3,7 +3,7 @@
  *  Why doesn't any of this need to be in document.ready?
  */
 
-const socket = io('http://localhost:4000')
+const socket = io.connect('http://localhost:8080')
 const messageContainer = document.getElementById('chatHistory')
 const messageForm = document.getElementById('chatContainer')
 const messageInput = document.getElementById('messageInput')
