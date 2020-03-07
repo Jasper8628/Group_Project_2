@@ -24,7 +24,7 @@ app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true 
 app.use(passport.initialize())
 app.use(passport.session())
 
-const PORTSOCKET = process.env.PORTSOCKET || 8080 // This is for socket.io server on express
+const PORTSOCKET = process.env.PORT || 8080 // This is for socket.io server on express
 // const PORTSEQ = process.env.PORTSEQ || 8080 // This is for the html server
 
 // Set Handlebars Template Language
