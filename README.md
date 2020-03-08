@@ -5,13 +5,13 @@ Sydney Uni Bootcamp 2019
 Contributors:
 
 - Anstey, Stewart
-- Rita
-- Jasper
-- Gerald
+- Pang, Rita
+- Du, Jasper
+- Lam, Gerald
 
 ## Description
 
-Chess Game
+3D Chess Game
 
 Please see the application's screenshot as follows:
 
@@ -35,13 +35,15 @@ Simply `git clone https://github.com/Jasper8628/Group_Project_2.git` while in yo
 
 ## Usage
 
-Please see following link: 
+Go to the following link: 
+
+https://project2-chessgame.herokuapp.com/
 
 ## Credits
 
 Collaborators
 
-- No collaborators.
+- No outside collaborators.
 
 Libraries and Frameworks
 
@@ -54,7 +56,7 @@ Libraries and Frameworks
 
 MIT License
 
-Copyright (c) 2019 Stewart Anstey
+Copyright (c) 2019 Stewart Anstey, Rita Pang, Jasper Du, Gerald Lam
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -73,20 +75,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-## Badges
-
-Haven't covered this yet.
-
-## Contributing
-
-Haven't produced anything as yet.
-
-## Tests
-
-I haven't written any tests yet
 
 ---
 
