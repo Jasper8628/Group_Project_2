@@ -72,12 +72,6 @@ function routes (app) {
       })
   });
   
-  app.get('/replay', function (req, res) {
-    db.Replay.findAll(
-    ).then(function (data) {
-      res.json(data)
-    })
-  })
 
   
 }

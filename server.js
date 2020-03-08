@@ -62,6 +62,36 @@ app.post("/new", function (req, res) {
 
 });
 
+app.get('/replay', function (req, res) {
+  db.Replay.findAll(
+  ).then(function (data) {
+    res.json(data)
+  })
+});
+
+app.post("/save", function (req, res) {
+  db.Replay.destroy({
+    where: {},
+    truncate: true
+  });
+  db.sequelize.transaction(function (t) {
+    var promises = []
+    for (move of moveArray) {
+      var newPromise = db.Replay.create({
+        pieceName: move.pieceName,
+        capName: move.capName,
+        to: move.to,
+        from: move.from,
+        replay: "a "
+      }, { transaction: t });
+      promises.push(newPromise);
+    };
+    return Promise.all(promises).then(function (data) {
+      console.log("logged");
+    });
+  });
+});
+
 
 io.on('connection', socket => {
   console.log(`Connection made by socketid: [${socket.id}]`)
@@ -125,28 +155,6 @@ io.on('connection', socket => {
 
 
 
-  app.post("/save", function (req, res) {
-    db.Replay.destroy({
-      where: {},
-      truncate: true
-    });
-    db.sequelize.transaction(function (t) {
-      var promises = []
-      for (move of moveArray) {
-        var newPromise = db.Replay.create({
-          pieceName: move.pieceName,
-          capName: move.capName,
-          to: move.to,
-          from: move.from,
-          replay: "a "
-        }, { transaction: t });
-        promises.push(newPromise);
-      };
-      return Promise.all(promises).then(function (data) {
-        console.log("logged");
-      });
-    });
-  });
 
   /*
   console.log(moveArray);
