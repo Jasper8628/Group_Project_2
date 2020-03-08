@@ -3,7 +3,11 @@
  *  Why doesn't any of this need to be in document.ready?
  */
 
+<<<<<<< HEAD
 const socket = io('https://jack-plays-chess.herokuapp.com/')
+=======
+const socket = io.connect('https://project2-chessgame.herokuapp.com/')
+>>>>>>> d7ad12e42a3f6e75493faccf8b45f94dfc95d90c
 const messageContainer = document.getElementById('chatHistory')
 const messageForm = document.getElementById('chatContainer')
 const messageInput = document.getElementById('messageInput')

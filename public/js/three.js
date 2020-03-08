@@ -1,6 +1,11 @@
 
+<<<<<<< HEAD
 var socketCast = io.connect("https://jack-plays-chess.herokuapp.com/")
 // var socketGame = io.connect("http://localhost:4000/chest.html");
+=======
+var socketCast = io.connect('https://project2-chessgame.herokuapp.com/')
+
+>>>>>>> d7ad12e42a3f6e75493faccf8b45f94dfc95d90c
 const scene = new THREE.Scene()
 // scene.background = new THREE.Color( 0xff0000 );
 const tloader = new THREE.TextureLoader()
