@@ -28,7 +28,8 @@ socketCast.on("ready", function (data) {
 		
 		$("#turn").text("Awaiting player black");
 		color = "white";
-		msg=" is playing as white";
+    msg=" is playing as white";
+    
 	} else if (data.color == "b") {
 		color = "black";
 		$("#turn").text("Game ready,white's turn");
@@ -57,7 +58,7 @@ $("#ready").on("click", function () {
 	};
 	socketCast.emit("ready", readyData);
 
-	 	$.get("/ready", function (data) {
+	/* 	$.get("/ready", function (data) {
 			playerReady = true;
 			PrintBoard();
 	
@@ -72,7 +73,7 @@ $("#ready").on("click", function () {
 			} else {
 				$("#user-color").text("Both sides are take,you may observe the game");
 			}
-		}); 
+		}); */
 });
 
 $(".modal-message").on("click", function () {

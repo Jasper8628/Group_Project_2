@@ -48,12 +48,20 @@ let fenArray = []
 const fenCode = ''
 const whitePicked = false
 let moveArray = []
-
 const room1 = {
   name: 'room1',
   whiteTaken: false,
   blackTaken: false
 }
+
+app.post("/new", function (req, res) {
+  fenArray = [];
+  room1.whiteTaken = false;
+  room1.blackTaken = false;
+  console.log(room1);
+
+});
+
 
 io.on('connection', socket => {
   console.log(`Connection made by socketid: [${socket.id}]`)
@@ -96,21 +104,8 @@ io.on('connection', socket => {
   })
 
 
-  app.get('/replay', function (req, res) {
-    db.Replay.findAll(
-    ).then(function (data) {
-      res.json(data)
-    })
-  })
 
-  app.post("/new", function (req, res) {
-    fenArray = [];
-    room1.whiteTaken = false;
-    room1.blackTaken = false;
-
-  });
-
-
+/* 
   app.get("/ready", function (req, res) {
     let color;
     if (room1.whiteTaken == false && room1.blackTaken == false) {
@@ -126,7 +121,7 @@ io.on('connection', socket => {
     res.json({ color: color });
     console.log(color);
 
-  }); 
+  }); */
 
 
 

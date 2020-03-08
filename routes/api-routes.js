@@ -2,7 +2,8 @@
 var db = require('../models')
 var passport = require('../orm/passport')
 
-module.exports = function (app) {
+module.exports = 
+function routes (app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the chess page.
   // Otherwise the user will be sent an error
@@ -69,5 +70,14 @@ module.exports = function (app) {
       .catch(function (err) {
         console.log(err)
       })
+  });
+  
+  app.get('/replay', function (req, res) {
+    db.Replay.findAll(
+    ).then(function (data) {
+      res.json(data)
+    })
   })
+
+  
 }
