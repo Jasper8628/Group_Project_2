@@ -39,15 +39,29 @@ Go to the following link:
 
 https://project2-chessgame.herokuapp.com/
 
+- To play both as white and black (One Player), simply click "New Game" to play
+- To play against an opponent, click "New Game" then "Ready" and await for the opponent to click "Ready"
+- To be an Observer, click "Ready" until you are allocated as an Observer 
+- Click "Save" after the game and Click "Replay" to rewatch the game
+
+HAVE FUN!
+
+**Note**
+- If chat window cannot be clicked please press "Tab" until you are able to type in the chat 
+
 ## Credits
 
 Collaborators
 
 - No outside collaborators.
 
-Libraries and Frameworks
+## Libraries and Frameworks
+
+<b>Build with<b>
 
 - JQuery v3.4.1
+- NodeJS
+- Express.js
 - Foundation v6.4.3
 - Sequelize
 - Socket.io
