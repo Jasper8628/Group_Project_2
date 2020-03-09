@@ -465,6 +465,7 @@ a:active {
   position: absolute;
   top: 5%;
   right: -50%;
+  overflow:auto;
 }
 
 #chatContainer{
@@ -485,7 +486,7 @@ a:active {
   font-size: 20px;
   z-index: 500;
   position: absolute;
-  top: 70%;
+  top: 90%;
   right: -50%;
   width: 280px;
 }
@@ -494,7 +495,7 @@ a:active {
   border-radius: 5px;
   font-family: 'Rajdhani', sans-serif;
   font-size: 18px;
-  top: 78%;
+  top: 98%;
   right: 4%;
   position: absolute;
 }

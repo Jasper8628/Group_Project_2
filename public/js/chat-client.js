@@ -9,6 +9,10 @@ const messageForm = document.getElementById('chatContainer')
 const messageInput = document.getElementById('messageInput')
 const name = document.getElementById('hdbusername').textContent
 
+
+var chatHistory = document.getElementById("chatHistory")
+chatHistory.scrollTop = chatHistory.scrollHeight;
+
 appendMessage(`Hi ${name} thanks for joining the game`)
 console.log(`%c chat-client.js -> Good news [${name}] you joined the game`, 'background: #0000FF; color: #FFFFFF;')
 
@@ -60,6 +64,7 @@ function appendMessage (message) {
     console.log('%c chat-client.js -> EXCEPTION ON APPEND', 'background: #FF0000; color: #FFFFFF;')
   }
 }
+
 
 
 
