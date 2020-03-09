@@ -39,6 +39,16 @@ Go to the following link:
 
 https://project2-chessgame.herokuapp.com/
 
+- To play both as white and black (One Player), simply click "New Game" to play
+- To play against an opponent, click "New Game" then "Ready" and await for the opponent to click "Ready"
+- To be an Observer, click "Ready" until you are allocated as an Observer 
+- Click "Save" after the game and Click "Replay" to rewatch the game
+
+HAVE FUN!
+
+**Note**
+- If chat window cannot be clicked please press "Tab" until you are able to type in the chat 
+
 ## Credits
 
 Collaborators
@@ -82,24 +92,6 @@ SOFTWARE.
 
 ---
 
-<<<<<<< HEAD
-## Badges
-
-Haven't covered this yet.
-
-## Contributing
-
-Haven't produced anything as yet.
-
-## Tests
-
-I haven't written any tests yet
-
----
-
-© 2020 Code Connoisseurs, Sydney, Australia. All Rights Reserved.
-=======
 © 2019 Code Connoisseurs, Sydney, Australia. All Rights Reserved.
->>>>>>> master
 
 If you are still reading you get [this bonus comic strip about Git](https://xkcd.com/1597/).
