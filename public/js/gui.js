@@ -28,7 +28,8 @@ socketCast.on("ready", function (data) {
 		
 		$("#turn").text("Awaiting player black");
 		color = "white";
-		msg=" is playing as white";
+    msg=" is playing as white";
+    
 	} else if (data.color == "b") {
 		color = "black";
 		$("#turn").text("Game ready,white's turn");
@@ -45,7 +46,8 @@ socketCast.on("ready", function (data) {
 	} else {
 		$("#user-color").text(name + msg);
 
-	}
+  }
+  console.log(playerColor,playerSide);
 });
 
 $("#ready").on("click", function () {
@@ -223,6 +225,7 @@ function MakeUserMove () {
     UserMove.from = SQUARES.NO_SQ
     UserMove.to = SQUARES.NO_SQ
   }
+  console.log(playerSide,playerColor);
 }
 
 function PieceIsOnSq (sq, top, left) {

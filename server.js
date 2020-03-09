@@ -48,12 +48,50 @@ let fenArray = []
 const fenCode = ''
 const whitePicked = false
 let moveArray = []
-
 const room1 = {
   name: 'room1',
   whiteTaken: false,
   blackTaken: false
 }
+
+app.post("/new", function (req, res) {
+  fenArray = [];
+  room1.whiteTaken = false;
+  room1.blackTaken = false;
+  console.log(room1);
+
+});
+
+app.get('/replay', function (req, res) {
+  db.Replay.findAll(
+  ).then(function (data) {
+    res.json(data)
+  })
+});
+
+app.post("/save", function (req, res) {
+  db.Replay.destroy({
+    where: {},
+    truncate: true
+  });
+  db.sequelize.transaction(function (t) {
+    var promises = []
+    for (move of moveArray) {
+      var newPromise = db.Replay.create({
+        pieceName: move.pieceName,
+        capName: move.capName,
+        to: move.to,
+        from: move.from,
+        replay: "a "
+      }, { transaction: t });
+      promises.push(newPromise);
+    };
+    return Promise.all(promises).then(function (data) {
+      console.log("logged");
+    });
+  });
+});
+
 
 io.on('connection', socket => {
   console.log(`Connection made by socketid: [${socket.id}]`)
@@ -96,26 +134,7 @@ io.on('connection', socket => {
   })
 
 
-  app.get('/replay', function (req, res) {
-    db.Replay.findAll(
-    ).then(function (data) {
-      res.json(data)
-    })
-  })
 
-  app.post("/new", function (req, res) {
-    fenArray = [];
-    room1.whiteTaken = false;
-    room1.blackTaken = false;
-
-  });
-
-  app.get("/replay", function (req, res) {
-    db.Replay.findAll(
-    ).then(function (data) {
-      res.json(data);
-    });
-  });
 /* 
   app.get("/ready", function (req, res) {
     let color;
@@ -136,28 +155,6 @@ io.on('connection', socket => {
 
 
 
-  app.post("/save", function (req, res) {
-    db.Replay.destroy({
-      where: {},
-      truncate: true
-    });
-    db.sequelize.transaction(function (t) {
-      var promises = []
-      for (move of moveArray) {
-        var newPromise = db.Replay.create({
-          pieceName: move.pieceName,
-          capName: move.capName,
-          to: move.to,
-          from: move.from,
-          replay: "a "
-        }, { transaction: t });
-        promises.push(newPromise);
-      };
-      return Promise.all(promises).then(function (data) {
-        console.log("logged");
-      });
-    });
-  });
 
   /*
   console.log(moveArray);
