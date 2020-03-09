@@ -1,5 +1,5 @@
 
-var socketCast = io.connect("http://localhost:8080/")
+var socketCast = io.connect("https://project2-chessgame.herokuapp.com/")
 // var socketGame = io.connect("http://localhost:4000/chest.html");
 const scene = new THREE.Scene()
 // scene.background = new THREE.Color( 0xff0000 );
