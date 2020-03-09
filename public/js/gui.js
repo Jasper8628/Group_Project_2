@@ -19,44 +19,59 @@ $("#new").on("click", function () {
 });
 
 socketCast.on("ready", function (data) {
-	console.log(data.color);
-	PrintBoard();
-	$("#message").css("display", "block");
-	let color;
-	let msg;
-	if (data.color == "w") {
-		
-		$("#turn").text("Awaiting player black");
-		color = "white";
-    msg=" is playing as white";
-    
-	} else if (data.color == "b") {
-		color = "black";
-		$("#turn").text("Game ready,white's turn");
-		
-		msg=" is playing as black";
-	} else {
-		color = "Observer";
-		msg=" observes the game";
-	}
-	let name = data.name;
-	if (playerName == name) {
-		playerColor = data.color;
-		$("#user-color").text("You are playing as: " + color);
-	} else {
-		$("#user-color").text(name + msg);
+  console.log(data.color)
+  $.ajax({
+    url: "/api/user_data",
+    method: "GET"
+  }).then(function(response){
+    console.log(data.color)
+    PrintBoard();
+    $("#message").css("display", "block");
+    let color;
+    let msg;
+    if (data.color == "w") {
+      
+      $("#turn").text("Awaiting player black");
+      color = "white";
+      msg=" is playing as white";
+      
+    } else if (data.color == "b") {
+      color = "black";
+      $("#turn").text("Game ready,white's turn");
+      
+      msg=" is playing as black";
+    } else {
+      color = "Observer";
+      msg=" observes the game";
+    }
+    let name = response.username;
+    if (playerName == name) {
+      playerColor = data.color;
+      $("#user-color").text(`${response.username} are playing as: ` + color);
+    } else {
+      $("#user-color").text(name + msg);
+  
+    }
+    console.log(playerColor,playerSide);
+  })
 
-  }
-  console.log(playerColor,playerSide);
+
 });
 
 $("#ready").on("click", function () {
-	
-	playerReady = true;
-	let readyData = {
-		name: playerName
-	};
-	socketCast.emit("ready", readyData);
+  $.ajax({
+    url: "/api/user_data",
+    method: "GET"
+  }).then(function(response){
+
+    playerReady = true;
+    let readyData = {
+      username: response.username
+    };
+
+    socketCast.emit("ready", readyData);
+  })
+
 
 	/* 	$.get("/ready", function (data) {
 			playerReady = true;
