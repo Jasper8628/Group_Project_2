@@ -10,8 +10,7 @@ const messageInput = document.getElementById('messageInput')
 const name = document.getElementById('hdbusername').textContent
 
 
-var chatHistory = document.getElementById("chatHistory")
-chatHistory.scrollTop = chatHistory.scrollHeight;
+
 
 appendMessage(`Hi ${name} thanks for joining the game`)
 console.log(`%c chat-client.js -> Good news [${name}] you joined the game`, 'background: #0000FF; color: #FFFFFF;')
@@ -25,6 +24,7 @@ socket.on('chat-message', data => {
   } catch (error) {
     console.log('%c chat-client.js -> EXCEPTION ON CHAT-MESSAGE', 'background: #FF0000; color: #FFFFFF;')
   }
+
 })
 
 socket.on('user-connected', name => {
@@ -63,6 +63,8 @@ function appendMessage (message) {
   } catch (error) {
     console.log('%c chat-client.js -> EXCEPTION ON APPEND', 'background: #FF0000; color: #FFFFFF;')
   }
+  var chatHistory = document.getElementById("chatHistory")
+  chatHistory.scrollTop = chatHistory.scrollHeight;
 }
 
 
