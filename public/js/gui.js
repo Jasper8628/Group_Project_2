@@ -19,65 +19,64 @@ $("#new").on("click", function () {
 });
 
 socketCast.on("ready", function (data) {
-	console.log(data.color);
-	PrintBoard();
-	$("#message").css("display", "block");
-	let color;
-	let msg;
-	if (data.color == "w") {
-		
-		$("#turn").text("Awaiting player black");
-		color = "white";
-		msg=" is playing as white";
-	} else if (data.color == "b") {
-		color = "black";
-		$("#turn").text("Game ready,white's turn");
-		
-		msg=" is playing as black";
-	} else {
-		color = "Observer";
-		msg=" observes the game";
-	}
-	let name = data.name;
-	if (playerName == name) {
-		playerColor = data.color;
-		$("#user-color").text("You are playing as: " + color);
-	} else {
-		$("#user-color").text(name + msg);
+  console.log(data.color)
+    console.log(data.color)
+    PrintBoard();
+    $("#message").css("display", "block");
+    let color;
+    let msg;
+    let name=data.name;
+    if (data.color == "w") {
+      
+      $("#turn").text("Awaiting player black");
+      color = "white";
+      msg=" is playing as white";
+      
+    } else if (data.color == "b") {
+      color = "black";
+      $("#turn").text("Game ready,white's turn");
+      
+      msg=" is playing as black";
+    } else {
+      color = "Observer";
+      msg=" observes the game";
+    }
+    if (playerName == name) {
+      playerColor = data.color;
+      $("#user-color").text("You are playing as: " + color);
+    } else {
+      $("#user-color").text(name + msg);
+  
+    }
+    console.log(playerColor,playerSide);
+  
 
-	}
+
 });
 
 $("#ready").on("click", function () {
-	
-	playerReady = true;
-	let readyData = {
-		name: playerName
-	};
-	socketCast.emit("ready", readyData);
+  $.ajax({
+    url: "/api/user_data",
+    method: "GET"
+  }).then(function(response){
 
-	/* 	$.get("/ready", function (data) {
-			playerReady = true;
-			PrintBoard();
-	
-			playerColor = data.color;
-			console.log("your color is: " + playerColor);
-			console.log("your side is :" + playerSide);
-			$("#message").css("display", "block");
-			if (playerColor == "w") {
-				$("#user-color").text("You are playing as: White");
-			} else if (playerColor == "b") {
-				$("#user-color").text("You are playing as: Black");
-			} else {
-				$("#user-color").text("Both sides are take,you may observe the game");
-			}
-		}); */
+    playerReady = true;
+    playerName=response.username;
+    let readyData = {
+      name: playerName
+    };
+    console.log(playerName);
+
+    socketCast.emit("ready", readyData);
+  })
 });
 
 $(".modal-message").on("click", function () {
 	$("#message").css("display", "none");
 });
 $("#save").on("click", function () {
+  
+  $("#user-color").text("Game saved");
 	$.post("/save", function (res) {
 		console.log(res);
 	});
@@ -223,6 +222,7 @@ function MakeUserMove () {
     UserMove.from = SQUARES.NO_SQ
     UserMove.to = SQUARES.NO_SQ
   }
+  console.log(playerSide,playerColor);
 }
 
 function PieceIsOnSq (sq, top, left) {

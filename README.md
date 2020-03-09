@@ -5,13 +5,13 @@ Sydney Uni Bootcamp 2019
 Contributors:
 
 - Anstey, Stewart
-- Rita
-- Jasper
-- Gerald
+- Pang, Rita
+- Du, Jasper
+- Lam, Gerald
 
 ## Description
 
-Chess Game
+3D Chess Game
 
 Please see the application's screenshot as follows:
 
@@ -35,17 +35,15 @@ Simply `git clone https://github.com/Jasper8628/Group_Project_2.git` while in yo
 
 ## Usage
 
-Please see following link: https://project-two-heroku-test.herokuapp.com/ 
+Go to the following link: 
 
-**Note**
-- [Installation](#installation)
-- [Usage](#usage)
+https://project2-chessgame.herokuapp.com/
 
 ## Credits
 
 Collaborators
 
-- No collaborators.
+- No outside collaborators.
 
 ## Libraries and Frameworks
 
@@ -62,7 +60,7 @@ Collaborators
 
 MIT License
 
-Copyright (c) 2019 Stewart Anstey
+Copyright (c) 2019 Stewart Anstey, Rita Pang, Jasper Du, Gerald Lam
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -84,6 +82,7 @@ SOFTWARE.
 
 ---
 
+<<<<<<< HEAD
 ## Badges
 
 Haven't covered this yet.
@@ -99,5 +98,8 @@ I haven't written any tests yet
 ---
 
 © 2020 Code Connoisseurs, Sydney, Australia. All Rights Reserved.
+=======
+© 2019 Code Connoisseurs, Sydney, Australia. All Rights Reserved.
+>>>>>>> master
 
 If you are still reading you get [this bonus comic strip about Git](https://xkcd.com/1597/).

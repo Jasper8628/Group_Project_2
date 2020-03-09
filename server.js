@@ -5,7 +5,7 @@
  * mySQL(3306), PostGres(5432) or JawsDB(?)
  */
 const express = require('express')
-const socket = require('socket.io')
+const http = require('http')
 const session = require('express-session')
 const passport = require('./orm/passport')
 const db = require('./models')
@@ -14,6 +14,7 @@ const exphbs = require('express-handlebars')
 
 // >>>>> Middleware >>>>>
 app.use(express.static('public'))
+app.use('/static', express.static('node_modules'));
 // Parse application body as JSON
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -22,8 +23,7 @@ app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true 
 app.use(passport.initialize())
 app.use(passport.session())
 
-const PORTSOCKET = process.env.PORTSOCKET || 4000 // This is for socket.io server
-const PORTSEQ = process.env.PORTSEQ || 8080 // This is for the html server
+const PORTSOCKET = process.env.PORT || 8080 // This is for socket.io server on express
 
 // Set Handlebars Template Language
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
@@ -33,28 +33,72 @@ app.set('view engine', 'handlebars')
 require('./routes/html-routes.js')(app)
 require('./routes/api-routes.js')(app)
 
-// let cast = app.listen(PORT2, function () { console.log("server listening on 3000");});
-
 // >>>>> Chat and chess socket events >>>>>
-const ioserver = app.listen(PORTSOCKET, () => console.log(`listening for socket.io messages on port ${PORTSOCKET}`))
-const ioCast = socket(ioserver)
-ioCast.set('origins', '*:*')
+const server = http.createServer(app)
+const io = require('socket.io').listen(server)
+db.sequelize.sync().then(() => {
+  server.listen(PORTSOCKET, () => console.log('==> 🌎  Listening for socket.io messages on port %s. Visit http://localhost:%s/ in your browser.', PORTSOCKET, PORTSOCKET))
+  
+})
+
+// const ioCast = socket(ioserver)
+// ioCast.set('origins', '*:*')
 const chatUsers = {}
 let fenArray = []
 const fenCode = ''
 const whitePicked = false
 let moveArray = []
-
 const room1 = {
   name: 'room1',
   whiteTaken: false,
   blackTaken: false
 }
 
-ioCast.on('connection', socket => {
+app.post("/new", function (req, res) {
+  fenArray = [];
+  moveArray=[];
+  room1.whiteTaken = false;
+  room1.blackTaken = false;
+  console.log(room1);
+
+});
+
+
+app.get('/replay', function (req, res) {
+  db.Replay.findAll(
+  ).then(function (data) {
+    res.json(data)
+  })
+});
+
+app.post("/save", function (req, res) {
+  db.Replay.destroy({
+    where: {},
+    truncate: true
+  });
+  db.sequelize.transaction(function (t) {
+    var promises = []
+    for (move of moveArray) {
+      var newPromise = db.Replay.create({
+        pieceName: move.pieceName,
+        capName: move.capName,
+        to: move.to,
+        from: move.from,
+        replay: "a "
+      }, { transaction: t });
+      promises.push(newPromise);
+    };
+    return Promise.all(promises).then(function (data) {
+      console.log("logged");
+    });
+  });
+});
+
+
+io.on('connection', socket => {
   console.log(`Connection made by socketid: [${socket.id}]`)
   const fenStr = fenArray[fenArray.length - 1]
-  ioCast.sockets.emit('all', { fen: fenStr });
+  io.sockets.emit('all', { fen: fenStr });
 
   socket.on("ready", function (rd) {
     console.log(rd.name);
@@ -73,7 +117,7 @@ ioCast.on('connection', socket => {
       color: color,
       name: name
     }
-    ioCast.sockets.emit("ready", newData);
+    io.sockets.emit("ready", newData);
 
   });
 
@@ -88,30 +132,11 @@ ioCast.on('connection', socket => {
     gameMove.side = data.side
     moveArray.push(gameMove)
 
-    ioCast.sockets.emit('all', data)
+    io.sockets.emit('all', data)
   })
 
 
-  app.get('/replay', function (req, res) {
-    db.Replay.findAll(
-    ).then(function (data) {
-      res.json(data)
-    })
-  })
 
-  app.post("/new", function (req, res) {
-    fenArray = [];
-    room1.whiteTaken = false;
-    room1.blackTaken = false;
-
-  });
-
-  app.get("/replay", function (req, res) {
-    db.Replay.findAll(
-    ).then(function (data) {
-      res.json(data);
-    });
-  });
 /* 
   app.get("/ready", function (req, res) {
     let color;
@@ -132,28 +157,6 @@ ioCast.on('connection', socket => {
 
 
 
-  app.post("/save", function (req, res) {
-    db.Replay.destroy({
-      where: {},
-      truncate: true
-    });
-    db.sequelize.transaction(function (t) {
-      var promises = []
-      for (move of moveArray) {
-        var newPromise = db.Replay.create({
-          pieceName: move.pieceName,
-          capName: move.capName,
-          to: move.to,
-          from: move.from,
-          replay: "a "
-        }, { transaction: t });
-        promises.push(newPromise);
-      };
-      return Promise.all(promises).then(function (data) {
-        console.log("logged");
-      });
-    });
-  });
 
   /*
   console.log(moveArray);
@@ -206,8 +209,9 @@ ioCast.on('connection', socket => {
  **************************************************************
 */
 // Syncing our database and logging a message to the user upon success
-db.sequelize.sync().then(() => {
-  app.listen(PORTSEQ, () => {
-    console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORTSEQ, PORTSEQ)
-  })
-})
+// db.sequelize.sync().then(() => {
+//   app.listen(PORTSEQ, () => {
+//     console.log('==> 🌎  Listening on port %s. Visit http://localhost:%s/ in your browser.', PORTSEQ, PORTSEQ)
+
+//   })
+// })

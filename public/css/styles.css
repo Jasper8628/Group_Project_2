@@ -292,6 +292,15 @@ body {
   margin: 15px;
 }
 
+#updateButton{
+  background-color: white;
+  color: darkslateblue;
+  font-family: "Special Elite", sans-serif;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+}
+
 #usernameLabel {
   font-size: 18px; /*18px*/
   font-family: "Special Elite", sans-serif;
@@ -324,6 +333,12 @@ body {
 
 .goToLogin {
   font-size: 14px; /*14px*/
+  font-family: "Special Elite", sans-serif;
+  color: white;
+}
+
+.goToChess{
+  font-size: 18px; /*14px*/
   font-family: "Special Elite", sans-serif;
   color: white;
 }
@@ -363,7 +378,15 @@ a:active {
 }
 
 #profileForm {
-  background-image: url("../images/Chess-3D-Animation-Wallpaper.jpg");
+  /* background-image: url("../images/Chess-3D-Animation-Wallpaper.jpg"); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 500px 500px;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
 }
 
 /* >>>>>>>>>>>>>>>>>>>>>> REALTIME CHAT BELOW (Stew) >>>>>>>>>>>>>>>>>>> */
@@ -442,6 +465,8 @@ a:active {
   position: absolute;
   top: 5%;
   right: -50%;
+  overflow:auto;
+  padding: 3px;
 }
 
 #chatContainer{
@@ -462,7 +487,7 @@ a:active {
   font-size: 20px;
   z-index: 500;
   position: absolute;
-  top: 70%;
+  top: 90%;
   right: -50%;
   width: 280px;
 }
@@ -471,7 +496,7 @@ a:active {
   border-radius: 5px;
   font-family: 'Rajdhani', sans-serif;
   font-size: 18px;
-  top: 78%;
+  top: 98%;
   right: 4%;
   position: absolute;
 }

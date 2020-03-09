@@ -3,11 +3,14 @@
  *  Why doesn't any of this need to be in document.ready?
  */
 
-const socket = io('http://localhost:4000')
+const socket = io('https://project2-chessgame.herokuapp.com/')
 const messageContainer = document.getElementById('chatHistory')
 const messageForm = document.getElementById('chatContainer')
 const messageInput = document.getElementById('messageInput')
 const name = document.getElementById('hdbusername').textContent
+
+
+
 
 appendMessage(`Hi ${name} thanks for joining the game`)
 console.log(`%c chat-client.js -> Good news [${name}] you joined the game`, 'background: #0000FF; color: #FFFFFF;')
@@ -21,6 +24,7 @@ socket.on('chat-message', data => {
   } catch (error) {
     console.log('%c chat-client.js -> EXCEPTION ON CHAT-MESSAGE', 'background: #FF0000; color: #FFFFFF;')
   }
+
 })
 
 socket.on('user-connected', name => {
@@ -59,7 +63,12 @@ function appendMessage (message) {
   } catch (error) {
     console.log('%c chat-client.js -> EXCEPTION ON APPEND', 'background: #FF0000; color: #FFFFFF;')
   }
+  var chatHistory = document.getElementById("chatHistory")
+  chatHistory.scrollTop = chatHistory.scrollHeight;
 }
+
+
+
 
 // $("#logout").on('click', function (event) {
 //   event.preventDefault()
