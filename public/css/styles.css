@@ -466,6 +466,7 @@ a:active {
   top: 5%;
   right: -50%;
   overflow:auto;
+  padding: 3px;
 }
 
 #chatContainer{

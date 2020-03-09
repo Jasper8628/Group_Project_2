@@ -2,7 +2,7 @@
 {
     "development": {
       "username": "root",
-      "password": "Antares28",
+      "password": null,
       "database": "chess",
       "host": "localhost",
       "dialect": "mysql"
