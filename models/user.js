@@ -8,9 +8,7 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
-      // validate: {
-      //   isEmail: true
-      // }
+    
     },
     // The password cannot be null
     password: {
@@ -41,9 +39,9 @@ module.exports = function (sequelize, DataTypes) {
     user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null)
   })
 
-  // User.addHook('beforeBulkUpdate', function (user) {
-  //   user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null)
-  // })
+  User.addHook('beforeBulkUpdate', function (user) {
+    user.password = bcrypt.hashSync(user.password, null)
+  })
 
   return User
 }

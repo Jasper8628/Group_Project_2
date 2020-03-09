@@ -37,6 +37,10 @@ Simply `git clone https://github.com/Jasper8628/Group_Project_2.git` while in yo
 
 Please see following link: https://project-two-heroku-test.herokuapp.com/ 
 
+**Note**
+- [Installation](#installation)
+- [Usage](#usage)
+
 ## Credits
 
 Collaborators
