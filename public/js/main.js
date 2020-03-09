@@ -1,6 +1,7 @@
 let playerColor = " ";
 let playerSide = " ";
-let playerName=$("#hdbusername").text();
+let playerName;
+console.log(playerName);
 let startingFen;
 let newGame = true;
 let watching = false;

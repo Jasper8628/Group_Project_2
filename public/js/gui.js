@@ -20,15 +20,12 @@ $("#new").on("click", function () {
 
 socketCast.on("ready", function (data) {
   console.log(data.color)
-  $.ajax({
-    url: "/api/user_data",
-    method: "GET"
-  }).then(function(response){
     console.log(data.color)
     PrintBoard();
     $("#message").css("display", "block");
     let color;
     let msg;
+    let name=data.name;
     if (data.color == "w") {
       
       $("#turn").text("Awaiting player black");
@@ -44,16 +41,15 @@ socketCast.on("ready", function (data) {
       color = "Observer";
       msg=" observes the game";
     }
-    let name = response.username;
     if (playerName == name) {
       playerColor = data.color;
-      $("#user-color").text(`${response.username} are playing as: ` + color);
+      $("#user-color").text("You are playing as: " + color);
     } else {
       $("#user-color").text(name + msg);
   
     }
     console.log(playerColor,playerSide);
-  })
+  
 
 
 });
@@ -65,36 +61,22 @@ $("#ready").on("click", function () {
   }).then(function(response){
 
     playerReady = true;
+    playerName=response.username;
     let readyData = {
-      username: response.username
+      name: playerName
     };
+    console.log(playerName);
 
     socketCast.emit("ready", readyData);
   })
-
-
-	/* 	$.get("/ready", function (data) {
-			playerReady = true;
-			PrintBoard();
-	
-			playerColor = data.color;
-			console.log("your color is: " + playerColor);
-			console.log("your side is :" + playerSide);
-			$("#message").css("display", "block");
-			if (playerColor == "w") {
-				$("#user-color").text("You are playing as: White");
-			} else if (playerColor == "b") {
-				$("#user-color").text("You are playing as: Black");
-			} else {
-				$("#user-color").text("Both sides are take,you may observe the game");
-			}
-		}); */
 });
 
 $(".modal-message").on("click", function () {
 	$("#message").css("display", "none");
 });
 $("#save").on("click", function () {
+  
+  $("#user-color").text("Game saved");
 	$.post("/save", function (res) {
 		console.log(res);
 	});

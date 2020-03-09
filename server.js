@@ -56,11 +56,13 @@ const room1 = {
 
 app.post("/new", function (req, res) {
   fenArray = [];
+  moveArray=[];
   room1.whiteTaken = false;
   room1.blackTaken = false;
   console.log(room1);
 
 });
+
 
 app.get('/replay', function (req, res) {
   db.Replay.findAll(
