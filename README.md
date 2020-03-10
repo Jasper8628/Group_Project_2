@@ -47,6 +47,7 @@ https://project2-chessgame.herokuapp.com/
 HAVE FUN!
 
 **Note**
+- The chess pieces may take some time to load for the first time, try “new game” if it's stuck on loading
 - If chat window cannot be clicked please press "Tab" until you are able to type in the chat 
 
 ## Credits
