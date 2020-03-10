@@ -4,10 +4,10 @@ Sydney Uni Bootcamp 2019
 
 Contributors:
 
-- Anstey, Stewart
 - Pang, Rita
 - Du, Jasper
 - Lam, Gerald
+- Anstey, Stewart
 
 ## Description
 
