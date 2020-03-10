@@ -1,6 +1,7 @@
 // Requiring our models and passport as we've configured it
 var db = require('../models')
 var passport = require('../orm/passport')
+var bcrypt = require('bcryptjs')
 
 module.exports = 
 function routes (app) {
@@ -53,10 +54,18 @@ function routes (app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
   app.post('/api/profile', function (req, res) {
-    db.User.update({
-      email: req.body.email,
-      password: req.body.password
-    }, {
+
+    var hashedpassword = bcrypt.hashSync(req.body.password, bcrypt.genSaltSync(10), null)
+
+      db.User.update({
+        email: req.body.email,
+        password: hashedpassword
+      },
+    // db.User.update({
+    //   email: req.body.email,
+    //   password: req.body.password
+    // }, 
+    {
       where: {
         username: req.user.username
       }
