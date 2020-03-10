@@ -65,6 +65,8 @@ Collaborators
 - Foundation v6.4.3
 - Sequelize
 - Socket.io
+- Three.js
+- Fusion 360
 
 ## License
 
