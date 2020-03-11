@@ -4,10 +4,10 @@ Sydney Uni Bootcamp 2019
 
 Contributors:
 
-- Anstey, Stewart
 - Pang, Rita
 - Du, Jasper
 - Lam, Gerald
+- Anstey, Stewart
 
 ## Description
 
@@ -41,12 +41,13 @@ https://project2-chessgame.herokuapp.com/
 
 - To play both as white and black (One Player), simply click "New Game" to play
 - To play against an opponent, click "New Game" then "Ready" and await for the opponent to click "Ready"
-- To be an Observer, click "Ready" until you are allocated as an Observer 
+- If both sides have been taken when you click ”ready”, you will be assigned as Observer
 - Click "Save" after the game and Click "Replay" to rewatch the game
 
 HAVE FUN!
 
 **Note**
+- The chess pieces may take some time to load for the first time, try “new game” if it's stuck on loading
 - If chat window cannot be clicked please press "Tab" until you are able to type in the chat 
 
 ## Credits
@@ -65,6 +66,8 @@ Collaborators
 - Foundation v6.4.3
 - Sequelize
 - Socket.io
+- Three.js
+- Fusion 360
 
 ## License
 
