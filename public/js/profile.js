@@ -5,6 +5,21 @@ $(document).ready(function () {
   var passwordInput = $('input#passwordForm')
   var rePasswordInput = $('input#rePasswordForm')
 
+  $("#passwordForm").on("click",function(){
+    $(this).focus();
+    $(this).select();
+  });
+
+  $("#rePasswordForm").on("click",function(){
+    $(this).focus();
+    $(this).select();
+  });
+
+  $("#emailForm").on("click",function(){
+    $(this).focus();
+    $(this).select();
+  });
+
   // When the edit button is clicked, we update the user table
   editProfileForm.on('submit', function (event) {
       event.preventDefault()

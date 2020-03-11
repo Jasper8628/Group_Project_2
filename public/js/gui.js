@@ -1,3 +1,8 @@
+$("#messageInput").on("click",function(){
+  $(this).focus();
+  $(this).select();
+});
+
 $("#SetFen").click(function () {
 	var fenStr = $("#fenIn").val();
 	NewGame(fenStr);
